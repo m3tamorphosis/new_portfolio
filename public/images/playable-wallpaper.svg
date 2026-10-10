@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320" fill="none">
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="1" fill="#aeb8a7" opacity=".4"/>
+    </pattern>
+  </defs>
+  <path fill="#eef0e9" d="M0 0h320v320H0z"/>
+  <path fill="url(#dots)" d="M0 0h320v320H0z"/>
+  <g fill="#dce3d3" stroke="#87917f" stroke-width="2">
+    <path d="M32-2h42v74H32zM32 225h42v97H32z" opacity=".45"/>
+    <path d="M241-2h48v118h-48zM241 243h48v79h-48z"/>
+    <path fill="#f5f5f0" d="M236 106h58v12h-58zM236 239h58v12h-58z"/>
+  </g>
+  <path d="M65 173h35M77 186h20" stroke="#aebced" stroke-width="4" stroke-linecap="round"/>
+  <g transform="translate(151 169) rotate(-12)">
+    <ellipse rx="35" ry="28" fill="#3155ef"/>
+    <ellipse cx="-12" cy="8" rx="20" ry="10" transform="rotate(-15 -12 8)" fill="#8298f5"/>
+    <path d="m29-1 24 10-25 5" fill="#242521"/>
+    <circle cx="15" cy="-9" r="10" fill="#fcfcfa"/>
+    <circle cx="18" cy="-9" r="4.5" fill="#242521"/>
+  </g>
+  <path fill="#e3e7dc" d="M0 298h320v22H0z"/>
+  <path d="M0 298h320" stroke="#b9c1b1" stroke-width="2"/>
+</svg>

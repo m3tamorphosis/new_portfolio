@@ -1,0 +1,227 @@
+/* One index and utility group, shared by the sidebar and mobile dialog. */
+.sidebar-connect {
+  margin-top: 24px;
+  flex-shrink: 0;
+}
+.sidebar-connect > h2 {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+  font-size: 10px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.sidebar-connect > h2 > span {
+  color: #4f5149;
+  flex-shrink: 0;
+}
+.connect-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.connect-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.connect-links a:hover,
+.connect-links a:focus-visible {
+  color: var(--blue);
+}
+.connect-links a:focus-visible {
+  outline-offset: 2px;
+}
+.contact-card .contact-messaging {
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.contact-messaging > a {
+  min-height: 32px;
+}
+.sidebar-bottom {
+  padding-top: 16px;
+}
+.sidebar {
+  min-height: 0;
+}
+.mobile-hero-summary,
+.mobile-project-name {
+  display: none;
+}
+.project-details > .project-tags {
+  margin-top: -2px;
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) {
+  .builds-view .project-details {
+    gap: 18px;
+  }
+  .builds-view .project-selector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+    border-top: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .builds-view .project-selector > button {
+    min-width: 0;
+    min-height: 46px;
+    gap: 8px;
+    font-size: 14px;
+  }
+  .builds-view .project-selector > button:first-child {
+    border-top: 0;
+  }
+  .builds-view .project-selector > button > svg {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+  }
+  .builds-view .project-description h2,
+  .builds-view .project-description > p {
+    max-width: none;
+  }
+  .builds-view .project-description > p {
+    line-height: 1.7;
+  }
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1120px) {
+  .builds-view .project-selector > button {
+    font-size: 13px;
+  }
+  .builds-view .project-selector > button > svg {
+    display: none;
+  }
+}
+.mobile-menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  font: 10px var(--mono);
+  letter-spacing: 0.05em;
+}
+.mobile-index {
+  inset: 0;
+  width: min(100% - 24px, 540px);
+  max-width: none;
+  max-height: calc(100dvh - 24px);
+  margin: auto;
+  padding: 0;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  overscroll-behavior: contain;
+}
+.mobile-index::backdrop {
+  background: rgb(36 37 33 / 35%);
+}
+.mobile-index-content {
+  padding: 16px 24px 24px;
+}
+.mobile-index-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.mobile-index-heading h2 {
+  font-size: 11px;
+  font-weight: 400;
+}
+.mobile-index-heading button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+.mobile-index .nav-item {
+  min-height: 50px;
+  width: 100%;
+  font-size: 18px;
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.mobile-index .nav-item.active {
+  border-bottom-color: var(--blue);
+}
+.mobile-index .nav-number {
+  font-size: 11px;
+}
+.mobile-index .sidebar-connect {
+  margin-top: 28px;
+}
+.mobile-index .connect-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 16px;
+}
+.mobile-index .connect-links > a {
+  min-height: 44px;
+  font-size: 14px;
+}
+.mobile-index .connect-links > a:first-child {
+  grid-column: 1 / -1;
+}
+.mobile-index .connect-links svg,
+.mobile-index .connect-links img {
+  width: 18px;
+  height: 18px;
+}
+/* A restrained legibility lift for the desktop frame only. */
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) {
+  .sidebar,
+  .app-footer {
+    --small-text-step: 2.5px;
+  }
+  .sidebar .sidebar-connect > h2 {
+    font-size: 11px;
+  }
+  .sidebar .connect-links a {
+    font-size: 14px;
+  }
+  .sidebar .connect-links svg,
+  .sidebar .connect-links img {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+  }
+  .index-label svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 900px) {
+  .sidebar-doodle {
+    display: none;
+  }
+  .sidebar-connect {
+    margin-top: 18px;
+  }
+  .sidebar nav {
+    gap: 4px;
+  }
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 820px) {
+  .sidebar {
+    overflow-y: auto;
+  }
+  .sidebar-bottom {
+    display: none;
+  }
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 650px) {
+  .sidebar-connect {
+    margin-top: 14px;
+  }
+}

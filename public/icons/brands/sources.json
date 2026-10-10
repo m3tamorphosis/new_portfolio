@@ -1,0 +1,388 @@
+[
+  {
+    "file": "javascript",
+    "title": "JavaScript",
+    "source": "https://svgl.app/library/javascript.svg",
+    "provider": "SVGL",
+    "brand": "https://developer.mozilla.org/docs/Web/JavaScript",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "35328c60cffee71518294d614325fad52f903b48b5b63ac5f59fe1997249942c",
+    "sha256": "35328c60cffee71518294d614325fad52f903b48b5b63ac5f59fe1997249942c"
+  },
+  {
+    "file": "typescript",
+    "title": "TypeScript",
+    "source": "https://svgl.app/library/typescript.svg",
+    "provider": "SVGL",
+    "brand": "https://www.typescriptlang.org",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "a72e88ebd02b5e28708e7dfb3ca09c5bc524482f3d0b6a3df3053ed5d51a5f6b",
+    "sha256": "a72e88ebd02b5e28708e7dfb3ca09c5bc524482f3d0b6a3df3053ed5d51a5f6b"
+  },
+  {
+    "file": "python",
+    "title": "Python",
+    "source": "https://svgl.app/library/python.svg",
+    "provider": "SVGL",
+    "brand": "https://www.python.org/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "e4d80b4ca9418d1ebb4ff880eb7cbe6896d60d61d9f44ead6723db29a4ed962e",
+    "sha256": "e4d80b4ca9418d1ebb4ff880eb7cbe6896d60d61d9f44ead6723db29a4ed962e"
+  },
+  {
+    "file": "csharp",
+    "title": "C#",
+    "source": "https://svgl.app/library/csharp.svg",
+    "provider": "SVGL",
+    "brand": "https://dotnet.microsoft.com/languages/csharp",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "637b695492be05f7d0ec6977de4aa9b46133df52315be214c34572d176c8a1e3",
+    "sha256": "637b695492be05f7d0ec6977de4aa9b46133df52315be214c34572d176c8a1e3"
+  },
+  {
+    "file": "react",
+    "title": "React",
+    "source": "https://svgl.app/library/react_light.svg",
+    "provider": "SVGL",
+    "brand": "https://react.dev/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "0e3b3b606248d4868b5f0c63c30f27929e94724591e28cbd6852ccb649857998",
+    "sha256": "0e3b3b606248d4868b5f0c63c30f27929e94724591e28cbd6852ccb649857998"
+  },
+  {
+    "file": "nextjs",
+    "title": "Next.js",
+    "source": "https://svgl.app/library/nextjs_icon_dark.svg",
+    "provider": "SVGL",
+    "brand": "https://nextjs.org/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "efa7511b383927ea64c2e44c918bc40146c648fbc16e0389df87df5263e492eb",
+    "sha256": "efa7511b383927ea64c2e44c918bc40146c648fbc16e0389df87df5263e492eb"
+  },
+  {
+    "file": "html5",
+    "title": "HTML5",
+    "source": "https://svgl.app/library/html5.svg",
+    "provider": "SVGL",
+    "brand": "https://es.wikipedia.org/wiki/HTML5",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "8c4d77863a0a21b9b451a6da54176025954485a1f0842eb2627c3c52a5041bf2",
+    "sha256": "8c4d77863a0a21b9b451a6da54176025954485a1f0842eb2627c3c52a5041bf2"
+  },
+  {
+    "file": "css3",
+    "title": "CSS",
+    "source": "https://svgl.app/library/css_old.svg",
+    "provider": "SVGL",
+    "brand": "https://es.wikipedia.org/wiki/CSS",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "38b506b8c8ec918edde57d6b052f5898a3fd5536a25d4756407596f0bcdd229e",
+    "sha256": "38b506b8c8ec918edde57d6b052f5898a3fd5536a25d4756407596f0bcdd229e"
+  },
+  {
+    "file": "tailwindcss",
+    "title": "Tailwind CSS",
+    "source": "https://svgl.app/library/tailwindcss.svg",
+    "provider": "SVGL",
+    "brand": "https://tailwindcss.com/brand",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "ad607cfe6ce1d86f700264bea3ded08e4b3d7d50370e3f11260297ca41087098",
+    "sha256": "ad607cfe6ce1d86f700264bea3ded08e4b3d7d50370e3f11260297ca41087098"
+  },
+  {
+    "file": "motion",
+    "title": "Motion",
+    "source": "https://svgl.app/library/motion.svg",
+    "provider": "SVGL",
+    "brand": "https://motion.dev/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "ff0bf6947b386cb13f8ae5705a64f200d19a585af37209d4a0d337881565e174",
+    "sha256": "ff0bf6947b386cb13f8ae5705a64f200d19a585af37209d4a0d337881565e174"
+  },
+  {
+    "file": "nodejs",
+    "title": "Node.js",
+    "source": "https://svgl.app/library/nodejs.svg",
+    "provider": "SVGL",
+    "brand": "https://nodejs.org/en/about/branding",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "6cd865951598a8a16dd3d588bd93c9d96b3b415a7162d6a1cf63089a2769ed0f",
+    "sha256": "6cd865951598a8a16dd3d588bd93c9d96b3b415a7162d6a1cf63089a2769ed0f"
+  },
+  {
+    "file": "postgresql",
+    "title": "PostgreSQL",
+    "source": "https://svgl.app/library/postgresql.svg",
+    "provider": "SVGL",
+    "brand": "https://www.postgresql.org/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "dc6bb4376a5cf235b19a8871f3219c2b98d97e4469309c8bbecb86ff1811f506",
+    "sha256": "dc6bb4376a5cf235b19a8871f3219c2b98d97e4469309c8bbecb86ff1811f506"
+  },
+  {
+    "file": "mysql",
+    "title": "MySQL",
+    "source": "https://svgl.app/library/mysql-icon-light.svg",
+    "provider": "SVGL",
+    "brand": "https://www.mysql.com/about/legal/logos.html",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "a6b4206adaaf2e56e842df3f9a93b1c174c01f23439cab71e9412520d5a610da",
+    "sha256": "a6b4206adaaf2e56e842df3f9a93b1c174c01f23439cab71e9412520d5a610da"
+  },
+  {
+    "file": "sqlserver",
+    "title": "Microsoft SQL Server",
+    "source": "https://svgl.app/library/sql-server.svg",
+    "provider": "SVGL",
+    "brand": "https://www.microsoft.com/en-us/sql-server/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "18f29022bbad5471efc0d39b782949ad60ccaaa1231a15e82dd77c0606f5db7f",
+    "sha256": "18f29022bbad5471efc0d39b782949ad60ccaaa1231a15e82dd77c0606f5db7f"
+  },
+  {
+    "file": "supabase",
+    "title": "Supabase",
+    "source": "https://svgl.app/library/supabase.svg",
+    "provider": "SVGL",
+    "brand": "https://supabase.com/brand-assets",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "1f9387ffd2d8bea4b535f13f12c34b4b4c2df7ee0e5eefe1f532bbda0a3ce969",
+    "sha256": "1f9387ffd2d8bea4b535f13f12c34b4b4c2df7ee0e5eefe1f532bbda0a3ce969"
+  },
+  {
+    "file": "openai",
+    "title": "OpenAI",
+    "source": "https://svgl.app/library/openai.svg",
+    "provider": "SVGL",
+    "brand": "https://openai.com/brand/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "71eba8e11d265af0e3375ad610db95b4a5fedf9f07c40e5252e73942b8c5982e",
+    "sha256": "71eba8e11d265af0e3375ad610db95b4a5fedf9f07c40e5252e73942b8c5982e"
+  },
+  {
+    "file": "groq",
+    "title": "Groq",
+    "source": "https://svgl.app/library/groq.svg",
+    "provider": "SVGL",
+    "brand": "https://groq.com/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "f8b4420340ff8875a1f04ce80909325dd81b0cb78d0c7a15fd567977338ae956",
+    "sha256": "f8b4420340ff8875a1f04ce80909325dd81b0cb78d0c7a15fd567977338ae956"
+  },
+  {
+    "file": "copilot",
+    "title": "GitHub Copilot",
+    "source": "https://svgl.app/library/copilot.svg",
+    "provider": "SVGL",
+    "brand": "https://github.com/features/copilot",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "f9a0867d6e367502b33b093b638b066092b0f1b8814cd1450c745360aa92f1ba",
+    "sha256": "f9a0867d6e367502b33b093b638b066092b0f1b8814cd1450c745360aa92f1ba"
+  },
+  {
+    "file": "claude",
+    "title": "Claude AI",
+    "source": "https://svgl.app/library/claude-ai-icon.svg",
+    "provider": "SVGL",
+    "brand": "https://claude.ai/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "0df6dad23995f5a76c6db8cc2a4e646ff45bd7a0626ef98662a7025646e5eea1",
+    "sha256": "0df6dad23995f5a76c6db8cc2a4e646ff45bd7a0626ef98662a7025646e5eea1"
+  },
+  {
+    "file": "codex",
+    "title": "Codex",
+    "source": "https://svgl.app/library/codex_light.svg",
+    "provider": "SVGL",
+    "brand": "https://openai.com/codex/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "dde8b3563a40d55af25e3fb2509864d16ae214b0260748d294e2d011f2a6907c",
+    "sha256": "dde8b3563a40d55af25e3fb2509864d16ae214b0260748d294e2d011f2a6907c"
+  },
+  {
+    "file": "gemini",
+    "title": "Gemini",
+    "source": "https://svgl.app/library/gemini.svg",
+    "provider": "SVGL",
+    "brand": "https://gemini.google.com/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "c11d94a9e3ecb32f67dd9350848cf3124d617680533275c672e1e6bf61ce8cd4",
+    "sha256": "c11d94a9e3ecb32f67dd9350848cf3124d617680533275c672e1e6bf61ce8cd4"
+  },
+  {
+    "file": "git",
+    "title": "Git",
+    "source": "https://svgl.app/library/git.svg",
+    "provider": "SVGL",
+    "brand": "https://git-scm.com/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "cc43d5b0c4fae45b6e0857c17d602c0efb8526241ca9623a29863867a8f59f3a",
+    "sha256": "cc43d5b0c4fae45b6e0857c17d602c0efb8526241ca9623a29863867a8f59f3a"
+  },
+  {
+    "file": "github",
+    "title": "GitHub",
+    "source": "https://svgl.app/library/github_light.svg",
+    "provider": "SVGL",
+    "brand": "https://brand.github.com/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "64568845c83d5e840e6a1fb7af1939fed14709636427ce9be2fbcdc14ac5e021",
+    "sha256": "64568845c83d5e840e6a1fb7af1939fed14709636427ce9be2fbcdc14ac5e021"
+  },
+  {
+    "file": "vercel",
+    "title": "Vercel",
+    "source": "https://svgl.app/library/vercel.svg",
+    "provider": "SVGL",
+    "brand": "https://vercel.com/geist/brands",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "565f40e56abbd9c9f31e113c45e90ce456cc112d4811f2f49d1d5041fe501b7c",
+    "sha256": "565f40e56abbd9c9f31e113c45e90ce456cc112d4811f2f49d1d5041fe501b7c"
+  },
+  {
+    "file": "vscode",
+    "title": "Visual Studio Code",
+    "source": "https://svgl.app/library/vscode.svg",
+    "provider": "SVGL",
+    "brand": "https://code.visualstudio.com/brand",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "0c3dbeed85a5881f0e778a941f6033b8b42022587187f1e23e6f1c31a91ed3a0",
+    "sha256": "0c3dbeed85a5881f0e778a941f6033b8b42022587187f1e23e6f1c31a91ed3a0"
+  },
+  {
+    "file": "figma",
+    "title": "Figma",
+    "source": "https://svgl.app/library/figma.svg",
+    "provider": "SVGL",
+    "brand": "https://www.figma.com/using-the-figma-brand/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "5bcdea3417293412845b8298fe357fce3b192e8ff112d9b3fef315bc5cd127f6",
+    "sha256": "5bcdea3417293412845b8298fe357fce3b192e8ff112d9b3fef315bc5cd127f6"
+  },
+  {
+    "file": "vite",
+    "title": "Vite",
+    "source": "https://svgl.app/library/vite.svg",
+    "provider": "SVGL",
+    "brand": "https://vitejs.dev",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "1d85800a1f7e07cc92cdb5938a52dff050849e9a96de3cf4c3cd31662dde5d2c",
+    "sha256": "1d85800a1f7e07cc92cdb5938a52dff050849e9a96de3cf4c3cd31662dde5d2c"
+  },
+  {
+    "file": "phaser",
+    "title": "Phaser",
+    "source": "https://cdn.phaser.io/images/logo/phaser-logo.svg",
+    "provider": "Phaser",
+    "brand": "https://phaser.io/download/logo",
+    "presentation": "Original artwork, viewBox 128 149 592 126; paths and colors unchanged.",
+    "sourceSha256": "4ef3f1028fb2d21e5100b0d9b972fcee95fc3b69a0550359572cbf7073cddda2",
+    "sha256": "4569319407bb3acd685e6fe5b44c7ff0b60fb73c986a449e66af2f8376af8534"
+  },
+  {
+    "file": "powerbi",
+    "title": "Power BI",
+    "source": "https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg",
+    "provider": "Microsoft",
+    "brand": "https://github.com/microsoft/PowerBI-Icons",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "55daee85ccbe0d410909cd3b2b2d974d9a450ca3c6208992eec99fa9fa7b0b8d",
+    "sha256": "55daee85ccbe0d410909cd3b2b2d974d9a450ca3c6208992eec99fa9fa7b0b8d"
+  },
+  {
+    "file": "tableau",
+    "title": "Tableau",
+    "source": "https://www.tableau.com/themes/custom/tableau_www/logo.v2.svg",
+    "provider": "Tableau",
+    "brand": "https://www.tableau.com/",
+    "presentation": "Original artwork, viewBox 0 0 108.97 108.97; paths and colors unchanged.",
+    "sourceSha256": "7416a5cf1b26cb75279cbe0862f3d8ddcb50028525a168ef8e30b6015b2441d6",
+    "sha256": "61dd19329ec95305fd6a4e6bebe1ce4df87e53072691b299599006cd4b0b9cf5"
+  },
+  {
+    "file": "linkedin",
+    "title": "LinkedIn",
+    "source": "https://svgl.app/library/linkedin.svg",
+    "provider": "SVGL",
+    "brand": "https://brand.linkedin.com/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "ac8c9e0426de08e1f0ae7ca0d4f7551c89a011071c6dfe2ff926fa6b7dfd0942",
+    "sha256": "ac8c9e0426de08e1f0ae7ca0d4f7551c89a011071c6dfe2ff926fa6b7dfd0942"
+  },
+  {
+    "file": "viber",
+    "title": "Viber",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/viber.svg",
+    "provider": "Simple Icons",
+    "brand": "https://www.viber.com/",
+    "presentation": "Original brand geometry with portfolio muted color",
+    "sourceSha256": "2cc123deda743aeb31e3a9cba6bdd73bee79475704dfba9cf0c7b46023095914",
+    "sha256": "c5a161e8806b8b492e3aae92816b4c6be1a8f59b3fb7c9f334d38add8d253544"
+  },
+  {
+    "file": "telegram",
+    "title": "Telegram",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/telegram.svg",
+    "provider": "Simple Icons",
+    "brand": "https://telegram.org/",
+    "presentation": "Original brand geometry with portfolio muted color",
+    "sourceSha256": "147fd8f8923e7e5f463fe98c0eb9913bead6b2ae59935728cda141002ec8a7c9",
+    "sha256": "1d9b457178df2e96f90225391af4a833e0b6755830cf5c2370f65ac4d7e71c37"
+  },
+  {
+    "file": "whatsapp",
+    "title": "WhatsApp",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/whatsapp.svg",
+    "provider": "Simple Icons",
+    "brand": "https://www.whatsapp.com/",
+    "presentation": "Original brand geometry with portfolio muted color",
+    "sourceSha256": "8fb209a53a61618c3483594b3e070481a35575d6aaecbe00a6fe386670c8fb1c",
+    "sha256": "b1442c26ac64b986dad01f2c96e8ccd5a9a16641286d8f5cdf479d10839c91f3"
+  },
+  {
+    "file": "prisma",
+    "title": "Prisma",
+    "source": "https://svgl.app/library/prisma.svg",
+    "provider": "SVGL",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "ae59021bf39c95cff16bfdd634d2e266e9ad4f152fc1f014509d56b120a81c1f",
+    "sha256": "ae59021bf39c95cff16bfdd634d2e266e9ad4f152fc1f014509d56b120a81c1f"
+  },
+  {
+    "file": "authjs",
+    "title": "Auth.js",
+    "source": "https://svgl.app/library/authjs.svg",
+    "provider": "SVGL",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "25e796039625e22cf4bd938fc715b805fca19a2f71a27411ddffd667a0fc7610",
+    "sha256": "25e796039625e22cf4bd938fc715b805fca19a2f71a27411ddffd667a0fc7610"
+  },
+  {
+    "file": "neon",
+    "title": "Neon",
+    "source": "https://svgl.app/library/neon.svg",
+    "provider": "SVGL",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "3af6fa33e85ad9dff82abf21f3a0eb1ffe01d5e2d221c250857e74078aef34c2",
+    "sha256": "3af6fa33e85ad9dff82abf21f3a0eb1ffe01d5e2d221c250857e74078aef34c2"
+  },
+  {
+    "file": "playwright",
+    "title": "Playwright",
+    "source": "https://svgl.app/library/playwright.svg",
+    "provider": "SVGL",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "12d4dc0107deb4e8b9ab5f6e2b0d30034a887bd90ae2e34f342e74a25dd9f0d4",
+    "sha256": "12d4dc0107deb4e8b9ab5f6e2b0d30034a887bd90ae2e34f342e74a25dd9f0d4"
+  },
+  {
+    "file": "xendit",
+    "title": "Xendit",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/xendit.svg",
+    "provider": "Simple Icons",
+    "brand": "https://www.xendit.co/",
+    "presentation": "Original brand geometry in brand blue",
+    "sourceSha256": "eddede7b0b7244dab02de30bc9c6358a04d3ee683c6858634a8212d083565ada",
+    "sha256": "1db956544dc08625cabe19e0ed0a857e77f0901ec3aa7d1b357d7241b57f105e"
+  }
+]

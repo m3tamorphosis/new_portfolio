@@ -1,0 +1,412 @@
+/* Font assets are served locally. Satoshi's variable file includes every
+   weight from 300–900; technical labels only require Geist Mono Regular. */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.hero-copy h1 {
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.view-heading h1,
+.project-description h2,
+.experience-detail h2,
+.stack-board h2,
+.shortcuts-dialog h2 {
+  font-weight: 600;
+}
+
+.nav-item.active {
+  font-weight: 600;
+}
+
+/* Emphasize the names and actions visitors scan first. */
+.home-view .project-teaser h3,
+.about-view .about-discipline h3,
+.experience-timeline h3,
+.stack-view .tool-name {
+  font-weight: 650;
+}
+
+.about-current strong,
+.stack-principle strong,
+.stack-menu > button[aria-pressed='true'],
+.project-selector > button[aria-pressed='true'],
+.about-view .about-principles .principle-title,
+.about-tabs > button[aria-selected='true'],
+.about-discipline-switcher > button[aria-pressed='true'],
+.contact-view .contact-email,
+.home-view .hero-actions .button,
+.home-view .hero-actions .text-button,
+.contact-view .email-actions .button {
+  font-weight: 600;
+}
+
+.button,
+.text-button,
+.project-selector > button,
+.flashcard-footer > button {
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+.nav-number,
+.eyebrow,
+.mono,
+.tags > span,
+kbd {
+  font-weight: 400;
+}
+
+/* The established editorial serif accents deliberately remain unchanged. */
+
+/* A small, opt-in lift for supporting copy and system labels. Existing
+   responsive sizes remain the base; hero and major headings do not use it. */
+:root {
+  --small-text-step: 1.5px;
+}
+
+/* Desktop reading sizes stay legible even when height-based layouts compact. */
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) {
+  .app-shell .eyebrow:not(.about-view .eyebrow),
+  .app-shell .mono,
+  .app-shell .nav-number,
+  .sidebar .index-label,
+  .section-line > button,
+  .hero-copy .hero-note,
+  .current-pill,
+  .tool-index {
+    font-size: 11px;
+  }
+
+  .app-footer {
+    font-size: 11px;
+  }
+
+  .home-view .hero-copy > p,
+  .builds-view .project-description > p,
+  .experience-view .experience-detail li {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .home-view .hero-actions .button,
+  .home-view .text-button,
+  .role-company,
+  .experience-timeline p {
+    font-size: 14px;
+  }
+
+  .home-view .project-teaser h3 {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+  .home-view .teaser-category {
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+  }
+  .home-view .teaser-note,
+  .stack-principle > span,
+  .stack-board-foot {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .app-shell .tags > span {
+    font-size: 11px;
+  }
+
+  .stack-view .tool-description {
+    font-size: 14px;
+  }
+  .contact-view .topic-options button {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 820px) {
+  .home-view {
+    gap: 8px;
+    padding-top: 6px;
+    padding-bottom: 4px;
+  }
+  .builds-view .project-details {
+    gap: 12px;
+  }
+  .builds-view .project-selector > button {
+    min-height: 42px;
+  }
+  .experience-view .experience-detail ul {
+    gap: 12px;
+    margin-top: 18px;
+  }
+}
+
+.principle-description {
+  display: block;
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) {
+  .about-view {
+    --small-text-step: 2px;
+  }
+  .about-principles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+  }
+  .about-principles > div {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-content: start;
+    gap: 0 8px;
+    min-width: 0;
+    padding-inline: clamp(12px, 1.2vw, 24px);
+  }
+  .about-principles > div:first-child {
+    padding-left: 0;
+  }
+  .about-principles > div:last-child {
+    padding-right: 0;
+  }
+  .about-principles > div + div {
+    border-left: 1px solid var(--line);
+  }
+  .about-principles > div > span {
+    padding-top: 0;
+    align-self: center;
+  }
+  .about-principles > div > div {
+    display: contents;
+  }
+  .about-principles p {
+    grid-column: 1 / -1;
+  }
+  .about-principles .principle-title {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .about-principles .principle-description {
+    line-height: 1.5;
+  }
+}
+@media (min-width: 1550px) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait)))) {
+  .about-view {
+    --small-text-step: 2.5px;
+  }
+}
+@media (min-width: 1101px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1440px) {
+  .about-view .about-profile {
+    --small-text-step: 1.5px;
+  }
+}
+@media (min-width: 1101px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1380px) and (max-height: 820px) {
+  .about-view .about-builds {
+    --small-text-step: 1.5px;
+  }
+}
+/* Use existing whitespace for the extra copy without changing desktop type or portrait sizes. */
+@media (min-width: 1101px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (min-height: 651px) and (max-height: 1000px) {
+  .about-view {
+    row-gap: 8px;
+    padding-bottom: 10px;
+  }
+  .about-view .about-approach {
+    padding-top: 10px;
+  }
+}
+/* Mobile keeps its larger text and stacked reading flow. */
+@media ((max-width: 900px) or ((max-width: 1200px) and (max-height: 500px)) or ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait)))) {
+  .about-view .about-principles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .about-view .about-principles > div {
+    min-width: 0;
+  }
+  .about-view .about-principles .principle-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-top: 7px;
+  }
+  .about-view .about-principles .principle-description {
+    display: block;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 6px;
+    max-width: 32ch;
+  }
+}
+@media (max-width: 600px) {
+  .about-view .about-principles {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .about-view .about-principles > div {
+    padding-block: 16px;
+  }
+  .about-view .about-principles > div + div {
+    border-top: 1px solid var(--line);
+  }
+  .about-view .about-principles .principle-description {
+    max-width: none;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1100px) {
+  .stack-view .stack-layout {
+    grid-template-columns: 0.6fr 1.4fr;
+  }
+  .stack-view .tool-tile {
+    padding: 6px;
+    column-gap: 6px;
+  }
+}
+
+@media (min-width: 1550px) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait)))) {
+  .home-view .hero-copy > p,
+  .builds-view .project-description > p,
+  .experience-view .experience-detail li {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) {
+  .builds-view .project-description > p {
+    font-size: 15.5px;
+  }
+  .builds-view .project-selector > button {
+    font-size: 14.5px;
+  }
+  .builds-view .tags > span {
+    font-size: 11.5px;
+  }
+  .contact-view .contact-copy > p,
+  .contact-view .contact-interests li {
+    font-size: 17px;
+  }
+  .contact-view .contact-location,
+  .contact-view .contact-copy .contact-links > a {
+    font-size: 15px;
+  }
+  .contact-view .contact-location small {
+    font-size: 11.5px;
+  }
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1120px) {
+  .builds-view .project-selector > button {
+    font-size: 13.5px;
+  }
+  .builds-view .project-description > p {
+    font-size: 15px;
+  }
+  .builds-view .tags > span {
+    font-size: 11px;
+  }
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 820px) {
+  .contact-view .contact-copy > p,
+  .contact-view .contact-interests li {
+    font-size: 16.5px;
+  }
+}
+@media (min-width: 1550px) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait)))) {
+  .builds-view .project-description > p {
+    font-size: 16.5px;
+  }
+}
+
+/* A small readability increase for the desktop frame, without resizing its columns. */
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) {
+  .app-header .brand-symbol {
+    font-size: 42px;
+  }
+  .app-header .brand-text strong {
+    font-size: 16px;
+  }
+  .app-header .brand-text > span {
+    font-size: 12.5px;
+  }
+  .app-header .header-contact {
+    font-size: 11.5px;
+  }
+  .app-header .location-label {
+    font-size: 12.5px;
+  }
+  .sidebar .nav-item {
+    font-size: 16px;
+  }
+  .sidebar .index-label,
+  .sidebar .nav-number,
+  .app-shell .sidebar .sidebar-connect > h2.eyebrow {
+    font-size: 11.5px;
+  }
+  .sidebar .index-label,
+  .sidebar .sidebar-connect > h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-inline: 0;
+    padding-inline: 0 10px;
+    text-align: left;
+    letter-spacing: 1.2px;
+    line-height: 1.6;
+    color: #5c5e56;
+  }
+  .sidebar .index-label > span,
+  .sidebar .sidebar-connect > h2 > span {
+    display: flex;
+    align-items: center;
+  }
+  .sidebar .connect-links a {
+    font-size: 14.5px;
+  }
+  .sidebar-bottom p {
+    font-size: 15.5px;
+  }
+  .app-footer {
+    font-size: 12px;
+  }
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1120px) {
+  .sidebar .nav-item {
+    font-size: 15px;
+  }
+}
+
+.hero-copy .hero-note.work-availability,
+.contact-view .view-heading .work-availability.eyebrow {
+  font-size: 13px;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+}
+.work-availability .green-dot {
+  width: 7px;
+  height: 7px;
+}
+@media ((max-width: 900px) or ((max-width: 1200px) and (max-height: 500px)) or ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait)))) {
+  .hero-copy .hero-note.work-availability,
+  .contact-view .view-heading .work-availability.eyebrow {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}

@@ -1,0 +1,119 @@
+/* Stack tiles share the same résumé data in every orientation. */
+.stack-view {
+  height: 100%;
+  min-height: 0;
+}
+.stack-menu > button {
+  min-height: 40px;
+  font-size: 15px;
+}
+.stack-board {
+  min-height: 0;
+  border-top: 0;
+}
+.stack-board-top {
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+.stack-view .stack-board-top h2 {
+  margin: 0;
+}
+.stack-board-top .mono {
+  flex-shrink: 0;
+  font-size: 13px;
+}
+.stack-view .stack-board-foot {
+  font-size: 14px;
+}
+.stack-board-foot > svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.stack-view .tool-grid {
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  grid-auto-rows: minmax(0, 1fr);
+  max-height: calc(var(--tool-rows) * 72px);
+}
+.stack-view .tool-tile {
+  display: grid;
+  grid-template-columns: 28px minmax(135px, 0.8fr) minmax(0, 1.6fr);
+  min-height: 0;
+  align-items: center;
+  align-content: center;
+  padding: 10px 0;
+  gap: 8px 14px;
+}
+.stack-view .tool-tile:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.tool-tile .tool-name {
+  font-size: 16px;
+  color: var(--ink);
+}
+.tool-description {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0;
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) {
+  .stack-view {
+    --stack-header-height: 48px;
+    gap: calc(var(--stack-header-height) + 12px);
+  }
+  .stack-view .stack-board {
+    padding-top: 0;
+    margin-top: calc(-1 * var(--stack-header-height));
+  }
+  .stack-board-top {
+    border-bottom: 1px solid var(--line);
+    min-height: var(--stack-header-height);
+    flex-shrink: 0;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  .stack-view .tool-tile:first-child {
+    border-top: 0;
+  }
+  .stack-menu > button {
+    min-height: 48px;
+    font-size: 18px;
+  }
+  .stack-menu > button > svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 780px) {
+  .stack-view {
+    --stack-header-height: 44px;
+  }
+  .stack-menu > button {
+    min-height: 44px;
+  }
+  .stack-principle {
+    display: none;
+  }
+  .stack-view .tool-tile {
+    padding-block: 4px;
+    column-gap: 10px;
+  }
+  .tool-mark {
+    height: 22px;
+  }
+  .tool-description {
+    font-size: 13px;
+  }
+  .tool-index {
+    display: none;
+  }
+}
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1100px) {
+  .tool-description {
+    line-height: 1.3;
+  }
+}
