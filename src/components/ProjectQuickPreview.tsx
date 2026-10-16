@@ -84,17 +84,39 @@ export default function ProjectQuickPreview({
               </button>
             </div>
           )}
-          {compare && project.preview ? (
-            <ProjectComparison project={project} />
+          {project.preview ? (
+            <div className="preview-panels">
+              <div
+                className="preview-panel"
+                data-active={!compare}
+                aria-hidden={compare}
+                inert={compare}
+              >
+                <img
+                  className="quick-preview-image"
+                  src={project.preview.image}
+                  alt={project.preview.alt}
+                  width={1440}
+                  height={1000}
+                  decoding="async"
+                />
+              </div>
+              <div
+                className="preview-panel"
+                data-active={compare}
+                aria-hidden={!compare}
+                inert={!compare}
+              >
+                <ProjectComparison project={project} />
+              </div>
+            </div>
           ) : (
             <img
-              className={`quick-preview-image${project.preview ? '' : ' is-illustration'}`}
-              src={
-                project.preview?.image ?? `${import.meta.env.BASE_URL}images/playable-wallpaper.svg`
-              }
-              alt={project.preview?.alt ?? 'Illustration for the playable experiences demo'}
-              width={project.preview ? 1440 : 320}
-              height={project.preview ? 1000 : 320}
+              className="quick-preview-image is-illustration"
+              src={`${import.meta.env.BASE_URL}images/playable-wallpaper.svg`}
+              alt="Illustration for the playable experiences demo"
+              width={320}
+              height={320}
               decoding="async"
             />
           )}

@@ -1,0 +1,276 @@
+/* Shared semantic colors. Light is the original palette; dark keeps its warm undertone. */
+:root {
+  color-scheme: light;
+  --chrome: #f5f5f0;
+  --metadata: #62685b;
+  --control-border: #7b8674;
+  --surface: #eff1e9;
+  --surface-raised: #fcfcfa;
+  --surface-hover: #e2e9d9;
+  --surface-blue: #edf0fd;
+  --surface-sage: #eaf0e5;
+  --surface-peach: #f7f2e9;
+  --surface-lavender: #e9e6f0;
+  --surface-error: #f6e6e0;
+  --line-strong: #aeb7a4;
+  --on-solid: #fff;
+  --selection: #d4ddff;
+  --green: #6b926a;
+  --sage-strong: #4b5641;
+  --on-sage: #f6f8f0;
+  --canvas-blue-rgb: 53, 79, 255;
+  --canvas-grid-rgb: 100, 116, 139;
+  --game-background: #eef0e9;
+  --game-grid: #cbd1c7;
+  --game-gate: #e0e5da;
+  --game-outline: #87917f;
+  --game-ground: #e3e7dc;
+  --game-ground-line: #b9c1b1;
+  --study-paper: #f5f5ef;
+  --study-background: #eeefe7;
+  --study-outline: #a4aa9d;
+  --study-line: #c4c8bd;
+  --study-cross: #b3b9ac;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #171917;
+  --chrome: #1b1e1b;
+  --ink: #f0efe8;
+  --muted: #b7bdb5;
+  --metadata: #a4aca2;
+  --line: #383e37;
+  --blue: #929eff;
+  --surface: #20231f;
+  --surface-raised: #292d28;
+  --surface-hover: #292d28;
+  --surface-blue: #272c3e;
+  --surface-sage: #273025;
+  --surface-peach: #302b24;
+  --surface-lavender: #2b2832;
+  --surface-error: #352724;
+  --line-strong: #7b8674;
+  --control-border: #697366;
+  --on-solid: #171917;
+  --selection: #3c4d85;
+  --green: #a6c89a;
+  --sage-strong: #b0c2a4;
+  --on-sage: #20271c;
+  --canvas-blue-rgb: 146, 158, 255;
+  --canvas-grid-rgb: 164, 178, 168;
+  --game-background: #20231f;
+  --game-grid: #495244;
+  --game-gate: #35412f;
+  --game-outline: #97a58b;
+  --game-ground: #30382c;
+  --game-ground-line: #6d7a60;
+  --study-paper: #282c27;
+  --study-background: #222620;
+  --study-outline: #687361;
+  --study-line: #828b7a;
+  --study-cross: #687361;
+}
+
+/* Surface changes stay within the existing frame; no spacing or geometry changes. */
+[data-theme='dark'] .app-shell,
+[data-theme='dark'] .app-header,
+[data-theme='dark'] .sidebar,
+[data-theme='dark'] .app-footer {
+  background: var(--chrome);
+}
+[data-theme='dark'] .main-content {
+  background: var(--paper);
+}
+[data-theme='dark'] .app-body {
+  position: relative;
+  isolation: isolate;
+}
+[data-theme='dark'] .app-body::before {
+  content: '';
+  position: absolute;
+  inset: 0 calc(-1 * var(--frame-gutter)) 0 0;
+  z-index: -1;
+  background: var(--paper);
+  pointer-events: none;
+}
+@media ((max-width: 900px) or ((max-width: 1200px) and (max-height: 500px)) or ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait)))) {
+  [data-theme='dark'] .app-body::before {
+    left: calc(-1 * var(--frame-gutter));
+  }
+}
+[data-theme='dark']
+  :is(.quick-preview-dialog, .assistant-dialog, .shortcuts-dialog, .mobile-index, .theme-options) {
+  background: var(--surface);
+}
+[data-theme='dark']
+  :is(
+    .eyebrow,
+    .mono,
+    .index-label,
+    .nav-number,
+    .location-label,
+    .teaser-category,
+    .small-label,
+    .preview-meta,
+    .demo-pill,
+    .assistant-footer-note,
+    .theme-options legend,
+    .discipline-tools,
+    .footer-credit,
+    .footer-note
+  ) {
+  color: var(--metadata);
+}
+[data-theme='dark'] .nav-item.active .nav-number {
+  color: var(--blue);
+}
+
+/* Text and existing indicators carry emphasis without colored row backgrounds. */
+:root
+  :is(
+    .nav-item,
+    .stack-menu > button,
+    .project-selector > button,
+    .theme-options label,
+    .segmented button
+  ):hover {
+  color: var(--blue);
+}
+[data-theme='dark']
+  :is(
+    .nav-item.active,
+    .stack-menu > button[aria-pressed='true'],
+    .project-selector > button[aria-pressed='true'],
+    .theme-options label:has(input:checked)
+  ) {
+  color: var(--blue);
+}
+:root :is(.header-contact, .copy-button, .assistant-close, .assistant-launcher):hover {
+  color: var(--blue);
+}
+[data-theme='dark'] .topic-options button[aria-pressed='true'] {
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+/* Keep the contact card's fine details readable against its dark surface. */
+[data-theme='dark'] .contact-card {
+  background: color-mix(in srgb, var(--surface) 60%, var(--surface-raised));
+  border-color: var(--control-border);
+}
+[data-theme='dark'] .contact-card > .eyebrow,
+[data-theme='dark'] .contact-card .contact-small {
+  color: color-mix(in srgb, var(--muted) 65%, var(--ink));
+}
+[data-theme='dark'] .contact-card .topic-options button:not([aria-pressed='true']) {
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+[data-theme='dark'] .contact-card .copy-button {
+  color: var(--ink);
+}
+[data-theme='dark'] .contact-card .copy-button:hover {
+  color: var(--blue);
+}
+[data-theme='dark'] .contact-card .contact-email-row,
+[data-theme='dark'] .contact-card .contact-messaging {
+  border-color: color-mix(in srgb, var(--control-border) 65%, var(--surface));
+}
+[data-theme='dark'] :is(button, a):focus-visible {
+  outline: 2px solid var(--blue);
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-theme='dark'] :is(.project-teaser, .assistant-launcher, .copy-button, .assistant-close) {
+    transition:
+      color 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-options label {
+    transition: none;
+  }
+}
+
+/* Only monochrome marks change to a light silhouette; colored logos and artwork stay intact. */
+[data-theme='dark']
+  .brand-logo:is(
+    [data-brand='github'],
+    [data-brand='vercel'],
+    [data-brand='openai'],
+    [data-brand='codex'],
+    [data-brand='prisma'],
+    [data-brand='motion'],
+    [data-brand='copilot'],
+    [data-brand='viber'],
+    [data-brand='telegram'],
+    [data-brand='whatsapp']
+  ) {
+  filter: brightness(0) invert(0.92);
+}
+/* The Next.js mark contains white lettering on a black disc. Give it a subtle edge. */
+[data-theme='dark'] .brand-logo[data-brand='nextjs'] {
+  border-radius: 50%;
+  outline: 1px solid var(--line-strong);
+}
+
+.theme-options {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  flex-shrink: 0;
+  width: max-content;
+  margin: 10px 0 0;
+  padding: 2px;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--muted);
+}
+.theme-options label {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.theme-options input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.theme-options label:hover {
+  color: var(--blue);
+}
+.theme-options label:has(input:checked) {
+  color: var(--blue);
+}
+.theme-options label:has(input:focus-visible) {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+.mobile-index .theme-options label {
+  width: 44px;
+  height: 44px;
+}
+@media (max-height: 820px) {
+  .sidebar .sidebar-bottom {
+    padding-top: 8px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .theme-options label {
+    transition:
+      color 150ms ease,
+      border-color 150ms ease;
+  }
+}

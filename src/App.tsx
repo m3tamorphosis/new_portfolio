@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, MotionConfig } from 'motion/react'
-import { ArrowDownLeft, ArrowUpRight, CodeXml, Download, Mail, Menu, Phone, X } from 'lucide-react'
-import BrandIcon from './components/BrandIcon'
+import { ArrowDownLeft, ArrowUpRight, CodeXml, Download, Menu, X } from 'lucide-react'
 import PortfolioAssistant from './components/PortfolioAssistant'
 import ProjectQuickPreview from './components/ProjectQuickPreview'
 import { profile, views, type View } from './data'
@@ -13,6 +12,8 @@ import Contact from './views/Contact'
 import About from './views/About'
 import { compactLayoutQuery } from './layout'
 import usePointerFeedback from './hooks/usePointerFeedback'
+import useTheme from './hooks/useTheme'
+import ThemeControl from './components/ThemeControl'
 
 function readView(): View {
   if (window.location.hash.slice(1) === 'about') return 'About Me'
@@ -20,6 +21,7 @@ function readView(): View {
 }
 
 export default function App() {
+  const { mode, selectTheme } = useTheme()
   const interactionRoot = usePointerFeedback()
   const [view, setView] = useState<View>(readView)
   const [project, setProject] = useState(0)
@@ -109,53 +111,21 @@ export default function App() {
             onClick={() => navigate(v)}
           >
             <span className="nav-number">0{i + 1}</span>
-            <span>{v === 'Experience' ? 'Exp.' : v}</span>
+            <span>{v}</span>
             {v === view && <motion.span layoutId="nav-dot" className="nav-dot" />}
           </button>
         ))}
       </nav>
-      <section className="sidebar-connect" aria-label="Resume and contact links">
-        <h2 className="eyebrow">
-          GET IN TOUCH
-          <span>
-            <ArrowDownLeft size={12} aria-hidden="true" />
-          </span>
-        </h2>
+      {!compact && <PortfolioAssistant label="Ask about me" />}
+      <div className="sidebar-connect">
         <div className="connect-links">
           <a href={profile.resume} download="Carl-John-Haro-Resume.pdf" title="Download Resume">
             <Download size={17} aria-hidden="true" />
             <span>Download Resume</span>
           </a>
-          <a href={`mailto:${profile.email}`} title="Email Carl">
-            <Mail size={17} aria-hidden="true" />
-            <span>Email</span>
-          </a>
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noreferrer"
-            title="GitHub (opens in a new tab)"
-          >
-            <BrandIcon name="github" size={17} />
-            <span>GitHub</span>
-          </a>
-          {profile.linkedin && (
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              title="LinkedIn (opens in a new tab)"
-            >
-              <BrandIcon name="linkedin" size={17} />
-              <span>LinkedIn</span>
-            </a>
-          )}
-          <a href={`tel:${profile.phone}`} title="Call Carl">
-            <Phone size={17} aria-hidden="true" />
-            <span>0961 083 4292</span>
-          </a>
         </div>
-      </section>
+      </div>
+      <ThemeControl mode={mode} onSelect={selectTheme} />
     </>
   )
   return (
@@ -245,9 +215,9 @@ export default function App() {
               <motion.div
                 className="view-container"
                 key={view}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
               >
                 {view === 'About Me' ? (
@@ -279,7 +249,7 @@ export default function App() {
           <span className="footer-credit">
             DESIGNED & BUILT BY CARL <span>© {new Date().getFullYear()}</span>
           </span>
-          <PortfolioAssistant />
+          {compact && <PortfolioAssistant />}
           <span className="footer-note">Built with care. Made to be used.</span>
         </footer>
         {previewProject !== null && (
@@ -305,7 +275,9 @@ export default function App() {
             onKeyDown={(event) => {
               if (event.key !== 'Tab') return
               const controls = [
-                ...event.currentTarget.querySelectorAll<HTMLElement>('button, a[href]'),
+                ...event.currentTarget.querySelectorAll<HTMLElement>(
+                  'button, a[href], input[type="radio"]:checked',
+                ),
               ]
               const first = controls[0]
               const last = controls[controls.length - 1]

@@ -13,8 +13,8 @@ function LayoutStudy({ id }: { id: string }) {
       width={w}
       height={h}
       rx={14}
-      fill="#f5f5ef"
-      stroke="#a4aa9d"
+      fill="var(--study-paper)"
+      stroke="var(--study-outline)"
       strokeWidth={2}
     />
   )
@@ -27,12 +27,12 @@ function LayoutStudy({ id }: { id: string }) {
         width={w * (i === count - 1 ? 0.72 : 1)}
         height={10}
         rx={5}
-        fill="#c4c8bd"
+        fill="var(--study-line)"
       />
     ))
   return (
     <svg viewBox="0 0 1440 1000" className="layout-study" aria-hidden="true">
-      <rect width="1440" height="1000" fill="#eeefe7" />
+      <rect width="1440" height="1000" fill="var(--study-background)" />
       {id === 'careerforge' ? (
         <>
           {box(0, 0, 1440, 80)}
@@ -100,7 +100,11 @@ function LayoutStudy({ id }: { id: string }) {
           {lines(112, 33, 190, 1)}
           {lines(460, 33, 550, 1)}
           {box(382, 160, 676, 408)}
-          <path d="M382 160L1058 568M1058 160L382 568" stroke="#b3b9ac" strokeWidth="2" />
+          <path
+            d="M382 160L1058 568M1058 160L382 568"
+            stroke="var(--study-cross)"
+            strokeWidth="2"
+          />
           {lines(290, 665, 860, 1)}
           {lines(430, 740, 570, 1)}
           {box(512, 820, 200, 60)}
@@ -113,6 +117,7 @@ function LayoutStudy({ id }: { id: string }) {
 
 export default function ProjectComparison({ project }: { project: Project }) {
   const [position, setPosition] = useState(50)
+  const [pointerFocus, setPointerFocus] = useState(false)
   const descriptionId = useId()
   if (!project.preview) return null
   return (
@@ -136,6 +141,10 @@ export default function ProjectComparison({ project }: { project: Project }) {
           min={0}
           max={100}
           value={position}
+          data-pointer-focus={pointerFocus || undefined}
+          onPointerDown={() => setPointerFocus(true)}
+          onKeyDown={() => setPointerFocus(false)}
+          onBlur={() => setPointerFocus(false)}
           aria-label={`Compare ${project.name} layout study and current design`}
           aria-valuetext={`${position}% layout study, ${100 - position}% current design`}
           aria-describedby={descriptionId}

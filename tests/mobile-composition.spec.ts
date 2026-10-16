@@ -125,11 +125,8 @@ for (const width of [320, 393, 768]) {
     await expect(menu).toHaveCSS('opacity', '1')
     await expect(trigger).toHaveAttribute('aria-expanded', 'true')
     await expect(menu.locator('.nav-item')).toHaveCount(6)
-    await expect(menu.locator('.connect-links a')).toHaveCount(5)
-    await expect(menu.getByRole('link', { name: '0961 083 4292' })).toHaveAttribute(
-      'href',
-      'tel:+639610834292',
-    )
+    await expect(menu.locator('.connect-links a')).toHaveCount(1)
+    await expect(menu.locator('.connect-links a')).toHaveText('Download Resume')
     const targets = await menu
       .locator('button,a')
       .evaluateAll((items) =>
@@ -145,7 +142,7 @@ for (const width of [320, 393, 768]) {
     for (const [label, hash] of [
       ['About Me', 'about'],
       ['Builds', 'builds'],
-      ['Exp.', 'experience'],
+      ['Experience', 'experience'],
       ['Stack', 'stack'],
       ['Contact', 'contact'],
       ['Home', 'home'],
@@ -165,19 +162,6 @@ for (const width of [320, 393, 768]) {
     expect(await readFile((await file.path())!)).toEqual(
       await readFile('public/Carl-John-Haro-Resume.pdf'),
     )
-    await expect(menu.getByRole('link', { name: 'Email', exact: true })).toHaveAttribute(
-      'href',
-      'mailto:carljohnharo02@gmail.com',
-    )
-    await expect(menu.getByRole('link', { name: 'GitHub', exact: true })).toHaveAttribute(
-      'href',
-      'https://github.com/m3tamorphosis',
-    )
-    await expect(menu.getByRole('link', { name: 'GitHub', exact: true })).toHaveAttribute(
-      'target',
-      '_blank',
-    )
-    await expect(menu.locator('[data-brand="github"]')).toBeVisible()
     const result = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
       .analyze()

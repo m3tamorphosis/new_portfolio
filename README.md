@@ -26,7 +26,19 @@ npm run build
 npm run preview
 ```
 
-Deploy `dist/` to any static host, such as Vercel, Netlify, or GitHub Pages. No backend, environment variables, or secrets are required. Vite uses relative asset paths and navigation uses hashes, so server-side route rewrites are unnecessary.
+The portfolio pages can be served from `dist/` on a static host. The AI chat additionally needs the server endpoint described below; a static-only deployment cannot run Groq requests. Vite uses relative asset paths and navigation uses hashes.
+
+## Portfolio AI chat (Groq)
+
+The assistant has a chat history, free-text input (Enter to send, Shift+Enter for a new line), suggested questions, retry, and New chat. Conversation history stays in browser memory and is sent to Groq for replies; it is not saved to localStorage. Responses use the portfolio's profile, projects, stack, and a server-side experience summary. The UI never substitutes canned answers for AI replies.
+
+1. Set `GROQ_API_KEY` in the local `.env` file (or copy `.env.example` to `.env.local`). Both are ignored by Git. Never put the key in a `VITE_` variable or commit it.
+2. Run/restart `npm run dev`. Vite serves `/api/chat` locally and loads the server-only key.
+3. For production, deploy this repository to Vercel with the Vite preset and set `GROQ_API_KEY` in the project's server environment. `api/chat.ts` supplies the Node function at `/api/chat`. Other hosts need an equivalent Node handler at that route; `npm run preview` only previews the static frontend.
+
+`GROQ_MODEL` optionally overrides the default `openai/gpt-oss-20b` model. See [Groq's Chat API](https://console.groq.com/docs/api-reference) and [Vercel's Node functions](https://vercel.com/docs/functions/runtimes/node-js). There are no additional SDK dependencies.
+
+The endpoint validates and limits messages, caps output, times out upstream requests, and has a basic per-instance request limit. For a public deployment, use hosting-level rate limits and Groq project spending limits as well; the in-memory limiter is not shared across server instances. Provider errors and secrets are never returned to the browser. An absent key produces an honest connection message with a direct Contact Carl link.
 
 ## Project structure
 

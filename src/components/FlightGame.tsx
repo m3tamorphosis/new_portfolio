@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowUpRight, Bird, Pause, Play, RotateCcw } from 'lucide-react'
+import { ArrowUpRight, Pause, Play, RotateCcw } from 'lucide-react'
+import { observeTheme, readThemePalette } from '../themePalette'
 
 type Phase = 'ready' | 'playing' | 'paused' | 'lost'
 type Gate = { x: number; center: number; passed: boolean }
@@ -27,6 +28,18 @@ export default function FlightGame() {
     const element = canvas.current!
     const ctx = element.getContext('2d')
     if (!ctx) return
+    const colorNames = [
+      'game-background',
+      'game-grid',
+      'game-gate',
+      'game-outline',
+      'paper',
+      'game-ground',
+      'game-ground-line',
+      'blue',
+      'ink',
+    ] as const
+    let palette = readThemePalette(colorNames)
     let frame = 0,
       previous = 0,
       worldWidth = 400,
@@ -45,9 +58,9 @@ export default function FlightGame() {
       const g = flight.current
       ctx.setTransform(scale, 0, 0, scale, 0, 0)
       ctx.clearRect(0, 0, worldWidth, HEIGHT)
-      ctx.fillStyle = '#eef0e9'
+      ctx.fillStyle = palette['game-background']
       ctx.fillRect(0, 0, worldWidth, HEIGHT)
-      ctx.fillStyle = '#cbd1c7'
+      ctx.fillStyle = palette['game-grid']
       for (let x = 15; x < worldWidth + 30; x += 30)
         for (let y = 15; y < GROUND; y += 30)
           ctx.fillRect(x - (reduced.matches ? 0 : (g.time * 10) % 30), y, 1, 1)
@@ -56,22 +69,22 @@ export default function FlightGame() {
       for (const gate of gates) {
         const top = gate.center - GAP / 2,
           bottom = gate.center + GAP / 2
-        ctx.fillStyle = '#e0e5da'
-        ctx.strokeStyle = '#87917f'
+        ctx.fillStyle = palette['game-gate']
+        ctx.strokeStyle = palette['game-outline']
         ctx.lineWidth = 1.3
         ctx.fillRect(gate.x, -2, GATE_WIDTH, top + 2)
         ctx.strokeRect(gate.x, -2, GATE_WIDTH, top + 2)
         ctx.fillRect(gate.x, bottom, GATE_WIDTH, GROUND - bottom)
         ctx.strokeRect(gate.x, bottom, GATE_WIDTH, GROUND - bottom)
-        ctx.fillStyle = '#f5f5f0'
+        ctx.fillStyle = palette.paper
         ctx.fillRect(gate.x - 3, top - 9, GATE_WIDTH + 6, 9)
         ctx.strokeRect(gate.x - 3, top - 9, GATE_WIDTH + 6, 9)
         ctx.fillRect(gate.x - 3, bottom, GATE_WIDTH + 6, 9)
         ctx.strokeRect(gate.x - 3, bottom, GATE_WIDTH + 6, 9)
       }
-      ctx.fillStyle = '#e3e7dc'
+      ctx.fillStyle = palette['game-ground']
       ctx.fillRect(0, GROUND, worldWidth, HEIGHT - GROUND)
-      ctx.strokeStyle = '#b9c1b1'
+      ctx.strokeStyle = palette['game-ground-line']
       ctx.beginPath()
       ctx.moveTo(0, GROUND)
       ctx.lineTo(worldWidth, GROUND)
@@ -80,7 +93,7 @@ export default function FlightGame() {
       ctx.save()
       ctx.translate(worldWidth * 0.25, g.y)
       ctx.rotate(Math.max(-0.35, Math.min(0.9, g.velocity / 650)))
-      ctx.fillStyle = '#3155ef'
+      ctx.fillStyle = palette.blue
       ctx.beginPath()
       ctx.ellipse(0, 0, 14, 11, 0, 0, Math.PI * 2)
       ctx.fill()
@@ -96,7 +109,7 @@ export default function FlightGame() {
         Math.PI * 2,
       )
       ctx.fill()
-      ctx.fillStyle = '#242521'
+      ctx.fillStyle = palette.ink
       ctx.beginPath()
       ctx.moveTo(12, -1)
       ctx.lineTo(21, 3)
@@ -200,6 +213,10 @@ export default function FlightGame() {
       paint()
     })
     resize.observe(element)
+    const stopThemeObserver = observeTheme(() => {
+      palette = readThemePalette(colorNames)
+      paint()
+    })
     const intersection = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting
@@ -215,6 +232,7 @@ export default function FlightGame() {
     window.addEventListener('blur', pause)
     return () => {
       disposed = true
+      stopThemeObserver()
       cancelAnimationFrame(frame)
       resize.disconnect()
       intersection.disconnect()
@@ -225,9 +243,7 @@ export default function FlightGame() {
   return (
     <div className="demo flight-demo">
       <div className="demo-app-header">
-        <span className="demo-logo">
-          <Bird size={18} aria-hidden="true" /> SIGNAL / GLIDE
-        </span>
+        <span className="demo-logo">SIGNAL / GLIDE</span>
         <span className="demo-pill">PLAYABLE CONCEPT</span>
       </div>
       <div className="flight-stage">

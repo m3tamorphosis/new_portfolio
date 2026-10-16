@@ -1,18 +1,6 @@
-/* One index and utility group, shared by the sidebar and mobile dialog. */
+/* One index and resume link, shared by the sidebar and mobile dialog. */
 .sidebar-connect {
-  margin-top: 24px;
-  flex-shrink: 0;
-}
-.sidebar-connect > h2 {
-  display: flex;
-  justify-content: space-between;
-  padding-right: 10px;
-  font-size: 10px;
-  font-weight: 400;
-  margin-bottom: 8px;
-}
-.sidebar-connect > h2 > span {
-  color: #4f5149;
+  margin-top: 8px;
   flex-shrink: 0;
 }
 .connect-links {
@@ -23,8 +11,8 @@
 .connect-links a {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-height: 28px;
+  gap: 15px;
+  min-height: 42px;
   font-size: 13px;
   color: var(--muted);
   line-height: 1.4;
@@ -38,9 +26,9 @@
 }
 .contact-card .contact-messaging {
   flex-wrap: wrap;
-  gap: 4px 20px;
-  margin-top: 18px;
-  padding-top: 12px;
+  gap: 4px 24px;
+  margin-top: 20px;
+  padding-top: 14px;
   border-top: 1px solid var(--line);
 }
 .contact-messaging > a {
@@ -93,6 +81,9 @@
   }
 }
 @media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1120px) {
+  .sidebar .nav-item {
+    gap: 8px;
+  }
   .builds-view .project-selector > button {
     font-size: 13px;
   }
@@ -124,7 +115,7 @@
   overscroll-behavior: contain;
 }
 .mobile-index::backdrop {
-  background: rgb(36 37 33 / 35%);
+  background: light-dark(rgb(36 37 33 / 35%), rgb(0 0 0 / 55%));
 }
 .mobile-index-content {
   padding: 16px 24px 24px;
@@ -159,7 +150,7 @@
   font-size: 11px;
 }
 .mobile-index .sidebar-connect {
-  margin-top: 28px;
+  margin-top: 8px;
 }
 .mobile-index .connect-links {
   display: grid;
@@ -184,8 +175,20 @@
   .app-footer {
     --small-text-step: 2.5px;
   }
-  .sidebar .sidebar-connect > h2 {
-    font-size: 11px;
+  .sidebar nav {
+    gap: clamp(6px, 1.2vh, 14px);
+    flex-shrink: 0;
+  }
+  .sidebar .nav-item {
+    min-height: clamp(42px, 5.3vh, 56px);
+  }
+  .sidebar .nav-dot {
+    position: absolute;
+    right: 0;
+    margin: 0;
+  }
+  .sidebar-bottom {
+    flex-shrink: 0;
   }
   .sidebar .connect-links a {
     font-size: 14px;
@@ -205,23 +208,14 @@
   .sidebar-doodle {
     display: none;
   }
-  .sidebar-connect {
-    margin-top: 18px;
-  }
-  .sidebar nav {
-    gap: 4px;
-  }
 }
 @media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 820px) {
   .sidebar {
     overflow-y: auto;
   }
-  .sidebar-bottom {
-    display: none;
-  }
 }
 @media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 650px) {
-  .sidebar-connect {
-    margin-top: 14px;
+  .sidebar-bottom {
+    display: none;
   }
 }

@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from 'motion/react'
 import { ArrowUpRight, Maximize2 } from 'lucide-react'
 import { PlayableDemo } from '../components/Demos'
 import { projects } from '../data'
-import { projectIcons } from '../components/TechnologyIcon'
 
 export default function Builds({
   selected,
@@ -32,16 +31,12 @@ export default function Builds({
       <div className="builds-layout">
         <div className="project-details">
           <div className="project-selector" aria-label="Select a project">
-            {projects.map((p, i) => {
-              const ProjectIcon = projectIcons[p.id]
-              return (
-                <button key={p.id} onClick={() => onSelect(i)} aria-pressed={selected === i}>
-                  <span>{p.number}</span>
-                  <span>{p.name}</span>
-                  <ProjectIcon size={16} aria-hidden="true" />
-                </button>
-              )
-            })}
+            {projects.map((p, i) => (
+              <button key={p.id} onClick={() => onSelect(i)} aria-pressed={selected === i}>
+                <span>{p.number}</span>
+                <span>{p.name}</span>
+              </button>
+            ))}
           </div>
           <AnimatePresence mode="wait">
             <motion.div

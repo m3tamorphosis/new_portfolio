@@ -255,7 +255,8 @@ export default function About({ onBack }: { onBack: () => void }) {
           <i className="green-dot" /> RECENT EXPERIENCE
         </span>
         <p>
-          Built interactive, high-performance experiences at <strong>HPL Game Design.</strong>
+          Built responsive web interfaces with reusable components and smooth interactions at{' '}
+          <strong>HPL Game Design.</strong>
         </p>
       </motion.div>
     </div>

@@ -1,5 +1,35 @@
 import { expect, test } from '@playwright/test'
 
+test('sidebar transitions do not introduce temporary page scrollbars', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  for (const width of [1440, 1920]) {
+    await page.setViewportSize({ width, height: 900 })
+    await page.goto('/')
+    await expect(page.locator('.view-container')).toHaveCSS('opacity', '1')
+    for (const section of ['Experience', 'Stack', 'About Me', 'Builds', 'Contact', 'Home']) {
+      const overflow = await page.evaluate(async (name) => {
+        const main = document.querySelector<HTMLElement>('main')!
+        const button = [...document.querySelectorAll<HTMLButtonElement>('.sidebar .nav-item')].find(
+          (item) => item.textContent?.endsWith(name),
+        )!
+        let peak = 0
+        const start = performance.now()
+        button.click()
+        await new Promise<void>((resolve) => {
+          const sample = () => {
+            peak = Math.max(peak, main.scrollHeight - main.clientHeight)
+            if (performance.now() - start < 600) requestAnimationFrame(sample)
+            else resolve()
+          }
+          requestAnimationFrame(sample)
+        })
+        return peak
+      }, section)
+      expect(overflow, `${section} at ${width}`).toBeLessThanOrEqual(1)
+    }
+  }
+})
+
 for (const width of [1440, 390]) {
   for (const reducedMotion of ['no-preference', 'reduce'] as const) {
     test(`category reveals and timeline selection at ${width}, ${reducedMotion}`, async ({

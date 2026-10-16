@@ -3,6 +3,7 @@ import AxeBuilder from '@axe-core/playwright'
 
 for (const size of [
   { width: 1440, height: 900 },
+  { width: 1280, height: 650 },
   { width: 393, height: 852 },
   { width: 320, height: 568 },
   { width: 844, height: 390 },
@@ -10,31 +11,52 @@ for (const size of [
   test(`portfolio assistant preview works at ${size.width} × ${size.height}`, async ({ page }) => {
     const errors: string[] = []
     page.on('pageerror', (error) => errors.push(error.message))
+    await page.route('**/api/chat', async (route) => {
+      const { messages } = route.request().postDataJSON()
+      const question = messages.at(-1).content
+      const reply = question.includes('technologies')
+        ? 'Carl uses React, TypeScript, and Phaser 3.'
+        : question.includes('contact')
+          ? 'Email Carl at carljohnharo02@gmail.com.'
+          : 'Carl has built CareerForge AI and other portfolio projects.'
+      await route.fulfill({ json: { reply } })
+    })
     await page.setViewportSize(size)
     await page.goto('/#about')
     await page.evaluate(() => document.fonts.ready)
-    const launcher = page.getByRole('button', { name: 'Ask about my work' })
+    const launcher = page.getByRole('button', {
+      name: size.width > 900 ? 'Ask about me' : 'Ask about my work',
+      exact: true,
+    })
     const launcherBounds = await launcher.boundingBox()
     expect(launcherBounds!.width).toBeGreaterThanOrEqual(44)
     expect(launcherBounds!.height).toBeGreaterThanOrEqual(44)
     expect(launcherBounds!.x + launcherBounds!.width).toBeLessThanOrEqual(size.width)
     expect(launcherBounds!.y + launcherBounds!.height).toBeLessThanOrEqual(size.height)
     if (size.width > 900) {
-      const footerBounds = await page.locator('.app-footer').boundingBox()
-      expect(launcherBounds!.y).toBeGreaterThanOrEqual(footerBounds!.y)
-      expect(launcherBounds!.y + launcherBounds!.height).toBeLessThanOrEqual(
-        footerBounds!.y + footerBounds!.height,
+      await expect(page.locator('.sidebar .assistant-launcher')).toHaveCount(1)
+      await expect(launcher.locator('span')).toBeVisible()
+      const sidebarBounds = await page.locator('.sidebar').boundingBox()
+      expect(launcherBounds!.x).toBeGreaterThanOrEqual(sidebarBounds!.x)
+      expect(launcherBounds!.x + launcherBounds!.width).toBeLessThanOrEqual(
+        sidebarBounds!.x + sidebarBounds!.width,
       )
+      expect(launcherBounds!.y + launcherBounds!.height).toBeLessThanOrEqual(
+        sidebarBounds!.y + sidebarBounds!.height,
+      )
+    } else {
+      await expect(launcher).toHaveCSS('position', 'fixed')
     }
     await page.screenshot({ path: `test-results/assistant-launcher-${size.width}.png` })
     await launcher.click()
     const panel = page.getByRole('dialog', { name: 'Ask about my work.' })
     const close = panel.getByRole('button', { name: 'Close portfolio assistant' })
     await expect(panel).toBeVisible()
+    await expect(panel).toBeFocused()
+    await expect(panel.getByRole('textbox', { name: 'Message portfolio assistant' })).toBeVisible()
+    await expect(panel.getByRole('button', { name: 'Send message' })).toBeDisabled()
+    await page.keyboard.press('Tab')
     await expect(close).toBeFocused()
-    await expect(panel.getByText('Sample answers · AI chat coming soon')).toBeVisible()
-    await expect(panel.getByRole('textbox')).toBeDisabled()
-    await expect(panel.getByRole('button', { name: 'Send message — coming soon' })).toBeDisabled()
 
     await page.keyboard.press('Shift+Tab')
     await expect(panel.getByRole('link', { name: 'Contact Carl' })).toBeFocused()
@@ -45,12 +67,16 @@ for (const size of [
     await page.keyboard.press('?')
     await expect(page.locator('dialog[open]')).toHaveCount(1)
 
-    await panel.getByRole('button', { name: 'What has Carl built?' }).click()
-    await expect(panel.getByRole('status')).toContainText('CareerForge AI')
-    await panel.getByRole('button', { name: 'What technologies does he use?' }).click()
-    await expect(panel.getByRole('status')).toContainText('Phaser 3')
-    await panel.getByRole('button', { name: 'How can I contact Carl?' }).click()
-    await expect(panel.getByRole('status')).toContainText('carljohnharo02@gmail.com')
+    const input = panel.getByRole('textbox')
+    await input.fill('What has Carl built?')
+    await input.press('Enter')
+    await expect(panel.getByRole('log')).toContainText('CareerForge AI')
+    await input.fill('What technologies does he use?')
+    await input.press('Enter')
+    await expect(panel.getByRole('log')).toContainText('Phaser 3')
+    await input.fill('How can I contact Carl?')
+    await panel.getByRole('button', { name: 'Send message' }).click()
+    await expect(panel.getByRole('log')).toContainText('carljohnharo02@gmail.com')
     const bounds = await panel.boundingBox()
     expect(bounds!.x).toBeGreaterThanOrEqual(0)
     expect(bounds!.y).toBeGreaterThanOrEqual(0)

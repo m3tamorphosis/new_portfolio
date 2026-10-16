@@ -8,7 +8,7 @@ export const profile = {
   phone: '+639610834292',
   github: 'https://github.com/m3tamorphosis',
   linkedin: 'https://www.linkedin.com/in/carl-john-haro-923a9a3bb',
-  resume: `${import.meta.env.BASE_URL}Carl-John-Haro-Resume.pdf`,
+  resume: `${import.meta.env?.BASE_URL ?? '/'}Carl-John-Haro-Resume.pdf`,
 }
 
 export const projects = [
@@ -56,8 +56,8 @@ export const projects = [
     color: 'blue',
     liveUrl: 'https://mycareerforge.vercel.app/',
     preview: {
-      image: `${import.meta.env.BASE_URL}images/careerforge-preview.jpg`,
-      thumbnail: `${import.meta.env.BASE_URL}images/careerforge-thumbnail.jpg`,
+      image: `${import.meta.env?.BASE_URL ?? '/'}images/careerforge-preview.jpg`,
+      thumbnail: `${import.meta.env?.BASE_URL ?? '/'}images/careerforge-thumbnail.jpg`,
       alt: 'CareerForge AI live website: AI resume building, cover letters, and job tracking overview',
     },
   },
@@ -73,8 +73,8 @@ export const projects = [
     color: 'blue',
     liveUrl: 'https://insight-vault-lite.vercel.app/',
     preview: {
-      image: `${import.meta.env.BASE_URL}images/insight-preview.jpg`,
-      thumbnail: `${import.meta.env.BASE_URL}images/insight-thumbnail.jpg`,
+      image: `${import.meta.env?.BASE_URL ?? '/'}images/insight-preview.jpg`,
+      thumbnail: `${import.meta.env?.BASE_URL ?? '/'}images/insight-thumbnail.jpg`,
       alt: 'InsightVault Lite live app: AI analysis introduction and sign-in screen',
     },
   },
@@ -90,8 +90,8 @@ export const projects = [
     color: 'peach',
     liveUrl: 'https://studdybuddygpt.vercel.app/',
     preview: {
-      image: `${import.meta.env.BASE_URL}images/study-preview.jpg`,
-      thumbnail: `${import.meta.env.BASE_URL}images/study-thumbnail.jpg`,
+      image: `${import.meta.env?.BASE_URL ?? '/'}images/study-preview.jpg`,
+      thumbnail: `${import.meta.env?.BASE_URL ?? '/'}images/study-thumbnail.jpg`,
       alt: 'StudyBuddyGPT live app: PDF study tools and upload page',
     },
   },
@@ -107,8 +107,8 @@ export const projects = [
     color: 'sage',
     liveUrl: 'https://dangerzone.vercel.app/',
     preview: {
-      image: `${import.meta.env.BASE_URL}images/danger-preview.jpg`,
-      thumbnail: `${import.meta.env.BASE_URL}images/danger-thumbnail.jpg`,
+      image: `${import.meta.env?.BASE_URL ?? '/'}images/danger-preview.jpg`,
+      thumbnail: `${import.meta.env?.BASE_URL ?? '/'}images/danger-thumbnail.jpg`,
       alt: 'Danger Zone official website: disaster simulation game title and introduction',
     },
   },

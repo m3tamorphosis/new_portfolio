@@ -12,7 +12,7 @@ test('all six sections share navigation, history, shortcuts, and mobile menus', 
     '01Home',
     '02About Me',
     '03Builds',
-    '04Exp.',
+    '04Experience',
     '05Stack',
     '06Contact',
   ])

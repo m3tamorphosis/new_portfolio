@@ -3,6 +3,7 @@ import { useReducedMotion } from 'motion/react'
 import { stackGroups } from '../data'
 import TechnologyIcon from './TechnologyIcon'
 import { compactLayoutQuery } from '../layout'
+import { observeTheme, readThemePalette } from '../themePalette'
 
 type Point = { x: number; y: number; z: number }
 const technologies = [...new Set(stackGroups.flatMap((group) => group.items))]
@@ -80,6 +81,8 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
       ctx = canvas?.getContext('2d')
     // Keep the last frame while a modal covers Home; resume from the same rotation.
     if (!canvas || !ctx || paused) return
+    const colorNames = ['canvas-blue-rgb', 'canvas-grid-rgb'] as const
+    let palette = readThemePalette(colorNames)
     let frame = 0,
       previous = 0,
       width = 0,
@@ -133,7 +136,7 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
         }
       }
       const stroke = (a: Point, b: Point, alpha: number, blue = false, weight = 0.65) => {
-        ctx.strokeStyle = blue ? `rgba(53,79,255,${alpha})` : `rgba(100,116,139,${alpha})`
+        ctx.strokeStyle = `rgba(${palette[blue ? 'canvas-blue-rgb' : 'canvas-grid-rgb']},${alpha})`
         ctx.lineWidth = weight
         ctx.beginPath()
         ctx.moveTo(a.x, a.y)
@@ -283,14 +286,14 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
           textBoxes.push(box)
         }
         if (p.z > 0) {
-          ctx.fillStyle = `rgba(53,79,255,${0.18 + pulse * 0.7})`
+          ctx.fillStyle = `rgba(${palette['canvas-blue-rgb']},${0.18 + pulse * 0.7})`
           ctx.beginPath()
           ctx.arc(p.x, p.y, 1.4 + pulse, 0, Math.PI * 2)
           ctx.fill()
         }
       })
       signals.forEach((signal) => {
-        ctx.fillStyle = signal.z < 0 ? 'rgba(53,79,255,0.3)' : '#354fff'
+        ctx.fillStyle = `rgba(${palette['canvas-blue-rgb']},${signal.z < 0 ? 0.3 : 1})`
         ctx.beginPath()
         ctx.arc(signal.x, signal.y, compact ? 5 : 6, 0, Math.PI * 2)
         ctx.fill()
@@ -314,6 +317,10 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
       schedule()
     }
     redraw.current = schedule
+    const stopThemeObserver = observeTheme(() => {
+      palette = readThemePalette(colorNames)
+      schedule()
+    })
     const observer = new ResizeObserver(resize)
     observer.observe(canvas)
     resize()
@@ -335,6 +342,7 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
     document.addEventListener('visibilitychange', visibility)
     return () => {
       disposed = true
+      stopThemeObserver()
       cancelAnimationFrame(frame)
       observer.disconnect()
       intersection.disconnect()

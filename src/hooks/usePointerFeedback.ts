@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const targets = '.project-teaser, .hero-actions .button, .header-contact, .contact-email'
+const targets = '.project-teaser, .hero-actions .button, .header-contact'
 const properties = [
   '--pointer-x',
   '--pointer-y',

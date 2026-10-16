@@ -198,9 +198,11 @@ kbd {
   .about-principles .principle-title {
     font-weight: 600;
     color: var(--ink);
+    margin-top: 8px;
   }
   .about-principles .principle-description {
     line-height: 1.5;
+    margin-top: 6px;
   }
 }
 @media (min-width: 1550px) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait)))) {
@@ -341,25 +343,19 @@ kbd {
   .app-header .brand-text strong {
     font-size: 16px;
   }
-  .app-header .brand-text > span {
-    font-size: 12.5px;
-  }
-  .app-header .header-contact {
-    font-size: 11.5px;
-  }
+  .app-header .brand-text > span,
+  .app-header .header-contact,
   .app-header .location-label {
     font-size: 12.5px;
   }
   .sidebar .nav-item {
-    font-size: 16px;
+    font-size: 17px;
   }
   .sidebar .index-label,
-  .sidebar .nav-number,
-  .app-shell .sidebar .sidebar-connect > h2.eyebrow {
-    font-size: 11.5px;
+  .sidebar .nav-number {
+    font-size: 12px;
   }
-  .sidebar .index-label,
-  .sidebar .sidebar-connect > h2 {
+  .sidebar .index-label {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -369,18 +365,17 @@ kbd {
     text-align: left;
     letter-spacing: 1.2px;
     line-height: 1.6;
-    color: #5c5e56;
+    color: light-dark(#5c5e56, var(--muted));
   }
-  .sidebar .index-label > span,
-  .sidebar .sidebar-connect > h2 > span {
+  .sidebar .index-label > span {
     display: flex;
     align-items: center;
   }
   .sidebar .connect-links a {
-    font-size: 14.5px;
+    font-size: 15.5px;
   }
   .sidebar-bottom p {
-    font-size: 15.5px;
+    font-size: 16px;
   }
   .app-footer {
     font-size: 12px;
@@ -388,7 +383,7 @@ kbd {
 }
 @media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1120px) {
   .sidebar .nav-item {
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 

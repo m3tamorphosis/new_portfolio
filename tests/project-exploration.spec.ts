@@ -51,6 +51,7 @@ for (const width of [320, 390, 768, 1440]) {
     await slider.focus()
     await page.keyboard.press('Home')
     await expect(slider).toHaveValue('0')
+    await expect(dialog.locator('.comparison-stage')).toHaveCSS('outline-width', '2px')
     await page.keyboard.press('End')
     await expect(slider).toHaveValue('100')
     await page.keyboard.press('ArrowLeft')
@@ -62,6 +63,9 @@ for (const width of [320, 390, 768, 1440]) {
     const box = (await slider.boundingBox())!
     await page.mouse.click(box.x + box.width * 0.35, box.y + box.height / 2)
     expect(Number(await slider.inputValue())).toBeLessThan(50)
+    await expect(dialog.locator('.comparison-stage')).toHaveCSS('outline-style', 'none')
+    await page.keyboard.press('ArrowRight')
+    await expect(dialog.locator('.comparison-stage')).toHaveCSS('outline-width', '2px')
     const overflow = await dialog.evaluate((el) => el.scrollWidth > el.clientWidth + 1)
     expect(overflow).toBe(false)
     await dialog.screenshot({ path: `test-results/comparison-${width}.png` })
@@ -88,8 +92,15 @@ for (const width of [320, 390, 768, 1440]) {
       await page.getByRole('button', { name: 'Quick preview', exact: true }).click()
       const preview = page.getByRole('dialog', { name: project, exact: true })
       await expect(preview).toBeVisible()
+      await expect(preview.locator('.quick-preview-summary')).toHaveCSS('border-top-width', '0px')
+      await expect(preview.getByRole('slider')).toHaveCount(0)
+      const currentHeight = (await preview.boundingBox())!.height
       await preview.getByRole('button', { name: 'Compare layout' }).click()
       await expect(preview.getByRole('slider')).toHaveValue('50')
+      expect(Math.abs((await preview.boundingBox())!.height - currentHeight)).toBeLessThanOrEqual(1)
+      await preview.getByRole('button', { name: 'Current design', exact: true }).click()
+      await expect(preview.getByRole('slider')).toHaveCount(0)
+      expect(Math.abs((await preview.boundingBox())!.height - currentHeight)).toBeLessThanOrEqual(1)
       await page.keyboard.press('Escape')
     }
   })
@@ -118,6 +129,7 @@ test('comparison slider responds to a touch drag', async ({ browser }) => {
     type: 'touchMove',
     touchPoints: [{ x: box.x + box.width * 0.8, y, id: 1 }],
   })
+  await expect(page.locator('.comparison-stage')).toHaveCSS('outline-style', 'none')
   await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
   expect(Number(await slider.inputValue())).toBeGreaterThan(65)
   await context.close()

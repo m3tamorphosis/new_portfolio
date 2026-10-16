@@ -7,6 +7,7 @@ import {
   Mail,
   MapPin,
   MessagesSquare,
+  Phone,
 } from 'lucide-react'
 import BrandIcon from '../components/BrandIcon'
 import { profile } from '../data'
@@ -121,7 +122,7 @@ export default function Contact() {
               <BrandIcon name="linkedin" size={17} /> LinkedIn <ArrowUpRight size={15} />
             </a>
             <a href={profile.resume} download>
-              <ArrowDownToLine size={17} /> Résumé <ArrowUpRight size={15} />
+              <ArrowDownToLine size={17} /> Résumé
             </a>
           </div>
           <section className="contact-interests" aria-labelledby="contact-interests-heading">
@@ -137,28 +138,34 @@ export default function Contact() {
         </div>
         <div className="contact-card">
           <span className="eyebrow">WHAT’S ON YOUR MIND?</span>
-          <div className="topic-options">
+          <div className="topic-options" role="group" aria-label="Email topic">
             {contactIntents.map((intent) => (
               <button
                 key={intent.label}
-                aria-pressed={topic === intent}
+                aria-pressed={topic.subject === intent.subject}
                 onClick={() => setTopic(intent)}
               >
                 {intent.label}
               </button>
             ))}
           </div>
-          <a className="contact-email" href={emailHref}>
-            {profile.email}
-            <ArrowUpRight size={20} />
-          </a>
+          <div className="contact-email-row">
+            <a className="contact-email" href={emailHref}>
+              {profile.email}
+            </a>
+            <button
+              className="copy-button"
+              onClick={copy}
+              aria-label="Copy email address"
+              title={copied ? 'Copied' : 'Copy email address'}
+            >
+              {copied ? <Check size={17} /> : <Copy size={17} />}
+            </button>
+          </div>
           <div className="email-actions">
             <a className="button button-dark" href={emailHref}>
               Start a conversation <Mail size={16} />
             </a>
-            <button className="copy-button" onClick={copy} aria-label="Copy email address">
-              {copied ? <Check size={17} /> : <Copy size={17} />}
-            </button>
           </div>
           <div className="contact-small" role="status">
             {copied
@@ -167,7 +174,10 @@ export default function Contact() {
                 ? 'Select the email address above to copy it manually.'
                 : 'Opens your email app. A simple hello works, too.'}
           </div>
-          <div className="contact-links contact-messaging" aria-label="Messaging apps">
+          <div className="contact-links contact-messaging" aria-label="Phone and messaging apps">
+            <a href={`tel:${profile.phone}`} title="Call Carl">
+              <Phone size={17} aria-hidden="true" /> 0961 083 4292
+            </a>
             <a href={`viber://chat?number=${encodeURIComponent(profile.phone)}`} title="Open Viber">
               <BrandIcon name="viber" size={17} /> Viber <ArrowUpRight size={15} />
             </a>

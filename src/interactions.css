@@ -1,8 +1,16 @@
 /* Motion follows intentional interaction and never changes the layout. */
 @media (prefers-reduced-motion: no-preference) {
+  .header-contact .green-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 1.5px solid var(--green);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: availability-pulse 2s ease-out infinite;
+  }
   .nav-item,
   .header-contact,
-  .contact-email,
   .topic-options button,
   .stack-menu > button,
   .project-selector > button {
@@ -17,7 +25,6 @@
   .project-teaser .teaser-arrow,
   .hero-actions svg,
   .header-contact > svg,
-  .contact-email > svg,
   .stack-menu > button > svg,
   .contact-links a > svg {
     transition:
@@ -56,40 +63,30 @@
     transform: translateX(3px);
   }
   .project-teaser:focus-visible .teaser-arrow,
-  .header-contact:focus-visible > svg,
-  .contact-email:focus-visible > svg {
+  .header-contact:focus-visible > svg {
     transform: translate(2px, -2px);
   }
 }
 
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .contact-email::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: radial-gradient(
-      180px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
-      rgb(61 80 255 / 7%),
-      transparent 75%
-    );
+@keyframes availability-pulse {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.9;
+  }
+  75%,
+  100% {
+    transform: scale(1.6);
     opacity: 0;
-    transition: opacity 220ms ease;
   }
-  .contact-email {
-    position: relative;
-  }
-  .contact-email[data-pointer-active='true']::after {
-    opacity: 1;
-  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .project-teaser[data-pointer-active='true'] .mini-preview {
     transform: perspective(500px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x)) scale(1.04);
   }
   [data-pointer-active='true'].project-teaser .teaser-arrow,
   .hero-actions [data-pointer-active='true'] > svg,
-  [data-pointer-active='true'].header-contact > svg,
-  [data-pointer-active='true'].contact-email > svg {
+  [data-pointer-active='true'].header-contact > svg {
     transform: translate(var(--pointer-dx), var(--pointer-dy));
   }
   .hero-actions .text-button:hover > svg {

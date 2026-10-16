@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { LayoutGroup, motion, useReducedMotion } from 'motion/react'
-import { ChartColumn, ChevronRight, Gamepad2 } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 export default function Experience() {
   const [selected, setSelected] = useState(0)
@@ -70,11 +70,6 @@ export default function Experience() {
                 <span className="eyebrow">{r.date}</span>
                 <h3>{r.company}</h3>
                 <p>{r.role}</p>
-                {i === 0 ? (
-                  <Gamepad2 size={18} aria-hidden="true" />
-                ) : (
-                  <ChartColumn size={18} aria-hidden="true" />
-                )}
               </button>
             ))}
             <div className="education">

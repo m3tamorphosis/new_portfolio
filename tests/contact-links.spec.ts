@@ -71,8 +71,13 @@ for (const [width, height] of [
       if (width <= 900) expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44)
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width)
+    await expect(page.locator('main').getByRole('link', { name: '0961 083 4292' })).toHaveAttribute(
+      'href',
+      'tel:+639610834292',
+    )
     if (width > 900) {
-      await expect(page.locator('.connect-links a').last()).toHaveText('0961 083 4292')
+      await expect(page.locator('.connect-links a')).toHaveCount(1)
+      await expect(page.locator('.connect-links a')).toHaveText('Download Resume')
       const geometry = await page
         .locator('.sidebar')
         .evaluate((el) => ({ height: el.clientHeight, scroll: el.scrollHeight }))
