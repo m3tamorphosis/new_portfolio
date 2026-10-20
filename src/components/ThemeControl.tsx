@@ -1,12 +1,4 @@
-import { useId } from 'react'
-import { Monitor, Moon, Sun } from 'lucide-react'
 import type { ThemeMode } from '../hooks/useTheme'
-
-const modes = [
-  { value: 'system', label: 'System', icon: Monitor },
-  { value: 'light', label: 'Light', icon: Sun },
-  { value: 'dark', label: 'Dark', icon: Moon },
-] as const
 
 export default function ThemeControl({
   mode,
@@ -15,26 +7,21 @@ export default function ThemeControl({
   mode: ThemeMode
   onSelect: (mode: ThemeMode) => void
 }) {
-  const id = useId()
   return (
-    <fieldset className="theme-options">
-      <legend className="sr-only">Color theme</legend>
-      {modes.map(({ value, label, icon: Icon }) => (
-        <label
-          key={value}
-          title={label + ' theme' + (value === 'system' ? ' ? follows your device' : '')}
-        >
-          <input
-            type="radio"
-            name={id}
-            value={value}
-            checked={mode === value}
-            aria-label={label}
-            onChange={() => onSelect(value)}
-          />
-          <Icon size={14} aria-hidden="true" />
-        </label>
-      ))}
-    </fieldset>
+    <button
+      type="button"
+      className="theme-options"
+      role="switch"
+      aria-label="Dark theme"
+      aria-checked={mode === 'dark'}
+      title={`Switch to ${mode === 'dark' ? 'light' : 'dark'} theme`}
+      onClick={() => onSelect(mode === 'dark' ? 'light' : 'dark')}
+    >
+      <span className="theme-switch-track" aria-hidden="true">
+        <span className="theme-switch-thumb" />
+        <span className="theme-switch-light-label">Light</span>
+        <span className="theme-switch-dark-label">Dark</span>
+      </span>
+    </button>
   )
 }

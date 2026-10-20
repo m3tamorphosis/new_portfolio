@@ -1,5 +1,8 @@
 /* One index and resume link, shared by the sidebar and mobile dialog. */
 .sidebar-connect {
+  display: grid;
+  width: max-content;
+  max-width: 100%;
   margin-top: 8px;
   flex-shrink: 0;
 }

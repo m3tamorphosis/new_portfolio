@@ -103,7 +103,7 @@ test('chat input supports follow-ups, pending state, retry, and starting over', 
   })
   await page.goto('/#about')
   await page.locator('.assistant-launcher').click()
-  const panel = page.getByRole('dialog', { name: 'Ask about my work.' })
+  const panel = page.getByRole('dialog', { name: /Ask Carl.s assistant/ })
   const input = panel.getByRole('textbox')
   await input.fill('Tell me about his frontend work')
   await input.press('Shift+Enter')
@@ -124,7 +124,7 @@ test('chat input supports follow-ups, pending state, retry, and starting over', 
   expect(requests[2].map((m) => m.role)).toEqual(['user', 'assistant', 'user'])
   await panel.getByRole('button', { name: 'New chat' }).click()
   await expect(panel.locator('.assistant-message-user')).toHaveCount(0)
-  await expect(panel.getByRole('log')).toContainText('Hi! What would you like to know')
+  await expect(panel.getByRole('log')).toContainText('Curious about Carl')
   await expect(input).toBeFocused()
 })
 

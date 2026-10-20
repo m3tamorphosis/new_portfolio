@@ -92,14 +92,14 @@
   position: fixed;
   inset: auto max(24px, calc((100vw - 1832px) / 2)) 80px auto;
   width: 440px;
-  height: 580px;
+  height: 440px;
   max-width: calc(100vw - 32px);
   max-height: calc(100dvh - 104px);
   margin: 0;
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--paper);
   box-shadow: none;
   color: var(--ink);
@@ -110,6 +110,9 @@
   display: flex;
   flex-direction: column;
   animation: assistant-enter 0.18s ease-out;
+}
+.assistant-dialog[data-has-messages='true'] {
+  height: 560px;
 }
 .assistant-dialog:focus {
   outline: none;
@@ -122,19 +125,16 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 18px 20px 0;
+  margin: 0 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
   flex-shrink: 0;
 }
 .assistant-header h2 {
-  font-size: 26px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.04em;
-}
-.assistant-header h2 em {
-  color: var(--blue);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-weight: 400;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
 }
 .assistant-close {
   display: grid;
@@ -150,21 +150,13 @@
 }
 .assistant-body {
   flex: 1;
-  padding: 20px;
+  padding: 24px 20px;
   overflow-y: auto;
   overscroll-behavior: contain;
   min-height: 0;
 }
 .assistant-body:focus-visible {
   outline-offset: -3px;
-}
-.assistant-description {
-  margin: 2px 20px 0;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.5;
 }
 .assistant-messages {
   display: flex;
@@ -186,11 +178,12 @@
   align-items: start;
 }
 .assistant-message-assistant > .assistant-avatar {
-  grid-row: 1 / span 2;
+  grid-row: 1;
 }
 .assistant-message-assistant > p,
 .assistant-message-assistant > .assistant-reply {
   grid-column: 2;
+  padding-top: 3px;
 }
 .assistant-reply p + p,
 .assistant-reply p + ul,
@@ -254,19 +247,12 @@
   border-radius: 50%;
   background: var(--blue);
 }
-.assistant-speaker {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--ink);
-  font-size: 14px;
-  font-weight: 600;
-}
 .assistant-message-user {
   align-self: flex-end;
   max-width: 88%;
   padding: 12px 14px;
-  background: var(--surface-blue);
-  border-radius: 8px 8px 2px 8px;
+  background: color-mix(in srgb, var(--ink) 6%, var(--paper));
+  border-radius: 4px;
 }
 .assistant-pending,
 .assistant-error {
@@ -325,10 +311,10 @@
   display: flex;
   align-items: flex-end;
   gap: 8px;
-  padding: 6px;
-  border: 1px solid var(--control-border);
-  border-radius: 8px;
-  background: var(--paper);
+  padding: 4px 6px 4px 16px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: var(--surface-raised);
 }
 .assistant-composer:focus-within {
   border-color: var(--blue);
@@ -338,7 +324,7 @@
   flex: 1;
   min-width: 0;
   resize: none;
-  padding: 10px 6px;
+  padding: 10px 0;
   max-height: 112px;
   border: 0;
   outline: 0;
@@ -355,12 +341,15 @@
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  border-radius: 4px;
-  background: var(--ink);
-  color: var(--paper);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+}
+.assistant-composer button:hover:not(:disabled) {
+  background: var(--surface-hover);
 }
 .assistant-composer button:disabled {
-  background: var(--surface);
+  background: transparent;
   color: var(--metadata);
   cursor: default;
 }
@@ -368,8 +357,7 @@
   outline-offset: 2px;
 }
 .assistant-footer {
-  padding: 14px 20px 10px;
-  border-top: 1px solid var(--line);
+  padding: 10px 20px 12px;
   flex-shrink: 0;
 }
 .assistant-footer-note {
@@ -423,30 +411,25 @@
 }
 @media (max-width: 380px) {
   .assistant-header {
-    padding: 12px 16px 0;
+    margin-inline: 16px;
+    padding: 10px 0;
   }
   .assistant-header h2 {
-    font-size: 23px;
-  }
-  .assistant-description {
-    margin-inline: 16px;
+    font-size: 20px;
   }
   .assistant-body {
     padding: 16px;
   }
   .assistant-footer {
-    padding: 12px 16px 8px;
+    padding: 0 16px 8px;
   }
 }
 @media (max-height: 500px) {
   .assistant-header {
-    padding-top: 8px;
-  }
-  .assistant-description {
-    padding-bottom: 8px;
+    padding-block: 6px;
   }
   .assistant-footer {
-    padding-top: 8px;
+    padding-top: 0;
     padding-bottom: 4px;
   }
 }

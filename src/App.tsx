@@ -124,8 +124,8 @@ export default function App() {
             <span>Download Resume</span>
           </a>
         </div>
+        <ThemeControl mode={mode} onSelect={selectTheme} />
       </div>
-      <ThemeControl mode={mode} onSelect={selectTheme} />
     </>
   )
   return (

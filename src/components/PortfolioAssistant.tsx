@@ -226,10 +226,10 @@ export default function PortfolioAssistant({ label = 'Ask about my work' }: { la
       <dialog
         id="portfolio-assistant"
         className="assistant-dialog"
+        data-has-messages={messages.length > 0}
         ref={dialog}
         tabIndex={-1}
         aria-labelledby="assistant-title"
-        aria-describedby="assistant-description"
         onKeyDown={(event) => {
           if (event.key !== 'Tab') return
           const controls = event.currentTarget.querySelectorAll<HTMLElement>(
@@ -254,9 +254,7 @@ export default function PortfolioAssistant({ label = 'Ask about my work' }: { la
         }}
       >
         <div className="assistant-header">
-          <h2 id="assistant-title">
-            Ask about <em>my work.</em>
-          </h2>
+          <h2 id="assistant-title">Ask Carl’s assistant</h2>
           <button
             className="assistant-close"
             aria-label="Close portfolio assistant"
@@ -266,9 +264,6 @@ export default function PortfolioAssistant({ label = 'Ask about my work' }: { la
           </button>
         </div>
 
-        <p id="assistant-description" className="assistant-description">
-          Get to know Carl and his work.
-        </p>
         <div
           className="assistant-body"
           ref={transcript}
@@ -285,13 +280,13 @@ export default function PortfolioAssistant({ label = 'Ask about my work' }: { la
           >
             <div className="assistant-message assistant-message-assistant">
               <AssistantAvatar />
-              <span className="assistant-speaker">Portfolio assistant</span>
-              <p>Hi! What would you like to know about Carl’s work?</p>
+              <span className="sr-only">Portfolio assistant</span>
+              <p>Curious about Carl’s work? Ask away.</p>
             </div>
             {messages.map((message, index) => (
               <div className={`assistant-message assistant-message-${message.role}`} key={index}>
                 {message.role === 'assistant' && <AssistantAvatar />}
-                <span className={message.role === 'user' ? 'sr-only' : 'assistant-speaker'}>
+                <span className="sr-only">
                   {message.role === 'user' ? 'You' : 'Portfolio assistant'}
                 </span>
                 {message.role === 'assistant' ? (
@@ -338,7 +333,7 @@ export default function PortfolioAssistant({ label = 'Ask about my work' }: { la
               maxLength={2000}
               value={draft}
               onChange={(event) => setDraft(event.target.value)}
-              placeholder="Ask a question…"
+              placeholder="Your question…"
               onKeyDown={(event) => {
                 if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
                   event.preventDefault()

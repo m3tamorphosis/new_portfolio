@@ -49,7 +49,7 @@ for (const size of [
     }
     await page.screenshot({ path: `test-results/assistant-launcher-${size.width}.png` })
     await launcher.click()
-    const panel = page.getByRole('dialog', { name: 'Ask about my work.' })
+    const panel = page.getByRole('dialog', { name: /Ask Carl.s assistant/ })
     const close = panel.getByRole('button', { name: 'Close portfolio assistant' })
     await expect(panel).toBeVisible()
     await expect(panel).toBeFocused()

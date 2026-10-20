@@ -9,7 +9,7 @@ async function openOptions(page: Page, mobile = false) {
 }
 
 for (const mobile of [false, true]) {
-  test(`system, overrides, reload and keyboard selection (${mobile ? 'mobile' : 'desktop'})`, async ({
+  test(`light/dark switch persists and supports keyboard (${mobile ? 'mobile' : 'desktop'})`, async ({
     browser,
   }) => {
     const context = await browser.newContext({
@@ -18,43 +18,40 @@ for (const mobile of [false, true]) {
       colorScheme: 'dark',
     })
     const page = await context.newPage()
-    const errors: string[] = []
-    page.on('pageerror', (error) => errors.push(error.message))
     await page.goto('/')
     const root = page.locator('html')
-    await expect(root).toHaveAttribute('data-theme-mode', 'system')
-    await expect(root).toHaveAttribute('data-theme', 'dark')
-    await page.emulateMedia({ colorScheme: 'light' })
     await expect(root).toHaveAttribute('data-theme', 'light')
     await openOptions(page, mobile)
-    await expect(page.getByRole('radio', { name: 'System', exact: true })).toBeChecked()
-    const dark = page.getByRole('radio', { name: 'Dark', exact: true })
-    if (mobile) await dark.tap()
-    else await dark.check()
+    const toggle = page.getByRole('switch', { name: 'Dark theme' })
+    await expect(toggle).not.toBeChecked()
+    await expect(page.getByRole('radio')).toHaveCount(0)
+    if (mobile) await toggle.tap()
+    else await toggle.click()
+    await expect(toggle).toBeChecked()
     await expect(root).toHaveAttribute('data-theme', 'dark')
-    await page.emulateMedia({ colorScheme: 'dark' })
     await page.emulateMedia({ colorScheme: 'light' })
     await expect(root).toHaveAttribute('data-theme', 'dark')
     await page.reload()
-    await expect(root).toHaveAttribute('data-theme-mode', 'dark')
     await expect(root).toHaveAttribute('data-theme', 'dark')
     await openOptions(page, mobile)
-    await page.getByRole('radio', { name: 'Light', exact: true }).check()
-    await page.emulateMedia({ colorScheme: 'dark' })
+    await toggle.focus()
+    await page.keyboard.press('Space')
+    await expect(toggle).not.toBeChecked()
     await expect(root).toHaveAttribute('data-theme', 'light')
-    await page.reload()
-    await expect(root).toHaveAttribute('data-theme', 'light')
-    await openOptions(page, mobile)
-    await page.getByRole('radio', { name: 'Light', exact: true }).focus()
-    await page.keyboard.press('ArrowLeft')
-    await expect(page.getByRole('radio', { name: 'System', exact: true })).toBeChecked()
-    await expect(root).toHaveAttribute('data-theme', 'dark')
-    expect(await page.evaluate(() => localStorage.getItem('portfolio-theme'))).toBeNull()
-    await page.keyboard.press('Escape')
-
-    await page.reload()
-    await expect(root).toHaveAttribute('data-theme-mode', 'system')
-    expect(errors).toEqual([])
+    await page.keyboard.press('Enter')
+    await expect(toggle).toBeChecked()
+    await page.evaluate(() =>
+      window.dispatchEvent(
+        new StorageEvent('storage', { key: 'portfolio-theme', newValue: 'light' }),
+      ),
+    )
+    await expect(toggle).not.toBeChecked()
+    expect((await new AxeBuilder({ page }).include('.theme-options').analyze()).violations).toEqual(
+      [],
+    )
+    await page.screenshot({
+      path: `test-results/theme-switch-${mobile ? 'mobile' : 'desktop'}.png`,
+    })
     await context.close()
   })
 }
@@ -62,7 +59,7 @@ for (const mobile of [false, true]) {
 test('theme is applied before the application loads, including unavailable storage', async ({
   browser,
 }) => {
-  for (const saved of ['light', 'dark', 'invalid', 'blocked']) {
+  for (const saved of ['light', 'dark', 'system', 'invalid', 'blocked']) {
     const context = await browser.newContext({ colorScheme: saved === 'dark' ? 'light' : 'dark' })
     await context.addInitScript((preference) => {
       if (preference === 'blocked')
@@ -77,7 +74,7 @@ test('theme is applied before the application loads, including unavailable stora
     await page.route('**/src/main.tsx*', (route) => route.abort())
     await page.goto('/')
     await expect(page.locator('#root')).toBeEmpty()
-    const expected = saved === 'light' ? 'light' : 'dark'
+    const expected = saved === 'dark' ? 'dark' : 'light'
     await expect(page.locator('html')).toHaveAttribute('data-theme', expected)
     await expect(page.locator('html')).toHaveCSS(
       'background-color',
@@ -87,7 +84,7 @@ test('theme is applied before the application loads, including unavailable stora
     await page.reload()
     await expect(page.locator('.app-shell')).toBeVisible()
     await openOptions(page)
-    await page.getByRole('radio', { name: 'Light', exact: true }).check()
+    if (expected === 'dark') await page.getByRole('switch', { name: 'Dark theme' }).click()
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
     await context.close()
   }
@@ -106,6 +103,7 @@ for (const size of [
         colorScheme: theme,
         reducedMotion: 'reduce',
       })
+      await context.addInitScript((value) => localStorage.setItem('portfolio-theme', value), theme)
       const page = await context.newPage()
       const errors: string[] = []
       page.on('pageerror', (error) => errors.push(error.message))
@@ -167,7 +165,7 @@ for (const size of [
   }
 }
 
-test('canvases repaint on system changes without resetting reduced-motion globe or paused game', async ({
+test('canvases repaint on switch changes without resetting reduced-motion globe or paused game', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
@@ -182,7 +180,7 @@ test('canvases repaint on system changes without resetting reduced-motion globe 
       .evaluateAll((nodes) => nodes.map((node) => (node as HTMLElement).style.transform))
   const before = await pixels()
   const rotation = await positions()
-  await page.emulateMedia({ colorScheme: 'dark' })
+  await page.getByRole('switch', { name: 'Dark theme' }).click()
   await expect.poll(pixels).not.toBe(before)
   expect(await positions()).toEqual(rotation)
   await page.goto('/#builds')
@@ -192,7 +190,7 @@ test('canvases repaint on system changes without resetting reduced-motion globe 
   const gamePixels = () => game.evaluate((el: HTMLCanvasElement) => el.toDataURL())
   const paused = await gamePixels()
   const score = await page.locator('.flight-score').innerText()
-  await page.emulateMedia({ colorScheme: 'light' })
+  await page.getByRole('switch', { name: 'Dark theme' }).click()
   await expect.poll(gamePixels).not.toBe(paused)
   await expect(page.getByRole('button', { name: 'Resume flight' })).toBeVisible()
   expect(await page.locator('.flight-score').innerText()).toBe(score)

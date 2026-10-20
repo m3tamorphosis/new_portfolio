@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 
-export type ThemeMode = 'system' | 'light' | 'dark'
+export type ThemeMode = 'light' | 'dark'
 const storageKey = 'portfolio-theme'
-const schemeQuery = '(prefers-color-scheme: dark)'
 const validMode = (value: string | null | undefined): ThemeMode =>
-  value === 'light' || value === 'dark' ? value : 'system'
+  value === 'dark' ? 'dark' : 'light'
 
 function applyTheme(mode: ThemeMode) {
-  const theme = mode === 'system' ? (matchMedia(schemeQuery).matches ? 'dark' : 'light') : mode
+  const theme = mode
   const root = document.documentElement
   root.dataset.themeMode = mode
   root.dataset.theme = theme
@@ -23,10 +22,6 @@ export default function useTheme() {
   )
   useEffect(() => {
     applyTheme(mode)
-    const media = matchMedia(schemeQuery)
-    const systemChanged = () => {
-      if (mode === 'system') applyTheme(mode)
-    }
     const storageChanged = (event: StorageEvent) => {
       if (event.key === storageKey || event.key === null) {
         const next = validMode(event.newValue)
@@ -34,10 +29,8 @@ export default function useTheme() {
         setMode(next)
       }
     }
-    if (mode === 'system') media.addEventListener('change', systemChanged)
     window.addEventListener('storage', storageChanged)
     return () => {
-      if (mode === 'system') media.removeEventListener('change', systemChanged)
       window.removeEventListener('storage', storageChanged)
     }
   }, [mode])
@@ -46,8 +39,7 @@ export default function useTheme() {
     applyTheme(next)
     setMode(next)
     try {
-      if (next === 'system') localStorage.removeItem(storageKey)
-      else localStorage.setItem(storageKey, next)
+      localStorage.setItem(storageKey, next)
     } catch {
       /* Theme selection still works when storage is unavailable. */
     }
