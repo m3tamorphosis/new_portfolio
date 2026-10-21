@@ -165,8 +165,10 @@ a:not(.contact-email):hover {
   min-height: 44px;
   padding: 11px 0;
 }
-.header-contact .green-dot {
+.green-dot {
   --green: #008000;
+}
+.header-contact .green-dot {
   position: relative;
   width: 8px;
   height: 8px;
@@ -178,7 +180,7 @@ a:not(.contact-email):hover {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: light-dark(#6b926a, var(--green));
+  background: var(--green);
   flex-shrink: 0;
 }
 .blue-dot {

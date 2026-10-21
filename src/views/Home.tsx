@@ -35,11 +35,12 @@ export default function Home({
             AI-powered possibilities.
           </p>
           <p className="hero-description">
-            I build AI-powered web applications and full-stack systems with React, Next.js,
-            TypeScript, and Node.js — connecting LLMs, RAG, embeddings, and document processing with
-            responsive interfaces, APIs, and databases. My experience also includes reusable web
-            interfaces, animation systems, and interactive gameplay with Phaser 3 and HTML5
-            Canvas/WebGL.
+            Full-stack developer building AI-powered web applications with React, Next.js,
+            TypeScript, and Node.js, backed by PostgreSQL and Supabase. Hands-on with LLM integration,
+            RAG pipelines, embeddings, and PDF processing, shipped in live tools for document
+            analysis, data insights, and career management. Strong front-end and game development
+            foundation: reusable UI components, animation systems, and interactive games built with
+            Phaser 3 and HTML5 Canvas/WebGL.
           </p>
           <div className="hero-actions">
             <button className="button button-dark" onClick={() => navigate('Builds')}>

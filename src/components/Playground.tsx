@@ -8,7 +8,7 @@ import { observeTheme, readThemePalette } from '../themePalette'
 type Point = { x: number; y: number; z: number }
 const technologies = [...new Set(stackGroups.flatMap((group) => group.items))]
 const samples = technologies.length * 16
-const signalCount = 5
+const signalCount = 8
 
 function createNetwork() {
   // Even coverage with a little variation; shuffle identities independently of the route.
@@ -120,8 +120,8 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
         (reduced ? 0 : cursor.x * 0.4)
       const tilt = -0.12 + orientation.current.y + (reduced ? 0 : cursor.y * 0.14)
       const size = Math.min(
-        width * (portrait ? 0.46 : compact ? 0.36 : 0.43),
-        height * (portrait ? 0.47 : 0.46),
+        width * (portrait ? 0.46 : compact ? 0.36 : 0.47),
+        height * (portrait ? 0.47 : compact ? 0.46 : 0.475),
       )
       const centerY = height * 0.51
       const project = (p: Point): Point => {
@@ -136,13 +136,25 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
           z: depth,
         }
       }
+      // Echo the dark backdrop: sage at the lower left, charcoal in the
+      // middle, and a blue-violet tint toward the upper right.
+      const wireframeGradient = ctx.createLinearGradient(0, height, width, 0)
+      wireframeGradient.addColorStop(0, '#21282a')
+      wireframeGradient.addColorStop(0.45, '#1a1e21')
+      wireframeGradient.addColorStop(1, '#2b303f')
       const stroke = (a: Point, b: Point, alpha: number, blue = false, weight = 0.65) => {
-        ctx.strokeStyle = `rgba(${palette[blue ? 'globe-signal-rgb' : 'globe-grid-rgb']},${alpha})`
+        if (!blue && !darkTheme) {
+          ctx.strokeStyle = wireframeGradient
+          ctx.globalAlpha = alpha
+        } else {
+          ctx.strokeStyle = `rgba(${palette[blue ? 'globe-signal-rgb' : 'globe-grid-rgb']},${alpha})`
+        }
         ctx.lineWidth = weight
         ctx.beginPath()
         ctx.moveTo(a.x, a.y)
         ctx.lineTo(b.x, b.y)
         ctx.stroke()
+        ctx.globalAlpha = 1
       }
       ctx.clearRect(0, 0, width, height)
       ctx.lineCap = 'round'

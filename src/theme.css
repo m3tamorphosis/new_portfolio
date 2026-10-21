@@ -21,7 +21,7 @@
   --canvas-blue-rgb: 53, 79, 255;
   --canvas-grid-rgb: 100, 116, 139;
   --globe-signal-rgb: var(--canvas-blue-rgb);
-  --globe-grid-rgb: var(--canvas-grid-rgb);
+  --globe-grid-rgb: 26, 30, 33;
   --game-background: #eef0e9;
   --game-grid: #cbd1c7;
   --game-gate: #e0e5da;
