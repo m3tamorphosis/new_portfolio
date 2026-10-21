@@ -81,8 +81,9 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
       ctx = canvas?.getContext('2d')
     // Keep the last frame while a modal covers Home; resume from the same rotation.
     if (!canvas || !ctx || paused) return
-    const colorNames = ['canvas-blue-rgb', 'canvas-grid-rgb'] as const
+    const colorNames = ['globe-signal-rgb', 'globe-grid-rgb'] as const
     let palette = readThemePalette(colorNames)
+    let darkTheme = document.documentElement.dataset.theme === 'dark'
     let frame = 0,
       previous = 0,
       width = 0,
@@ -136,7 +137,7 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
         }
       }
       const stroke = (a: Point, b: Point, alpha: number, blue = false, weight = 0.65) => {
-        ctx.strokeStyle = `rgba(${palette[blue ? 'canvas-blue-rgb' : 'canvas-grid-rgb']},${alpha})`
+        ctx.strokeStyle = `rgba(${palette[blue ? 'globe-signal-rgb' : 'globe-grid-rgb']},${alpha})`
         ctx.lineWidth = weight
         ctx.beginPath()
         ctx.moveTo(a.x, a.y)
@@ -161,9 +162,10 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
       for (let i = 0; i <= rows; i++)
         for (let j = 0; j < cols; j++) {
           const p = mesh[i][j],
-            alpha = 0.08 + (p.z + 1) * 0.13
-          stroke(p, mesh[i][j + 1], alpha, false, 0.8)
-          if (i < rows && j % 2 === 0) stroke(p, mesh[i + 1][j], alpha, false, 0.8)
+            alpha = darkTheme ? 0.1 + (p.z + 1) * 0.16 : 0.08 + (p.z + 1) * 0.13
+          stroke(p, mesh[i][j + 1], alpha, false, darkTheme ? 0.9 : 0.8)
+          if (i < rows && j % 2 === 0)
+            stroke(p, mesh[i + 1][j], alpha, false, darkTheme ? 0.9 : 0.8)
         }
       const path = route.map(project)
       const heads = Array.from(
@@ -203,11 +205,12 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
         }, 0)
         const hoverDistance = hovered >= 0 ? Math.abs(i / samples - nodeTimes[hovered]) : 1
         const highlight = hovered >= 0 && Math.min(hoverDistance, 1 - hoverDistance) < 0.035
-        const depth = path[i].z < 0 ? 0.2 : 1
+        const depth = path[i].z < 0 ? (darkTheme ? 0.28 : 0.2) : 1
         stroke(
           path[i],
           path[(i + 1) % samples],
-          (0.07 + tail * 0.7 + (highlight ? 0.35 : 0)) * depth,
+          ((darkTheme ? 0.1 : 0.07) + tail * (darkTheme ? 0.8 : 0.7) + (highlight ? 0.35 : 0)) *
+            depth,
           true,
           tail > 0 || highlight ? (compact ? 3 : 3.4) : 0.65,
         )
@@ -271,8 +274,8 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
         }, 1)
         const pulse = Math.max(0, 1 - distance / 0.016)
         const opacity = visible
-          ? Math.min(1, 0.88 + p.z * 0.1 + pulse * 0.1) *
-            (hovered >= 0 && hovered !== index ? 0.85 : 1)
+          ? Math.min(1, (darkTheme ? 0.96 : 0.88) + p.z * 0.1 + pulse * 0.1) *
+            (hovered >= 0 && hovered !== index ? (darkTheme ? 0.94 : 0.85) : 1)
           : 0
         node.style.transform = `translate3d(${(p.x - icon / 2).toFixed(2)}px, ${(p.y - icon - 7).toFixed(2)}px, 0)`
         node.style.opacity = String(opacity)
@@ -286,14 +289,14 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
           textBoxes.push(box)
         }
         if (p.z > 0) {
-          ctx.fillStyle = `rgba(${palette['canvas-blue-rgb']},${0.18 + pulse * 0.7})`
+          ctx.fillStyle = `rgba(${palette['globe-signal-rgb']},${(darkTheme ? 0.3 : 0.18) + pulse * 0.7})`
           ctx.beginPath()
           ctx.arc(p.x, p.y, 1.4 + pulse, 0, Math.PI * 2)
           ctx.fill()
         }
       })
       signals.forEach((signal) => {
-        ctx.fillStyle = `rgba(${palette['canvas-blue-rgb']},${signal.z < 0 ? 0.3 : 1})`
+        ctx.fillStyle = `rgba(${palette['globe-signal-rgb']},${signal.z < 0 ? (darkTheme ? 0.45 : 0.3) : 1})`
         ctx.beginPath()
         ctx.arc(signal.x, signal.y, compact ? 5 : 6, 0, Math.PI * 2)
         ctx.fill()
@@ -319,6 +322,7 @@ export default function Playground({ paused = false }: { paused?: boolean }) {
     redraw.current = schedule
     const stopThemeObserver = observeTheme(() => {
       palette = readThemePalette(colorNames)
+      darkTheme = document.documentElement.dataset.theme === 'dark'
       schedule()
     })
     const observer = new ResizeObserver(resize)
