@@ -185,7 +185,7 @@ test('mobile previews, canvas, and contact remain interactive and accessible', a
   await page.goto('/')
   await expect(page.getByRole('img', { name: /^Interactive Tech Stack Globe/ })).toBeVisible()
   await expect(page.locator('.playground button')).toHaveCount(0)
-  await page.locator('.project-teaser').filter({ hasText: 'InsightVault Lite' }).click()
+  await page.getByRole('button', { name: 'Preview InsightVault Lite', exact: true }).click()
   await page.getByRole('button', { name: 'View project', exact: true }).click()
   await expect(page.locator('.project-screenshot img')).toHaveAttribute(
     'src',

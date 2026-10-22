@@ -233,7 +233,7 @@
   flex-shrink: 0;
   color: var(--ink);
 }
-.project-teaser:focus-visible {
+.teaser-preview-label:focus-visible {
   background-color: var(--surface);
 }
 .teaser-preview-label .teaser-preview-icon {
@@ -244,11 +244,11 @@
   color: currentColor;
   --icon-stroke: 1.25;
 }
-.project-teaser:focus-visible .teaser-preview-label {
+.teaser-preview-label:focus-visible {
   color: var(--blue);
 }
 @media (hover: hover) and (pointer: fine) {
-  .project-teaser:hover .teaser-preview-label {
+  .teaser-preview-label:hover {
     color: var(--blue);
   }
 }
@@ -259,11 +259,11 @@
   .teaser-preview-icon {
     transition: transform 220ms ease;
   }
-  .project-teaser:focus-visible .teaser-preview-icon {
+  .teaser-preview-label:focus-visible .teaser-preview-icon {
     transform: translate(3px, -3px);
   }
   @media (hover: hover) and (pointer: fine) {
-    .project-teaser:hover .teaser-preview-icon {
+    .teaser-preview-label:hover .teaser-preview-icon {
       transform: translate(3px, -3px);
     }
   }

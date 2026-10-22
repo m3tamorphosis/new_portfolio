@@ -1,5 +1,51 @@
 import { expect, test } from '@playwright/test'
 
+for (const reducedMotion of ['no-preference', 'reduce'] as const) {
+  test(`mobile scroll reveals and preview press respect ${reducedMotion}`, async ({ browser }) => {
+    const context = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      hasTouch: true,
+      isMobile: true,
+      reducedMotion,
+    })
+    const page = await context.newPage()
+    await page.goto('/')
+    const card = page.locator('.project-teaser').first()
+    await expect(card).toHaveCSS('opacity', reducedMotion === 'reduce' ? '1' : '0')
+    await card.scrollIntoViewIfNeeded()
+    await expect(card).toHaveCSS('opacity', '1')
+    await expect(card).toHaveCSS('transform', 'none')
+    await page.evaluate(() => window.scrollTo(0, 0))
+    await expect(card).toHaveCSS('opacity', '1')
+    await card.scrollIntoViewIfNeeded()
+    await card.locator('.mini-preview').tap()
+    await card.locator('.teaser-note').tap()
+    await expect(page.getByRole('dialog')).not.toBeVisible()
+    const rect = (await card.locator('.teaser-preview-label').boundingBox())!
+    const touch = await context.newCDPSession(page)
+    await touch.send('Input.dispatchTouchEvent', {
+      type: 'touchStart',
+      touchPoints: [{ x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 }],
+    })
+    const arrow = card.locator('.teaser-preview-icon')
+    if (reducedMotion === 'reduce') {
+      await expect(arrow).toHaveCSS('transform', 'none')
+    } else {
+      await expect(arrow).not.toHaveCSS('transform', 'none')
+    }
+    await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
+    await expect(page.getByRole('dialog')).toBeVisible()
+    await page.goto('/#about')
+    for (const article of await page.locator('.about-discipline').all()) {
+      await article.scrollIntoViewIfNeeded()
+      await expect(article).toHaveCSS('opacity', '1')
+      await expect(article).toHaveCSS('transform', 'none')
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390)
+    await context.close()
+  })
+}
+
 test('project hover responds to the pointer, resets, and still opens the project', async ({
   page,
 }) => {
@@ -22,7 +68,11 @@ test('project hover responds to the pointer, resets, and still opens the project
   await page.mouse.move(1, 1)
   await expect(project).not.toHaveAttribute('data-pointer-active')
   expect(await project.evaluate((el) => el.style.getPropertyValue('--pointer-x'))).toBe('')
-  await project.click()
+  await project.locator('.mini-preview').click()
+  await project.locator('.teaser-note').click()
+  await expect(page.getByRole('dialog')).not.toBeVisible()
+  await project.getByRole('button', { name: 'Preview Playable experiences' }).focus()
+  await page.keyboard.press('Enter')
   await page.getByRole('button', { name: 'Play demo', exact: true }).click()
   await expect(page).toHaveURL(/#builds$/)
   await expect(page.locator('.builds-view')).toBeVisible()

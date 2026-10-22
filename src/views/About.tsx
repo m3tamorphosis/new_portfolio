@@ -51,11 +51,12 @@ export default function About() {
   const reducedMotion = useReducedMotion()
   const tabs = useRef<(HTMLButtonElement | null)[]>([])
   const reveal = (order: number) => ({
-    initial: { opacity: 0, y: reducedMotion ? 0 : 6 },
-    animate: { opacity: 1, y: 0 },
+    initial: reducedMotion ? (false as const) : { opacity: 0, y: 6 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.15 },
     transition: {
       duration: reducedMotion ? 0 : 0.3,
-      delay: reducedMotion ? 0 : order * 0.045,
+      delay: reducedMotion ? 0 : Math.min(order * 0.045, 0.12),
       ease: 'easeOut' as const,
     },
   })

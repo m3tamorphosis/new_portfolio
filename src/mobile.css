@@ -244,7 +244,7 @@
   }
   .project-teaser {
     display: grid;
-    grid-template-columns: 80px minmax(0, 1fr) 18px;
+    grid-template-columns: 104px minmax(0, 1fr) 18px;
     align-items: center;
     gap: 14px;
     padding: 20px 0;
@@ -254,7 +254,7 @@
     border-right: 0;
   }
   .home-view .project-teaser {
-    row-gap: 8px;
+    row-gap: 4px;
   }
   .project-teaser .teaser-copy {
     grid-column: 2 / -1;
@@ -262,15 +262,28 @@
   .home-view .teaser-preview-label {
     grid-column: 2 / -1;
     justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
     margin-left: 0;
+  }
+  .home-view .teaser-preview-label .teaser-preview-icon {
+    width: 22px;
+    height: 22px;
   }
   .home-view .teaser-preview-label > span {
     display: inline;
   }
   .project-teaser .mini-preview {
     grid-row: 1 / 3;
-    width: 80px;
-    height: 80px;
+    align-self: stretch;
+    width: 104px;
+    height: auto;
+  }
+  .project-teaser .mini-preview img {
+    position: absolute;
+    inset: 0;
   }
   .teaser-category {
     display: block;
@@ -991,12 +1004,11 @@
     padding: 18px;
   }
   .project-teaser {
-    grid-template-columns: 96px minmax(0, 1fr) 20px;
+    grid-template-columns: 120px minmax(0, 1fr) 20px;
     gap: 20px;
   }
   .project-teaser .mini-preview {
-    width: 96px;
-    height: 96px;
+    width: 120px;
   }
 }
 @media (min-width: 600px) and (orientation: portrait) and ((max-width: 1100px) or (any-pointer: coarse)) {
@@ -1048,12 +1060,11 @@
     grid-column: 2;
   }
   .project-teaser {
-    grid-template-columns: 64px minmax(0, 1fr) 18px;
+    grid-template-columns: 88px minmax(0, 1fr) 18px;
     gap: 10px;
   }
   .project-teaser .mini-preview {
-    width: 64px;
-    height: 64px;
+    width: 88px;
   }
   .canvas-bottom > span {
     display: none;
@@ -1083,5 +1094,33 @@
   button:active,
   a:active {
     opacity: 0.75;
+  }
+}
+
+/* Touch feedback lasts only for the press, so scrolling cannot leave a hover state behind. */
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .mobile-menu-button,
+  .mobile-index-heading > button,
+  .about-discipline-switcher > button,
+  .experience-timeline > button {
+    transition: transform 160ms ease, background-color 160ms ease;
+  }
+  .mobile-menu-button:active,
+  .mobile-index-heading > button:active,
+  .mobile-index .nav-item:active,
+  .project-selector > button:active,
+  .stack-menu > button:active,
+  .about-discipline-switcher > button:active,
+  .experience-timeline > button:active {
+    transform: scale(0.98);
+  }
+  .teaser-preview-label:is(:active, [data-touch-pressed='true']) {
+    background-color: var(--surface);
+  }
+  .teaser-preview-label:is(:active, [data-touch-pressed='true']) {
+    color: var(--blue);
+  }
+  .teaser-preview-label:is(:active, [data-touch-pressed='true']) .teaser-preview-icon {
+    transform: translate(3px, -3px);
   }
 }

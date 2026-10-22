@@ -1,4 +1,6 @@
 import { ArrowRight, ArrowUpRight, MousePointerClick } from 'lucide-react'
+import { motion, useReducedMotion } from 'motion/react'
+import { useState } from 'react'
 import Playground from '../components/Playground'
 import { MiniPreview } from '../components/Demos'
 import { profile, projects, type View } from '../data'
@@ -12,6 +14,8 @@ export default function Home({
   navigate: (v: View) => void
   paused: boolean
 }) {
+  const reducedMotion = useReducedMotion()
+  const [pressedProject, setPressedProject] = useState<number | null>(null)
   return (
     <div className="home-view">
       <div className="hero-grid">
@@ -69,12 +73,16 @@ export default function Home({
         </div>
         <div className="project-strip">
           {projects.slice(0, 3).map((project, i) => (
-            <button
+            <motion.article
               className="project-teaser"
               key={project.id}
-              onClick={() => openPreview(i)}
-              aria-label={`Preview ${project.name}`}
-              aria-haspopup="dialog"
+              initial={reducedMotion ? false : { opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{
+                duration: reducedMotion ? 0 : 0.28,
+                delay: reducedMotion ? 0 : i * 0.04,
+              }}
             >
               <MiniPreview id={project.id} />
               <div className="teaser-copy">
@@ -92,11 +100,23 @@ export default function Home({
                         : 'Less cramming. More knowing.'}
                 </span>
               </div>
-              <span className="teaser-preview-label">
+              <motion.button
+                type="button"
+                className="teaser-preview-label"
+                onClick={() => openPreview(i)}
+                aria-label={`Preview ${project.name}`}
+                aria-haspopup="dialog"
+                data-touch-pressed={pressedProject === i || undefined}
+                onTapStart={(event) => {
+                  if ('pointerType' in event && event.pointerType !== 'mouse') setPressedProject(i)
+                }}
+                onTapCancel={() => setPressedProject(null)}
+                onTap={() => setPressedProject(null)}
+              >
                 <span>Preview</span>
                 <ArrowUpRight className="teaser-preview-icon" size={32} aria-hidden="true" />
-              </span>
-            </button>
+              </motion.button>
+            </motion.article>
           ))}
         </div>
       </div>

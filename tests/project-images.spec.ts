@@ -22,7 +22,7 @@ for (const [width, height] of [
     await page
       .locator('.project-strip')
       .screenshot({ path: `test-results/project-thumbnails-${width}.png` })
-    await page.locator('.project-teaser').nth(1).click()
+    await page.getByRole('button', { name: 'Preview CareerForge AI', exact: true }).click()
     await page.getByRole('button', { name: 'View project', exact: true }).click()
     for (const [name, image] of [
       ['CareerForge AI', 'careerforge'],

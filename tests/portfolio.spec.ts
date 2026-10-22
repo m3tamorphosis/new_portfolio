@@ -59,7 +59,7 @@ for (const [width, height] of [
     await projects.last().scrollIntoViewIfNeeded()
     await expect(projects.last()).toBeInViewport({ ratio: 1 })
     await page.screenshot({ path: `test-results/home-projects-${width}x${height}.png` })
-    await projects.last().click()
+    await projects.last().getByRole('button').click()
     await expect(page.getByRole('dialog')).toBeVisible()
     await page.getByRole('button', { name: 'View project', exact: true }).click()
     await expect(page.locator('.builds-view')).toBeVisible()
