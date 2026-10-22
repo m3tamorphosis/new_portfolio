@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http'
-import { profile, projects, stackGroups } from '../src/data'
+import { profile, projects, stackGroups } from '../src/data.js'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 type Request = IncomingMessage & { body?: unknown }

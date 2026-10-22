@@ -1,4 +1,4 @@
-export const views = ['Home', 'About Me', 'Builds', 'Experience', 'Stack', 'Contact'] as const
+export const views = ['Home', 'Builds', 'About Me', 'Experience', 'Stack', 'Contact'] as const
 export type View = (typeof views)[number]
 
 export const profile = {

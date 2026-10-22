@@ -10,8 +10,8 @@ test('all six sections share navigation, history, shortcuts, and mobile menus', 
   await expect(nav.locator('.nav-item')).toHaveCount(6)
   await expect(nav.locator('.nav-item')).toHaveText([
     '01Home',
-    '02About Me',
-    '03Builds',
+    '02Builds',
+    '03About Me',
     '04Experience',
     '05Stack',
     '06Contact',
@@ -46,7 +46,7 @@ test('all six sections share navigation, history, shortcuts, and mobile menus', 
   await expect(page.getByRole('heading', { name: /I build things/ })).toBeVisible()
   await mobileNavigate('Contact')
   await expect(page.getByRole('heading', { name: /Got an idea/ })).toBeVisible()
-  await page.keyboard.press('2')
+  await page.keyboard.press('3')
   await expect(page.getByRole('heading', { name: 'About me.' })).toBeVisible()
 })
 

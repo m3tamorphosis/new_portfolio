@@ -11,9 +11,9 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. Use the index or keys **1–6** to navigate: Home, About Me, Builds, Experience, Stack, and Contact. Press **?** for keyboard shortcuts. Section hashes support direct links and browser history.
+Open the local URL printed by Vite. Use the index or keys **1–6** to navigate: Home, Builds, About Me, Experience, Stack, and Contact. Press **?** for keyboard shortcuts. Section hashes support direct links and browser history.
 
-About Me is a top-level section at `#about`, with position `02 / 06`. Use Home in the index or key **1** to return to the hero. Desktop layouts keep the index, content frame, and footer; narrower desktop layouts retain keyboard-accessible About detail tabs. Phones and touch tablets use Menu to open the numbered index in an accessible dialog. Each mobile section scrolls as a document, with the footer following its content. Mobile About presents the portrait, profile, all four disciplines, approach, and recent experience in sequence.
+About Me is a top-level section at `#about`, with position `03 / 06`. Use Home in the index or key **1** to return to the hero. Desktop layouts keep the index, content frame, and footer; narrower desktop layouts retain keyboard-accessible About detail tabs. Phones and touch tablets use Menu to open the numbered index in an accessible dialog. Each mobile section scrolls as a document, with the footer following its content. Mobile About presents the portrait, profile, all four disciplines, approach, and recent experience in sequence.
 
 ## Add your portrait
 

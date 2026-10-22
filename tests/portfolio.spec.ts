@@ -69,7 +69,7 @@ for (const [width, height] of [
 test('navigation supports keyboard, history, and direct links', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('heading', { name: /I build things/ })).toBeVisible()
-  await page.keyboard.press('3')
+  await page.keyboard.press('2')
   await expect(page.getByRole('heading', { name: /Less talk/ })).toBeVisible()
   await page.keyboard.press('4')
   await expect(page.getByRole('heading', { name: /Built on experience/ })).toBeVisible()
