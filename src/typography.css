@@ -41,7 +41,7 @@
   font-weight: 650;
 }
 
-.about-current strong,
+.about-current h3,
 .stack-principle strong,
 .stack-menu > button[aria-pressed='true'],
 .project-selector > button[aria-pressed='true'],
@@ -96,6 +96,18 @@ kbd {
     font-size: 11px;
   }
 
+  .app-shell .home-view .section-line > .eyebrow,
+  .app-shell .home-view .section-line > button {
+    font-size: 12px;
+  }
+
+  .app-shell .experience-view .detail-top > .eyebrow,
+  .app-shell .experience-view .detail-top > .current-pill {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
   .home-view .hero-copy > p,
   .builds-view .project-description > p,
   .experience-view .experience-detail li {
@@ -131,6 +143,9 @@ kbd {
   }
 
   .stack-view .tool-description {
+    font-size: 16px;
+  }
+  .app-shell .stack-view .stack-board-top .mono {
     font-size: 14px;
   }
   .contact-view .topic-options button {
@@ -139,10 +154,23 @@ kbd {
 }
 
 @media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 820px) {
+  .sidebar nav {
+    gap: 4px;
+  }
   .home-view {
     gap: 8px;
     padding-top: 6px;
     padding-bottom: 4px;
+  }
+  .home-view .hero-copy h1 {
+    font-size: 48px;
+  }
+  .home-view .hero-copy > p {
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+  .builds-view .builds-layout {
+    grid-template-columns: 1.15fr 1fr;
   }
   .builds-view .project-details {
     gap: 12px;
@@ -159,14 +187,53 @@ kbd {
 .principle-description {
   display: block;
 }
+@media (min-width: 1201px) and (max-width: 1380px) and (max-height: 820px) and (not (any-pointer: coarse)) {
+  .home-view .hero-copy h1 {
+    font-size: 44px;
+  }
+}
+@media (min-width: 901px) and (max-width: 1200px) and (min-height: 501px) and (max-height: 820px) and (orientation: landscape) and (not (any-pointer: coarse)) {
+  .home-view .hero-copy h1 {
+    font-size: 42px;
+  }
+  .home-view .hero-copy > p {
+    line-height: 1.45;
+  }
+  .home-view .hero-note {
+    margin-top: 12px;
+  }
+}
+@media (min-width: 901px) and (not (any-pointer: coarse)) and (min-height: 821px) and (max-height: 880px) {
+  .home-view .hero-copy h1 {
+    font-size: clamp(60px, 8dvh, 72px);
+  }
+}
 @media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) {
   .about-view {
-    --small-text-step: 2px;
+    --small-text-step: 3px;
+  }
+  .about-view .about-metadata {
+    align-items: start;
+  }
+  .about-view .about-metadata dt {
+    font-size: calc(9px + var(--small-text-step));
+  }
+  .about-view .about-metadata > div {
+    min-width: 0;
+  }
+  .about-view .about-current p {
+    max-width: none;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+  .about-view .about-approach > p {
+    margin-top: 8px;
   }
   .about-principles {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
+    margin-top: 16px;
   }
   .about-principles > div {
     display: grid;
@@ -187,7 +254,10 @@ kbd {
   }
   .about-principles > div > span {
     padding-top: 0;
-    align-self: center;
+    align-self: baseline;
+  }
+  .about-principles h3 {
+    align-self: baseline;
   }
   .about-principles > div > div {
     display: contents;
@@ -198,36 +268,151 @@ kbd {
   .about-principles .principle-title {
     font-weight: 600;
     color: var(--ink);
-    margin-top: 8px;
+    margin-top: 6px;
   }
   .about-principles .principle-description {
     line-height: 1.5;
-    margin-top: 6px;
+    margin-top: 4px;
   }
 }
 @media (min-width: 1550px) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait)))) {
   .about-view {
-    --small-text-step: 2.5px;
+    --small-text-step: 3.5px;
   }
 }
 @media (min-width: 1101px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1440px) {
   .about-view .about-profile {
-    --small-text-step: 1.5px;
+    --small-text-step: 2.5px;
   }
 }
 @media (min-width: 1101px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1380px) and (max-height: 820px) {
   .about-view .about-builds {
-    --small-text-step: 1.5px;
+    --small-text-step: 2.5px;
   }
 }
-/* Use existing whitespace for the extra copy without changing desktop type or portrait sizes. */
+/* Keep the expanded desktop copy within the existing portrait layout. */
+@media (min-width: 1381px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (min-height: 881px) and (not ((max-width: 1700px) and (max-height: 1050px))) {
+  .app-shell .about-view {
+    --about-portrait-width: min(
+      clamp(190px, calc(28vw - 180px), 360px),
+      max(200px, calc((100dvh - 550px) * 0.8))
+    );
+    height: 100%;
+    min-height: 0;
+    grid-template-columns: minmax(0, var(--about-portrait-width)) minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-rows: repeat(4, max-content);
+    align-content: safe center;
+    padding-block: 20px;
+    grid-template-areas:
+      'heading heading heading'
+      'portrait intro builds'
+      'portrait profile builds'
+      'approach approach current';
+  }
+  .about-view .about-work {
+    display: contents;
+  }
+  .about-view .about-builds,
+  .about-view .about-current {
+    margin-left: 12px;
+  }
+  .about-view .about-current {
+    align-self: start;
+    padding-top: 31px;
+    padding-bottom: 0;
+    padding-left: 35px;
+  }
+  .about-view .about-current > .eyebrow {
+    font-size: calc(10px + var(--small-text-step));
+  }
+  .about-view .about-current h3 {
+    font-size: calc(15px + var(--small-text-step));
+  }
+  .about-view .about-current p {
+    font-size: calc(13px + var(--small-text-step));
+  }
+  .about-view .about-portrait {
+    justify-items: start;
+    container-type: inline-size;
+    min-height: min-content;
+    align-self: start;
+    aspect-ratio: 4 / 5;
+  }
+  .about-view .about-profile {
+    min-height: min-content;
+  }
+  .about-view .portrait {
+    width: 100%;
+    max-width: 360px;
+  }
+  .about-view .about-approach {
+    margin-top: -42px;
+    padding-top: 16px;
+    align-self: start;
+  }
+  .about-view .about-builds {
+    min-height: auto;
+  }
+  .about-view .about-build-grid {
+    container-type: normal;
+    flex: none;
+    grid-template-rows: repeat(4, max-content);
+    align-content: start;
+    gap: 0;
+    overflow: visible;
+  }
+  .about-view .about-discipline {
+    align-content: start;
+    padding-block: 12px;
+  }
+  .about-view .about-discipline h3 {
+    font-size: 16px;
+    line-height: 1.35;
+  }
+  .about-view .about-discipline p {
+    line-height: 1.45;
+    margin-top: 5px;
+  }
+  .about-view .discipline-stack {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 3px 8px;
+    margin-top: 6px;
+  }
+  .about-view .discipline-stack .discipline-label {
+    display: block;
+    margin-top: 0;
+    font: 700 11px/1.25 var(--mono);
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .about-view .discipline-stack ul {
+    gap: 4px 8px;
+    margin-top: 0;
+  }
+  .about-view .discipline-stack li {
+    font-size: calc(10.5px + var(--small-text-step));
+  }
+  @media (max-height: 940px) {
+    .about-view .about-discipline {
+      padding-block: 8px;
+    }
+    .about-view .about-discipline p {
+      margin-top: 4px;
+    }
+    .about-view .discipline-stack {
+      margin-top: 5px;
+    }
+  }
+}
+
 @media (min-width: 1101px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (min-height: 651px) and (max-height: 1000px) {
   .about-view {
     row-gap: 8px;
+    padding-top: 20px;
     padding-bottom: 10px;
-  }
-  .about-view .about-approach {
-    padding-top: 10px;
   }
 }
 /* Mobile keeps its larger text and stacked reading flow. */
@@ -295,7 +480,13 @@ kbd {
     font-size: 15.5px;
   }
   .builds-view .project-selector > button {
-    font-size: 14.5px;
+    font-size: 18px;
+    line-height: 1.4;
+    padding-block: 10px;
+  }
+  .builds-view .project-selector > button > span:first-child {
+    min-width: 2ch;
+    font-size: 12.5px;
   }
   .builds-view .tags > span {
     font-size: 11.5px;
@@ -314,7 +505,7 @@ kbd {
 }
 @media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1120px) {
   .builds-view .project-selector > button {
-    font-size: 13.5px;
+    font-size: 15.5px;
   }
   .builds-view .project-description > p {
     font-size: 15px;
@@ -341,12 +532,12 @@ kbd {
     font-size: 42px;
   }
   .app-header .brand-text strong {
-    font-size: 16px;
+    font-size: 17px;
   }
   .app-header .brand-text > span,
   .app-header .header-contact,
   .app-header .location-label {
-    font-size: 12.5px;
+    font-size: 13.5px;
   }
   .sidebar .nav-item {
     font-size: 17px;

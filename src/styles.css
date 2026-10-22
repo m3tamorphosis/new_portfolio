@@ -9,7 +9,8 @@
   --paper: #f5f5f0;
   --ink: #242521;
   --muted: #62685b;
-  --line: #ddded5;
+  --line: #d0d3ca;
+  --line-frame: #c8cbc2;
   --blue: #3155ef;
   --mono: var(--font-mono);
 }
@@ -86,13 +87,13 @@ a:not(.contact-email):hover {
   margin: auto;
   padding: 0 44px;
   display: grid;
-  grid-template-rows: 105px minmax(0, 1fr) 64px;
+  grid-template-rows: 92px minmax(0, 1fr) 64px;
 }
 .app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-frame);
   gap: 20px;
 }
 .brand {
@@ -193,7 +194,7 @@ a:not(.contact-email):hover {
 }
 .sidebar {
   padding: 37px 26px 30px 0;
-  border-right: 1px solid var(--line);
+  border-right: 1px solid var(--line-frame);
   display: flex;
   flex-direction: column;
 }
@@ -736,7 +737,7 @@ a:not(.contact-email):hover {
   background: #dee5d9;
 }
 .app-footer {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-frame);
   display: flex;
   align-items: center;
   justify-content: space-between;

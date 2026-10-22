@@ -221,7 +221,7 @@ export default function App() {
                 transition={{ duration: 0.2, ease: 'easeOut' }}
               >
                 {view === 'About Me' ? (
-                  <About onBack={() => navigate('Home')} />
+                  <About />
                 ) : view === 'Home' ? (
                   <Home
                     openPreview={setPreviewProject}

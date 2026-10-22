@@ -89,6 +89,8 @@ export default function Experience() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reducedMotion ? 0 : 0.24 }}
           className="experience-detail"
+          tabIndex={0}
+          aria-label={`${role.full} experience`}
         >
           <div className="detail-top">
             <span className="eyebrow">{role.field}</span>

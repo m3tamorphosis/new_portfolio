@@ -31,6 +31,7 @@ for (const [width, height] of [
       'Playable experiences',
       'CareerForge AI',
       'InsightVault Lite',
+      'Developer Portfolio',
       'StudyBuddyGPT',
       'Danger Zone',
     ]) {

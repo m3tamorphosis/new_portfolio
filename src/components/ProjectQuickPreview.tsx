@@ -60,7 +60,9 @@ export default function ProjectQuickPreview({
     >
       <div className="quick-preview-header">
         <div>
-          <span className="eyebrow">PROJECT PREVIEW / {project.number}</span>
+          <span className="eyebrow">
+            {project.preview ? 'PROJECT PREVIEW' : 'EXAMPLE DEMO'} / {project.number}
+          </span>
           <h2 id={titleId}>{project.name}</h2>
         </div>
         <button
@@ -114,7 +116,7 @@ export default function ProjectQuickPreview({
             <img
               className="quick-preview-image is-illustration"
               src={`${import.meta.env.BASE_URL}images/playable-wallpaper.svg`}
-              alt="Illustration for the playable experiences demo"
+              alt="Illustration for the independent playable example demo"
               width={320}
               height={320}
               decoding="async"
@@ -139,7 +141,7 @@ export default function ProjectQuickPreview({
           </a>
         )}
         <button className="preview-explore" onClick={onExplore}>
-          {project.preview ? 'View project' : 'Play the demo'} <ArrowRight size={17} />
+          {project.preview ? 'View project' : 'Play demo'} <ArrowRight size={17} />
         </button>
       </div>
     </dialog>

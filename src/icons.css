@@ -1,4 +1,4 @@
-/* Brand SVGs retain their geometry; interface symbols use Lucide only. */
+/* Brand SVGs retain their geometry; Lucide symbols share a consistent stroke. */
 :root {
   --icon-stroke: 1.75;
 }

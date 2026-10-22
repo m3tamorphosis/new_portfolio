@@ -11,6 +11,7 @@
   }
   .nav-item,
   .header-contact,
+  .project-teaser,
   .topic-options button,
   .stack-menu > button,
   .project-selector > button {
@@ -108,7 +109,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .nav-item:hover,
-  .button-dark:hover,
+  .button.button-dark:hover,
   .project-teaser:hover .mini-preview {
     transform: none;
   }

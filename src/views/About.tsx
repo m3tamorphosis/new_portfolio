@@ -1,6 +1,6 @@
 import { useRef, useState, type KeyboardEvent } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
-import { ArrowLeft, BrainCircuit, Gamepad2, Layers, MousePointer2 } from 'lucide-react'
+import { BrainCircuit, Gamepad2, Layers, MousePointer2 } from 'lucide-react'
 import Portrait from '../components/Portrait'
 
 const disciplines = [
@@ -20,7 +20,7 @@ const disciplines = [
     icon: Layers,
     tools: 'REACT / NEXT.JS / TYPESCRIPT',
     detail: 'Connected applications with authentication, data, and payments.',
-    expanded: 'Connecting interfaces, authentication, databases, and payment integrations.',
+    expanded: 'Building backend APIs, authentication, databases, and payment integrations.',
     stack: ['Next.js', 'TypeScript', 'Prisma', 'NextAuth.js', 'Neon', 'Xendit'],
     example:
       'CareerForge AI brings resume building, cover letters, and job tracking into one workspace.',
@@ -52,7 +52,7 @@ const disciplines = [
 const panels = ['Overview', 'Profile', 'What I build', 'Approach'] as const
 type Panel = (typeof panels)[number]
 
-export default function About({ onBack }: { onBack: () => void }) {
+export default function About() {
   const [panel, setPanel] = useState<Panel>('Overview')
   const [discipline, setDiscipline] = useState(0)
   const reducedMotion = useReducedMotion()
@@ -91,9 +91,6 @@ export default function About({ onBack }: { onBack: () => void }) {
             About <span className="serif-word">me.</span>
           </h1>
         </div>
-        <button className="about-back" onClick={onBack}>
-          <ArrowLeft size={14} /> Back to Home
-        </button>
       </motion.div>
       <div className="about-overview" id="about-panel-0" aria-labelledby="about-tab-0">
         <motion.div
@@ -159,55 +156,64 @@ export default function About({ onBack }: { onBack: () => void }) {
           ))}
         </dl>
       </section>
-      <section
-        className="about-builds about-panel"
-        id="about-panel-2"
-        aria-labelledby="about-builds-title"
-      >
-        <motion.h2 className="eyebrow" id="about-builds-title" {...reveal(8)}>
-          WHAT I BUILD
-        </motion.h2>
-        <div className="about-discipline-switcher" aria-label="Choose a discipline">
-          {disciplines.map(({ title, icon: Icon }, i) => (
-            <button key={title} aria-pressed={discipline === i} onClick={() => setDiscipline(i)}>
-              <Icon className="discipline-icon" size={16} aria-hidden="true" />
-              {title}
-            </button>
-          ))}
-        </div>
-        <div className="about-build-grid">
-          {disciplines.map(({ title, tools, detail, expanded, stack, example, className }, i) => (
-            <motion.article
-              className={`about-discipline ${className}`}
-              data-selected={discipline === i}
-              key={title}
-              {...reveal(9 + i)}
-            >
-              <div className="discipline-top">
-                <span>0{i + 1}</span>
-              </div>
-              <h3>{title}</h3>
-              <p className="discipline-description">
-                <span className="discipline-summary">{detail}</span>
-                <span className="discipline-expanded-description">{expanded}</span>
-              </p>
-              <span className="discipline-tools">{tools}</span>
-              <div className="discipline-stack">
-                <span className="discipline-label">STACK &amp; TOOLS</span>
-                <ul aria-label={`${title} stack`}>
-                  {stack.map((tool) => (
-                    <li key={tool}>{tool}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="discipline-example">
-                <span className="discipline-label">IN PRACTICE</span>
-                <span>{example}</span>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </section>
+      <div className="about-work">
+        <section
+          className="about-builds about-panel"
+          id="about-panel-2"
+          aria-labelledby="about-builds-title"
+        >
+          <motion.h2 className="eyebrow" id="about-builds-title" {...reveal(8)}>
+            WHAT I BUILD
+          </motion.h2>
+          <div className="about-discipline-switcher" aria-label="Choose a discipline">
+            {disciplines.map(({ title, icon: Icon }, i) => (
+              <button key={title} aria-pressed={discipline === i} onClick={() => setDiscipline(i)}>
+                <Icon className="discipline-icon" size={16} aria-hidden="true" />
+                {title}
+              </button>
+            ))}
+          </div>
+          <div className="about-build-grid">
+            {disciplines.map(({ title, tools, detail, expanded, stack, example, className }, i) => (
+              <motion.article
+                className={`about-discipline ${className}`}
+                data-selected={discipline === i}
+                key={title}
+                {...reveal(9 + i)}
+              >
+                <div className="discipline-top">
+                  <span>0{i + 1}</span>
+                </div>
+                <h3>{title}</h3>
+                <p className="discipline-description">
+                  <span className="discipline-summary">{detail}</span>
+                  <span className="discipline-expanded-description">{expanded}</span>
+                </p>
+                <span className="discipline-tools">{tools}</span>
+                <div className="discipline-stack">
+                  <span className="discipline-label">TECH STACK:</span>
+                  <ul aria-label={`${title} stack`}>
+                    {stack.map((tool) => (
+                      <li key={tool}>{tool}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="discipline-example">
+                  <span className="discipline-label">IN PRACTICE</span>
+                  <span>{example}</span>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </section>
+        <motion.div className="about-current" {...reveal(14)}>
+          <span className="eyebrow">
+            <i className="green-dot" /> RECENT EXPERIENCE
+          </span>
+          <h3>HPL Game Design</h3>
+          <p>Built responsive web interfaces with reusable components and smooth interactions.</p>
+        </motion.div>
+      </div>
       <motion.section
         className="about-approach about-panel"
         id="about-panel-3"
@@ -250,15 +256,6 @@ export default function About({ onBack }: { onBack: () => void }) {
           ))}
         </div>
       </motion.section>
-      <motion.div className="about-current" {...reveal(14)}>
-        <span className="eyebrow">
-          <i className="green-dot" /> RECENT EXPERIENCE
-        </span>
-        <p>
-          Built responsive web interfaces with reusable components and smooth interactions at{' '}
-          <strong>HPL Game Design.</strong>
-        </p>
-      </motion.div>
     </div>
   )
 }

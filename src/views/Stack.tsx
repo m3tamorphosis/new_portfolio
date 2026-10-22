@@ -16,11 +16,6 @@ export default function Stack() {
             My building <span className="serif-word">blocks.</span>
           </h1>
         </div>
-        <span className="heading-note">
-          From interface
-          <br />
-          to intelligence.
-        </span>
       </div>
       <div className="stack-layout">
         <div className="stack-menu">

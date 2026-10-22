@@ -1,3 +1,6 @@
+.about-work {
+  display: contents;
+}
 .about-view {
   --about-portrait-width: min(360px, calc((100dvh - 485px) * 0.8));
   display: grid;
@@ -96,17 +99,6 @@
   letter-spacing: -0.035em;
   line-height: 1.1;
   margin-top: 8px;
-}
-.about-back {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: calc(11px + var(--small-text-step));
-  min-height: 36px;
-  color: var(--muted);
-}
-.about-back:hover {
-  color: var(--blue);
 }
 .about-intro {
   grid-area: intro;
@@ -292,8 +284,11 @@
   margin-top: 10px;
   max-width: 290px;
 }
-.about-current strong {
-  font-weight: 500;
+.about-current h3 {
+  margin-top: 8px;
+  font-size: calc(14px + var(--small-text-step));
+  line-height: 1.4;
+  font-weight: 600;
   color: var(--ink);
 }
 .about-tabs,
@@ -374,8 +369,9 @@
   }
 }
 /* Compact profile panels preserve readable content without adding a scrolling page. */
-@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1100px),
-  (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 650px) {
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1380px),
+  (min-width: 1381px) and (max-width: 1700px) and (max-height: 1050px) and (not (any-pointer: coarse)),
+  (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 880px) {
   .about-view {
     grid-template-rows: auto minmax(0, 1fr) auto auto;
     grid-template-columns: 1fr;
@@ -553,8 +549,9 @@
   }
 }
 /* The selected discipline uses the space available in the compact detail panel. */
-@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1100px),
-  (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 650px) {
+@media (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-width: 1380px),
+  (min-width: 1381px) and (max-width: 1700px) and (max-height: 1050px) and (not (any-pointer: coarse)),
+  (min-width: 901px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (max-height: 880px) {
   .about-build-grid {
     container: discipline-detail / size;
   }
@@ -623,7 +620,7 @@
     max-width: 560px;
   }
 }
-@container discipline-detail (max-height: 280px) {
+@container discipline-detail (max-height: 380px) {
   .about-discipline[data-selected='true'] {
     padding: 12px;
   }
@@ -707,7 +704,7 @@
   }
 }
 /* Show the same complete stack in the four-card desktop overview. */
-@media (min-width: 1101px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (min-height: 651px) {
+@media (min-width: 1381px) and (((min-width: 1201px) or (min-height: 501px)) and (not ((any-pointer: coarse) or ((max-width: 1100px) and (orientation: portrait))))) and (min-height: 881px) and (not ((max-width: 1700px) and (max-height: 1050px))) {
   .about-portrait {
     justify-items: end;
   }

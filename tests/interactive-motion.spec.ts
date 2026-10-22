@@ -23,7 +23,7 @@ test('project hover responds to the pointer, resets, and still opens the project
   await expect(project).not.toHaveAttribute('data-pointer-active')
   expect(await project.evaluate((el) => el.style.getPropertyValue('--pointer-x'))).toBe('')
   await project.click()
-  await page.getByRole('button', { name: 'Play the demo', exact: true }).click()
+  await page.getByRole('button', { name: 'Play demo', exact: true }).click()
   await expect(page).toHaveURL(/#builds$/)
   await expect(page.locator('.builds-view')).toBeVisible()
 })

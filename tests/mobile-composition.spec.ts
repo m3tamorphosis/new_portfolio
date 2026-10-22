@@ -194,13 +194,13 @@ test('mobile previews, canvas, and contact remain interactive and accessible', a
   await expect(
     page.getByRole('link', { name: 'Explore InsightVault Lite live app' }),
   ).toHaveAttribute('href', 'https://insight-vault-lite.vercel.app/')
-  await page.getByRole('button', { name: /04 StudyBuddyGPT/ }).click()
+  await page.getByRole('button', { name: /StudyBuddyGPT/ }).click()
   await expect(page.locator('.project-screenshot img')).toHaveAttribute('src', /study-preview.jpg$/)
   await expect(page.getByRole('link', { name: 'Explore StudyBuddyGPT live app' })).toHaveAttribute(
     'href',
     'https://studdybuddygpt.vercel.app/',
   )
-  await page.getByRole('button', { name: /05 Danger Zone/ }).click()
+  await page.getByRole('button', { name: /Danger Zone/ }).click()
   await expect(page.locator('.project-screenshot img')).toHaveAttribute(
     'src',
     /danger-preview.jpg$/,
@@ -209,7 +209,7 @@ test('mobile previews, canvas, and contact remain interactive and accessible', a
     'href',
     'https://dangerzone.vercel.app/',
   )
-  await page.getByRole('button', { name: /01 Playable experiences/ }).click()
+  await page.getByRole('button', { name: /Playable experiences/ }).click()
   await page.getByRole('button', { name: 'Let’s fly' }).click()
   await expect(page.getByRole('button', { name: 'Pause game' })).toBeEnabled()
   await page.goto('/#contact')

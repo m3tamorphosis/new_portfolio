@@ -11,9 +11,9 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. Use the index, footer arrows, or keys **1–6** to navigate: Home, About Me, Builds, Experience, Stack, and Contact. Press **?** for keyboard shortcuts. Section hashes support direct links and browser history.
+Open the local URL printed by Vite. Use the index or keys **1–6** to navigate: Home, About Me, Builds, Experience, Stack, and Contact. Press **?** for keyboard shortcuts. Section hashes support direct links and browser history.
 
-About Me is a top-level section at `#about`, with position `02 / 06`. Use its Back to Home control or key **1** to return to the hero. Desktop layouts keep the index, content frame, and footer; narrower desktop layouts retain keyboard-accessible About detail tabs. At 900px and below, Menu opens the numbered index and Connect actions in an accessible dialog. Each mobile section scrolls as a document, with the footer following its content. Mobile About presents the portrait, profile, all four disciplines, approach, and recent experience in sequence.
+About Me is a top-level section at `#about`, with position `02 / 06`. Use Home in the index or key **1** to return to the hero. Desktop layouts keep the index, content frame, and footer; narrower desktop layouts retain keyboard-accessible About detail tabs. Phones and touch tablets use Menu to open the numbered index in an accessible dialog. Each mobile section scrolls as a document, with the footer following its content. Mobile About presents the portrait, profile, all four disciplines, approach, and recent experience in sequence.
 
 ## Add your portrait
 
@@ -44,7 +44,7 @@ The endpoint validates and limits messages, caps output, times out upstream requ
 
 - `src/App.tsx`: persistent shell, navigation, keyboard shortcuts, and transitions.
 - `src/views/`: Home, About, Builds, Experience, Stack, and Contact.
-- `src/components/Playground.tsx`: responsive Canvas renderer; pointer input, pause, shape change, and reset.
+- `src/components/Playground.tsx`: responsive Tech Stack Globe with mouse and touch rotation and reduced-motion support.
 - `src/components/Portrait.tsx`: local profile photo with a designed loading/missing-image fallback.
 - `src/components/Demos.tsx`: preview thumbnails and the demo entry point.
 - `src/components/FlightGame.tsx`: original Flappy-style canvas game with tap/click/Space input, collision detection, scoring, pause, and replay. It fills the Builds preview, pauses when hidden or out of view, and cleans up its animation and observers on unmount.
@@ -83,9 +83,9 @@ Stack follows the seven user-supplied résumé groups in `src/data.ts`; `src/sta
 
 ### Portfolio content
 
-The October 11 CV update adds CareerForge AI as project 02 and retains all existing projects. Its real public landing-page screenshot supplies the Builds preview and Home thumbnail, linking to `https://mycareerforge.vercel.app/`. Stack and the Home globe also include Prisma ORM, NextAuth.js, Xendit Payment Integration, Neon, and Playwright. New logos use SVGL and Simple Icons artwork with sources recorded alongside the assets.
+Builds lists six projects: Playable experiences, CareerForge AI, InsightVault Lite, Developer Portfolio (04), StudyBuddyGPT, and Danger Zone. Developer Portfolio uses a local screenshot and links back to this site's Home view. CareerForge AI's public landing-page screenshot supplies its Builds preview and Home thumbnail, linking to `https://mycareerforge.vercel.app/`. Stack and the Home globe also include Prisma ORM, NextAuth.js, Xendit Payment Integration, Neon, and Playwright.
 
-Project descriptions and work history reflect the updated résumé, including HPL Game Design employment from April through October 2026. Home and About describe this as recent work rather than current employment. Playable experiences emphasizes frontend development and interactive gameplay. Its interactive preview is an original portfolio concept, not a proprietary HPL ad. The original Unity game is represented by a small browser interaction, not embedded.
+Project descriptions and work history reflect the updated résumé, including HPL Game Design employment from April through October 2026. Home and About describe this as recent work rather than current employment. Playable experiences emphasizes frontend development and interactive gameplay. Its description explains that client previews and source code are unavailable due to NDA; the Flappy game remains an independent example demo. Danger Zone uses a screenshot linked to its public site.
 
 InsightVault Lite and StudyBuddyGPT use real screenshots captured from their public live sites on October 7, 2026. Optimized JPEGs in `public/images` supply Home thumbnails and edge-to-edge Builds previews. InsightVault's screenshot shows its public sign-in screen; StudyBuddyGPT shows its PDF study entry page. Both screenshots link to the actual apps. These are static images, not embedded apps or generated interfaces. `tests/project-images.spec.ts` verifies image assets, live links, and responsive preview bounds.
 
@@ -93,7 +93,7 @@ GitHub and email use the supplied contact details. InsightVault Lite and StudyBu
 
 The Contact view opens an email client with the selected topic; it does not submit or store messages. Fonts are bundled locally. There are no tracking scripts or external runtime dependencies.
 
-The shared Connect area shows a phone link beneath LinkedIn. The Contact page uses `profile.phone` (+63 961 083 4292) for Viber, Telegram, and WhatsApp. Viber uses a native app chat link; Telegram and WhatsApp use phone-number links. Chat delivery/account availability has not been verified. Messaging logos are bundled Simple Icons brand marks in the portfolio's muted color; their source hashes and license are included in `public/icons/brands`.
+The Contact page uses `profile.phone` (+63 961 083 4292) for Viber, Telegram, and WhatsApp. Viber uses a native app chat link; Telegram and WhatsApp use phone-number links. Chat delivery/account availability has not been verified. Messaging logos are bundled Simple Icons brand marks in the portfolio's muted color; their source hashes and license are included in `public/icons/brands`.
 
 ## Checks
 

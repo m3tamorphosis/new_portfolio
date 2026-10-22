@@ -22,11 +22,6 @@ export default function Builds({
             Less talk. <span className="serif-word">More build.</span>
           </h1>
         </div>
-        <span className="heading-note">
-          Real projects.
-          <br />
-          Room to experiment.
-        </span>
       </div>
       <div className="builds-layout">
         <div className="project-details">

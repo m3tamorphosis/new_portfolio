@@ -13,6 +13,10 @@ for (const [width, height] of [
     page.on('pageerror', (error) => errors.push(error.message))
     await page.setViewportSize({ width, height })
     await page.goto('/#builds')
+    await page
+      .locator('.project-selector')
+      .getByRole('button', { name: /Playable experiences/ })
+      .click()
     await expect(page.locator('.view-container')).toHaveCSS('opacity', '1')
     await page.locator('.flight-demo').scrollIntoViewIfNeeded()
     await expect(page.getByRole('button', { name: 'Let’s fly' })).toBeVisible()
@@ -42,10 +46,14 @@ for (const [width, height] of [
 
 test('flapping clears gates, pause freezes play, and collision allows replay', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 })
-  await page.clock.install()
+  await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') })
   await page.goto('/#builds')
+  await page
+    .locator('.project-selector')
+    .getByRole('button', { name: /Playable experiences/ })
+    .click()
   await expect(page.locator('.view-container')).toHaveCSS('opacity', '1')
-  await page.clock.pauseAt(new Date())
+  await page.clock.pauseAt(new Date('2026-01-01T00:01:00Z'))
   await page.getByRole('button', { name: 'Let’s fly' }).click()
   const canvas = page.getByLabel('Flappy flight game')
   for (let i = 0; i < 7; i++) {
@@ -65,10 +73,10 @@ test('flapping clears gates, pause freezes play, and collision allows replay', a
   await page.getByRole('button', { name: 'Fly again' }).click()
   await expect(page.locator('.flight-score')).toHaveText('SCORE 00')
   await expect(page.locator('.flight-best')).not.toHaveText('BEST 00')
-  await page.getByRole('button', { name: /02 CareerForge AI/ }).click()
+  await page.getByRole('button', { name: /CareerForge AI/ }).click()
   await page.clock.runFor(1000)
   await expect(canvas).toHaveCount(0)
-  await page.getByRole('button', { name: /01 Playable experiences/ }).click()
+  await page.getByRole('button', { name: /Playable experiences/ }).click()
   await expect(page.getByRole('button', { name: 'Let’s fly' })).toBeVisible()
 })
 
@@ -79,12 +87,16 @@ test('touch can flap and leaving the game pauses it', async ({ browser }) => {
     hasTouch: true,
   })
   const page = await context.newPage()
-  await page.clock.install()
+  await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') })
   await page.goto('/#builds')
+  await page
+    .locator('.project-selector')
+    .getByRole('button', { name: /Playable experiences/ })
+    .click()
   await expect(page.locator('.view-container')).toHaveCSS('opacity', '1')
   const canvas = page.getByLabel('Flappy flight game')
   await canvas.scrollIntoViewIfNeeded()
-  await page.clock.pauseAt(new Date())
+  await page.clock.pauseAt(new Date('2026-01-01T00:01:00Z'))
   await page.getByRole('button', { name: 'Let’s fly' }).tap()
   for (let i = 0; i < 3; i++) {
     await page.clock.runFor(600)

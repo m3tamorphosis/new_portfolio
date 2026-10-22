@@ -16,10 +16,10 @@ export const projects = [
     id: 'playable',
     number: '01',
     name: 'Playable experiences',
-    category: 'GAME DEVELOPMENT + INTERACTION',
+    category: 'FRONT-END DEVELOPMENT + INTERACTION',
     description: 'Frontend craft. Interactive gameplay.',
     detail:
-      'My work combines frontend development with game mechanics, animation, and responsive interfaces. At HPL Game Design Corporation, I built a reusable Phaser 3 template with MRAID integration, delivering HTML5 Canvas/WebGL experiences as single-file HTML builds optimized for mobile within 5 MB limits.',
+      'My work combines frontend development with game mechanics, animation, and responsive interfaces. At HPL Game Design Corporation, I built a reusable Phaser 3 template with MRAID integration, delivering HTML5 Canvas/WebGL experiences as single-file HTML builds optimized for mobile within 5 MB limits. Client project previews and source code are unavailable due to NDA; the Flappy game shown here is an independent example demo.',
     stack: [
       'React',
       'Vite',
@@ -79,8 +79,34 @@ export const projects = [
     },
   },
   {
-    id: 'study',
+    id: 'portfolio',
     number: '04',
+    name: 'Developer Portfolio',
+    category: 'FRONT-END DEVELOPMENT + AI',
+    description: 'A portfolio built to explore.',
+    detail:
+      'I designed and built this portfolio with React, TypeScript, and Vite to bring my projects, experience, and skills together. It combines responsive layouts, light and dark themes, Motion transitions, an animated Canvas technology globe, and a Groq-powered assistant that answers questions about my work.',
+    stack: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'CSS3',
+      'Motion',
+      'HTML5 Canvas',
+      'Groq API',
+      'Playwright',
+    ],
+    color: 'sage',
+    liveUrl: `${import.meta.env?.BASE_URL ?? '/'}#home`,
+    preview: {
+      image: `${import.meta.env?.BASE_URL ?? '/'}images/portfolio-preview.jpg`,
+      thumbnail: `${import.meta.env?.BASE_URL ?? '/'}images/portfolio-preview.jpg`,
+      alt: 'Carl John Haro portfolio homepage with project navigation, introduction, and an animated technology globe',
+    },
+  },
+  {
+    id: 'study',
+    number: '05',
     name: 'StudyBuddyGPT',
     category: 'AI + LEARNING',
     description: 'From a dense document to a lightbulb moment.',
@@ -97,7 +123,7 @@ export const projects = [
   },
   {
     id: 'danger',
-    number: '05',
+    number: '06',
     name: 'Danger Zone',
     category: 'INTERACTIVE + GAME DEVELOPMENT',
     description: 'Learn by doing. Prepare by playing.',

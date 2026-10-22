@@ -3,7 +3,7 @@
   .app-shell {
     padding: 0 60px;
     --frame-gutter: 60px;
-    grid-template-rows: 118px minmax(0, 1fr) 75px;
+    grid-template-rows: 100px minmax(0, 1fr) 75px;
   }
   .app-body {
     grid-template-columns: 190px minmax(0, 1fr);

@@ -27,6 +27,7 @@ for (const [width, height] of [
     for (const [name, image] of [
       ['CareerForge AI', 'careerforge'],
       ['InsightVault Lite', 'insight'],
+      ['Developer Portfolio', 'portfolio'],
       ['StudyBuddyGPT', 'study'],
       ['Danger Zone', 'danger'],
     ]) {
@@ -42,7 +43,7 @@ for (const [width, height] of [
       await expect(page.locator('.preview-live-link')).toBeVisible()
       await expect(page.locator('.project-screenshot')).toHaveAttribute('target', '_blank')
       if (image === 'careerforge') {
-        await expect(page.getByRole('button', { name: /02 CareerForge AI/ })).toHaveAttribute(
+        await expect(page.getByRole('button', { name: /CareerForge AI/ })).toHaveAttribute(
           'aria-pressed',
           'true',
         )

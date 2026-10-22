@@ -60,6 +60,8 @@ for (const [width, height] of [
     await expect(projects.last()).toBeInViewport({ ratio: 1 })
     await page.screenshot({ path: `test-results/home-projects-${width}x${height}.png` })
     await projects.last().click()
+    await expect(page.getByRole('dialog')).toBeVisible()
+    await page.getByRole('button', { name: 'View project', exact: true }).click()
     await expect(page.locator('.builds-view')).toBeVisible()
   })
 }
@@ -83,11 +85,15 @@ test('navigation supports keyboard, history, and direct links', async ({ page })
 
 test('project demos run and can be replayed', async ({ page }) => {
   await page.goto('/#builds')
+  await page
+    .locator('.project-selector')
+    .getByRole('button', { name: /Playable experiences/ })
+    .click()
   await page.getByRole('button', { name: 'Let’s fly' }).click()
   await expect(page.getByRole('button', { name: 'Pause game' })).toBeEnabled()
   await page.getByRole('button', { name: 'Restart game' }).click()
   await expect(page.locator('.flight-score')).toHaveText('SCORE 00')
-  await page.getByRole('button', { name: /03 InsightVault Lite/ }).click()
+  await page.getByRole('button', { name: /InsightVault Lite/ }).click()
   await expect(page.locator('.project-screenshot img')).toHaveAttribute(
     'src',
     /insight-preview.jpg$/,
@@ -95,13 +101,13 @@ test('project demos run and can be replayed', async ({ page }) => {
   await expect(
     page.getByRole('link', { name: 'Explore InsightVault Lite live app' }),
   ).toHaveAttribute('href', 'https://insight-vault-lite.vercel.app/')
-  await page.getByRole('button', { name: /04 StudyBuddyGPT/ }).click()
+  await page.getByRole('button', { name: /StudyBuddyGPT/ }).click()
   await expect(page.locator('.project-screenshot img')).toHaveAttribute('src', /study-preview.jpg$/)
   await expect(page.getByRole('link', { name: 'Explore StudyBuddyGPT live app' })).toHaveAttribute(
     'href',
     'https://studdybuddygpt.vercel.app/',
   )
-  await page.getByRole('button', { name: /05 Danger Zone/ }).click()
+  await page.getByRole('button', { name: /Danger Zone/ }).click()
   await expect(page.locator('.project-screenshot img')).toHaveAttribute(
     'src',
     /danger-preview.jpg$/,

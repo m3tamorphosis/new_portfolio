@@ -25,7 +25,7 @@ test('all six sections share navigation, history, shortcuts, and mobile menus', 
     'page',
   )
   await expect(nav.locator('.nav-item.active')).toHaveCount(1)
-  await page.getByRole('button', { name: 'Back to Home' }).click()
+  await nav.getByRole('button', { name: 'Home' }).click()
   await expect(page.getByRole('heading', { name: /I build things/ })).toBeVisible()
   await page.goBack()
   await expect(page.getByRole('heading', { name: 'About me.' })).toBeVisible()

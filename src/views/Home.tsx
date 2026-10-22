@@ -36,11 +36,11 @@ export default function Home({
           </p>
           <p className="hero-description">
             Full-stack developer building AI-powered web applications with React, Next.js,
-            TypeScript, and Node.js, backed by PostgreSQL and Supabase. Hands-on with LLM integration,
-            RAG pipelines, embeddings, and PDF processing, shipped in live tools for document
-            analysis, data insights, and career management. Strong front-end and game development
-            foundation: reusable UI components, animation systems, and interactive games built with
-            Phaser 3 and HTML5 Canvas/WebGL.
+            TypeScript, and Node.js, backed by PostgreSQL and Supabase. Hands-on with LLM
+            integration, RAG pipelines, embeddings, and PDF processing, shipped in live tools for
+            document analysis, data insights, and career management. Strong front-end and game
+            development foundation: reusable UI components, animation systems, and interactive games
+            built with Phaser 3 and HTML5 Canvas/WebGL.
           </p>
           <div className="hero-actions">
             <button className="button button-dark" onClick={() => navigate('Builds')}>
@@ -77,24 +77,24 @@ export default function Home({
               aria-haspopup="dialog"
             >
               <MiniPreview id={project.id} />
-              <div>
+              <div className="teaser-copy">
                 <span className="teaser-category">
-                  {i === 0 ? 'INTERACTIVE EXPERIENCES' : project.category}
+                  {project.id === 'playable' ? 'INTERACTIVE EXPERIENCES' : project.category}
                 </span>
                 <h3>{project.name}</h3>
                 <span className="teaser-note">
-                  {i === 0
-                    ? 'Built to be played.'
+                  {project.id === 'playable'
+                    ? 'An independent Flappy demo with responsive game controls.'
                     : project.id === 'careerforge'
-                      ? 'Build your next opportunity.'
+                      ? 'AI-assisted resumes, cover letters, and job tracking.'
                       : project.id === 'insight'
-                        ? 'Make data make sense.'
+                        ? 'Explore CSV and PDF data with AI questions and dashboards.'
                         : 'Less cramming. More knowing.'}
                 </span>
               </div>
               <span className="teaser-preview-label">
                 <span>Preview</span>
-                <ArrowUpRight className="teaser-arrow" size={18} />
+                <ArrowUpRight className="teaser-preview-icon" size={32} aria-hidden="true" />
               </span>
             </button>
           ))}
