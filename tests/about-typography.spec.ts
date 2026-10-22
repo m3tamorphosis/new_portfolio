@@ -268,7 +268,7 @@ for (const size of sizes) {
             height: el.clientHeight,
             scrollHeight: el.scrollHeight,
             contentFits: [
-              ...el.querySelectorAll('h3, p, .discipline-stack li, .discipline-example'),
+              ...el.querySelectorAll('h3, p, .discipline-stack li'),
             ]
               .filter((child) => child.getClientRects().length > 0)
               .every((child) => {

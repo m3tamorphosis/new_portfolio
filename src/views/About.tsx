@@ -11,8 +11,6 @@ const disciplines = [
     detail: 'Document intelligence, data insights, and AI career tools.',
     expanded: 'Building AI tools for document analysis, career materials, and data insights.',
     stack: ['OpenAI API', 'Groq API', 'RAG', 'Embeddings', 'pdf-parse', 'Supabase'],
-    example:
-      'CareerForge AI for resumes and cover letters. InsightVault Lite for data insights. StudyBuddyGPT for learning.',
     className: 'ai',
   },
   {
@@ -22,8 +20,6 @@ const disciplines = [
     detail: 'Connected applications with authentication, data, and payments.',
     expanded: 'Building backend APIs, authentication, databases, and payment integrations.',
     stack: ['Next.js', 'TypeScript', 'Prisma', 'NextAuth.js', 'Neon', 'Xendit'],
-    example:
-      'CareerForge AI brings resume building, cover letters, and job tracking into one workspace.',
     className: 'systems',
   },
   {
@@ -33,8 +29,6 @@ const disciplines = [
     detail: 'Thoughtful interfaces, animation, and game-like interactions.',
     expanded: 'Building responsive interfaces, reusable animations, and game-like interactions.',
     stack: ['React', 'TypeScript', 'Motion', 'HTML5 Canvas', 'WebGL', 'Unity / C#'],
-    example:
-      'Interactive emergency scenarios in Danger Zone, an educational disaster-response simulation.',
     className: 'interaction',
   },
   {
@@ -45,7 +39,6 @@ const disciplines = [
     expanded:
       'Creating lightweight playable ads with reusable game mechanics, animation, and mobile ad integration.',
     stack: ['Phaser 3', 'HTML5 Canvas', 'WebGL', 'React', 'MRAID', 'Vite'],
-    example: 'Cross-platform experiences at HPL Game Design, packaged within 5 MB limits.',
     className: 'play',
   },
 ]
@@ -174,7 +167,7 @@ export default function About() {
             ))}
           </div>
           <div className="about-build-grid">
-            {disciplines.map(({ title, tools, detail, expanded, stack, example, className }, i) => (
+            {disciplines.map(({ title, tools, detail, expanded, stack, className }, i) => (
               <motion.article
                 className={`about-discipline ${className}`}
                 data-selected={discipline === i}
@@ -197,10 +190,6 @@ export default function About() {
                       <li key={tool}>{tool}</li>
                     ))}
                   </ul>
-                </div>
-                <div className="discipline-example">
-                  <span className="discipline-label">IN PRACTICE</span>
-                  <span>{example}</span>
                 </div>
               </motion.article>
             ))}

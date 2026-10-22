@@ -224,8 +224,7 @@
   padding-top: 5px;
 }
 .discipline-expanded-description,
-.discipline-stack,
-.discipline-example {
+.discipline-stack {
   display: none;
 }
 .about-approach {
@@ -610,15 +609,6 @@
     border-radius: 3px;
     background: light-dark(rgb(255 255 255 / 30%), rgb(255 255 255 / 3%));
   }
-  .discipline-example {
-    display: grid;
-    gap: 7px;
-    margin-top: clamp(12px, 4cqh, 24px);
-    font-size: calc(12px + var(--small-text-step));
-    line-height: 1.6;
-    color: light-dark(#606754, var(--muted));
-    max-width: 560px;
-  }
 }
 @container discipline-detail (max-height: 380px) {
   .about-discipline[data-selected='true'] {
@@ -646,9 +636,6 @@
   .discipline-stack li {
     font-size: calc(10.5px + var(--small-text-step));
     padding: 4px 6px;
-  }
-  .discipline-example {
-    display: none;
   }
 }
 @container discipline-detail (max-height: 190px) and (max-width: 449px) {

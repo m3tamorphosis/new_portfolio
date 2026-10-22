@@ -425,15 +425,6 @@
     font: 12.5px/1.6 var(--mono);
     color: light-dark(#424b3f, var(--muted));
   }
-  .discipline-example {
-    display: grid;
-    grid-column: 2;
-    gap: 6px;
-    margin-top: 8px;
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--muted);
-  }
   .about-approach,
   .about-current {
     display: block;
