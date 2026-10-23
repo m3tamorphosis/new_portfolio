@@ -1083,6 +1083,10 @@
   }
 }
 @media (hover: none) {
+  .app-shell[data-input-method='touch'] dialog:focus,
+  .app-shell[data-input-method='touch'] dialog button:focus-visible {
+    outline: none;
+  }
   .nav-item:hover,
   .button-dark:hover,
   .project-teaser:hover .mini-preview {

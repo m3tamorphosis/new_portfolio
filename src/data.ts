@@ -41,7 +41,7 @@ export const projects = [
     category: 'AI + CAREER MANAGEMENT',
     description: 'Stronger applications. A clearer next step.',
     detail:
-      'I’m developing CareerForge AI to bring resume building, bullet enhancement, tailored cover letters, and job application tracking into one workspace. Built with Next.js, React, and TypeScript, it combines Groq-powered writing assistance with Prisma and PostgreSQL for application data, and NextAuth.js for authentication.',
+      'I built CareerForge AI to bring resume building, bullet enhancement, tailored cover letters, and job application tracking into one workspace. Built with Next.js, React, and TypeScript, it combines Groq-powered writing assistance with Prisma and PostgreSQL for application data, and NextAuth.js for authentication.',
     stack: [
       'Next.js',
       'React',
@@ -128,7 +128,7 @@ export const projects = [
     category: 'INTERACTIVE + GAME DEVELOPMENT',
     description: 'Learn by doing. Prepare by playing.',
     detail:
-      'I built Danger Zone as a thesis project focused on Disaster Risk Reduction training. The game places learners in interactive emergency scenarios, using simulation to make disaster-response concepts more engaging to explore. Developed with Unity, C#, and Firebase, it brings together game development and an educational purpose: learning about preparedness through play.',
+      'Our team developed Danger Zone as our thesis project focused on Disaster Risk Reduction training. The game places learners in interactive emergency scenarios, using simulation to make disaster-response concepts more engaging to explore. Developed with Unity, C#, and Firebase, it brings together game development and an educational purpose: learning about preparedness through play.',
     stack: ['Unity', 'C#', 'Firebase'],
     color: 'sage',
     liveUrl: 'https://dangerzone.vercel.app/',

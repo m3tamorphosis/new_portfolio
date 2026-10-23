@@ -1,6 +1,46 @@
 import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
+test('mobile dialogs omit touch focus outlines and retain keyboard focus indicators', async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    hasTouch: true,
+    isMobile: true,
+    reducedMotion: 'reduce',
+  })
+  const page = await context.newPage()
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Ask about my work', exact: true }).tap()
+  const assistant = page.locator('.assistant-dialog')
+  await expect(assistant).toBeFocused()
+  await expect(assistant).toHaveCSS('outline-style', 'none')
+  await page.keyboard.press('Tab')
+  const assistantClose = page.getByRole('button', { name: 'Close portfolio assistant' })
+  await expect(assistantClose).toBeFocused()
+  await expect(assistantClose).toHaveCSS('outline-style', 'solid')
+  await assistantClose.tap()
+
+  await page.getByRole('button', { name: 'Preview Playable experiences', exact: true }).tap()
+  const previewClose = page.getByRole('button', { name: 'Close project preview' })
+  await expect(previewClose).toBeFocused()
+  await expect(previewClose).toHaveCSS('outline-style', 'none')
+  await page.keyboard.press('Tab')
+  await page.keyboard.press('Shift+Tab')
+  await expect(previewClose).toBeFocused()
+  await expect(previewClose).toHaveCSS('outline-style', 'solid')
+  await previewClose.tap()
+
+  await page.getByRole('button', { name: 'Open index menu' }).tap()
+  const menuClose = page.getByRole('button', { name: 'Close index menu' })
+  await expect(menuClose).toBeFocused()
+  await expect(menuClose).toHaveCSS('outline-style', 'none')
+  await page.keyboard.press('Tab')
+  await page.keyboard.press('Shift+Tab')
+  await expect(menuClose).toBeFocused()
+  await expect(menuClose).toHaveCSS('outline-style', 'solid')
+  await context.close()
+})
+
 for (const size of [
   { width: 1440, height: 900 },
   { width: 1280, height: 650 },

@@ -130,7 +130,16 @@ export default function App() {
   )
   return (
     <MotionConfig reducedMotion="user">
-      <div className="app-shell" ref={interactionRoot}>
+      <div
+        className="app-shell"
+        ref={interactionRoot}
+        onPointerDownCapture={(event) => {
+          event.currentTarget.dataset.inputMethod = event.pointerType
+        }}
+        onKeyDownCapture={(event) => {
+          event.currentTarget.dataset.inputMethod = 'keyboard'
+        }}
+      >
         <a
           className="skip-link"
           href="#main-content"
