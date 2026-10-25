@@ -14,6 +14,7 @@ import { compactLayoutQuery } from './layout'
 import usePointerFeedback from './hooks/usePointerFeedback'
 import useTheme from './hooks/useTheme'
 import ThemeControl from './components/ThemeControl'
+import VisitorCount from './components/VisitorCount'
 
 function readView(): View {
   if (window.location.hash.slice(1) === 'about') return 'About Me'
@@ -259,6 +260,7 @@ export default function App() {
             DESIGNED & BUILT BY CARL <span>© {new Date().getFullYear()}</span>
           </span>
           {compact && <PortfolioAssistant />}
+          <VisitorCount />
           <span className="footer-note">Built with care. Made to be used.</span>
         </footer>
         {previewProject !== null && (

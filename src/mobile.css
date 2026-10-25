@@ -932,6 +932,11 @@
     line-height: 1.6;
     text-align: left;
   }
+  .visitor-count {
+    font-size: 9px;
+    line-height: 1.6;
+    max-width: calc(100% - 64px);
+  }
   .shortcuts-dialog {
     width: calc(100% - 32px);
     max-width: 440px;

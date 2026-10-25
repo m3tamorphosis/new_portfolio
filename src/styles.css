@@ -754,6 +754,14 @@ a:not(.contact-email):hover {
   text-align: right;
   text-transform: uppercase;
 }
+.visitor-count {
+  white-space: nowrap;
+  text-transform: uppercase;
+  min-width: 12ch;
+}
+.visitor-count-number {
+  font-variant-numeric: tabular-nums;
+}
 kbd {
   font: calc(9px + var(--small-text-step)) var(--mono);
   border: 1px solid light-dark(#d8dbce, var(--line));

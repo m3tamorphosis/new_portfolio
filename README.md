@@ -26,7 +26,19 @@ npm run build
 npm run preview
 ```
 
-The portfolio pages can be served from `dist/` on a static host. The AI chat additionally needs the server endpoint described below; a static-only deployment cannot run Groq requests. Vite uses relative asset paths and navigation uses hashes.
+The portfolio pages can be served from `dist/` on a static host. AI chat and the visitor counter additionally need the server endpoints described below; a static-only deployment cannot run them. Vite uses relative asset paths and navigation uses hashes.
+
+## Visible visitor count (Supabase)
+
+The footer shows the total number of unique browsers since the counter was enabled. Reloads, returning in the same browser, and section navigation do not add another visitor. A different browser/device, private session, or clearing browser storage can count again. This is not an exact count of people and does not reconstruct past visits.
+
+1. In your existing Supabase project, open **SQL Editor**, paste the contents of [`supabase/visitor-count.sql`](supabase/visitor-count.sql), and run it. It creates two portfolio-specific tables and one function; rerunning the script preserves the count. Other project tables are untouched.
+2. Set `SUPABASE_URL` and `SUPABASE_SECRET_KEY` in `.env.local` for local viewing, and in this portfolio's Vercel **Production** environment. Get the URL from the project's Connect dialog and a backend secret key from Settings → API Keys. Never use a `VITE_` prefix. A legacy `SUPABASE_SERVICE_ROLE_KEY` is also supported if no secret key is set. See [Supabase API keys](https://supabase.com/docs/guides/getting-started/api-keys).
+3. Redeploy the portfolio. `/api/visitors` registers a browser only in production; local development and Vercel Preview deployments only read the count. The browser stores a random UUID in `localStorage` under `portfolio-visitor-id`; the database stores only that ID and an aggregate total, with no names, IP addresses, or browser fingerprints.
+
+The browser calls this site's API, which uses the server-only key to invoke a restricted [database function](https://supabase.com/docs/guides/database/functions). A unique primary key and transactional increment prevent duplicate counting on reloads, retries, and concurrent requests. The counter is approximate: it does not authenticate visitors or distinguish a real visitor from an automated browser.
+
+If storage is blocked in the browser, the counter reads the total without recording a new visit. If the endpoint is unavailable or not configured, the footer shows `— visitors` rather than inventing a count. The counter requests the latest total on each page load; it does not continuously poll.
 
 ## Portfolio AI chat (Groq)
 
@@ -91,7 +103,7 @@ InsightVault Lite and StudyBuddyGPT use real screenshots captured from their pub
 
 GitHub and email use the supplied contact details. InsightVault Lite and StudyBuddyGPT link to the live-demo URLs embedded in the updated résumé. Update `src/data.ts` when those URLs or project details change.
 
-The Contact view opens an email client with the selected topic; it does not submit or store messages. Fonts are bundled locally. There are no tracking scripts or external runtime dependencies.
+The Contact view opens an email client with the selected topic; it does not submit or store messages. Fonts are bundled locally. The visitor counter uses a first-party browser ID and a server-side Supabase request; there are no third-party tracking scripts.
 
 The Contact page uses `profile.phone` (+63 961 083 4292) for Viber, Telegram, and WhatsApp. Viber uses a native app chat link; Telegram and WhatsApp use phone-number links. Chat delivery/account availability has not been verified. Messaging logos are bundled Simple Icons brand marks in the portfolio's muted color; their source hashes and license are included in `public/icons/brands`.
 

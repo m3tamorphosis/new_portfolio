@@ -9,6 +9,24 @@ export default defineConfig(({ mode }) => {
       {
         name: 'portfolio-chat-api',
         configureServer(server) {
+          server.middlewares.use('/api/visitors', async (req, res, next) => {
+            if (req.url?.split('?')[0] !== '/') return next()
+            try {
+              for (const name of [
+                'SUPABASE_URL',
+                'SUPABASE_SECRET_KEY',
+                'SUPABASE_SERVICE_ROLE_KEY',
+              ]) {
+                if (env[name]) process.env[name] ||= env[name]
+              }
+              const { default: handler } = await server.ssrLoadModule('/api/visitors.ts')
+              await handler(req, res)
+            } catch {
+              res.statusCode = 500
+              res.setHeader('Content-Type', 'application/json')
+              res.end(JSON.stringify({ error: 'Visitor count unavailable.' }))
+            }
+          })
           server.middlewares.use('/api/chat', async (req, res, next) => {
             if (req.url?.split('?')[0] !== '/') return next()
             try {
