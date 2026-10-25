@@ -1,25 +1,34 @@
 import { useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 
-/** Add public/images/profile.jpg to replace the placeholder on the next load. */
+/** Keep the frame stable while the optimized portrait loads. */
 export default function Portrait() {
   const [status, setStatus] = useState<'loading' | 'ready' | 'missing'>('loading')
 
   return (
-    <figure className="portrait" data-image-status={status}>
+    <figure className="portrait" data-image-status={status} aria-busy={status === 'loading'}>
       {status !== 'missing' && (
         <img
-          src={`${import.meta.env.BASE_URL}images/profile.jpg`}
+          src={`${import.meta.env.BASE_URL}images/profile.webp`}
           alt="Portrait of Carl John Haro"
           width={800}
           height={1000}
           hidden={status !== 'ready'}
           decoding="async"
-          onLoad={() => setStatus('ready')}
+          loading="eager"
+          fetchPriority="high"
+          onLoad={async (event) => {
+            try {
+              await event.currentTarget.decode()
+              setStatus('ready')
+            } catch {
+              setStatus('missing')
+            }
+          }}
           onError={() => setStatus('missing')}
         />
       )}
-      {status !== 'ready' && (
+      {status === 'missing' && (
         <div
           className="portrait-placeholder"
           role="img"

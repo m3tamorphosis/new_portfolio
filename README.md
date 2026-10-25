@@ -17,7 +17,7 @@ About Me is a top-level section at `#about`, with position `03 / 06`. Use Home i
 
 ## Add your portrait
 
-Your supplied portrait is installed at **`public/images/profile.jpg`**. To replace it, put the new photo at that same path, then reload the application (or rebuild and redeploy a hosted copy). No code changes are needed. The image fills the existing 4:5 frame with `object-fit: cover`; the frame’s dimensions stay the same while the file loads. A missing or invalid file leaves the designed placeholder visible, with no broken-image icon. No stock or generated person image is included.
+Your original portrait is kept at **`public/images/profile.jpg`**. The website preloads and displays the optimized **`public/images/profile.webp`** (960px wide) to avoid downloading the large original. When replacing the photo, update the original and regenerate the WebP with `ffmpeg -i public/images/profile.jpg -vf "scale=960:-2:flags=lanczos" -frames:v 1 -c:v libwebp -quality 88 -compression_level 6 -y public/images/profile.webp`, then rebuild and redeploy. The existing 4:5 frame stays fixed while the image loads and decodes, without flashing placeholder text. The designed fallback appears only if the image fails to load. No stock or generated person image is included.
 
 ## Build and preview
 
