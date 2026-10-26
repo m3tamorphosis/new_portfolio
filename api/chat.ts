@@ -8,14 +8,13 @@ const portfolio = JSON.stringify({
   profile,
   location: 'Iloilo City, Philippines',
   education: 'BS Computer Science, Central Philippine University, 2021–2025',
-  introduction:
-    'Full-stack and AI developer building AI-powered applications, full-stack systems, interactive web experiences, and playable ads.',
+  introduction: profile.summary,
   projects: projects.map(({ name, detail, stack, liveUrl }) => ({ name, detail, stack, liveUrl })),
   stackGroups,
   experience: [
     {
       company: 'HPL Game Design Corporation',
-      role: 'Front-End Web Developer | Game Developer — Mid',
+      role: 'Front-End Web Developer — Mid | Game Development',
       dates: 'April–October 2026',
       work: 'Reusable animation and UI with React, Vite, Canvas, Motion; Phaser 3 games, mobile interactions, and bundles within 5 MB.',
     },

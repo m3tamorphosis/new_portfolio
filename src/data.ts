@@ -3,6 +3,8 @@ export type View = (typeof views)[number]
 
 export const profile = {
   name: 'Carl John Haro',
+  summary:
+    'Full-stack developer building AI-powered web applications with React, Next.js, TypeScript, Node.js, PostgreSQL, and Supabase. Experienced in LLM integration, RAG pipelines, embeddings, authentication, and document processing for career management and data analysis tools. Professional front-end and game development background in reusable interfaces, animation systems, and mobile performance optimization with React, Phaser 3, and HTML5 Canvas/WebGL.',
   workAvailability: 'Open to developer roles and freelance projects.',
   email: 'carljohnharo02@gmail.com',
   phone: '+639610834292',
@@ -15,11 +17,11 @@ export const projects = [
   {
     id: 'playable',
     number: '01',
-    name: 'Playable experiences',
+    name: 'Front-End & Game Dev',
     category: 'FRONT-END DEVELOPMENT + INTERACTION',
     description: 'Frontend craft. Interactive gameplay.',
     detail:
-      'My work combines frontend development with game mechanics, animation, and responsive interfaces. At HPL Game Design Corporation, I built a reusable Phaser 3 template with MRAID integration, delivering HTML5 Canvas/WebGL experiences as single-file HTML builds optimized for mobile within 5 MB limits. Client project previews and source code are unavailable due to NDA; the Flappy game shown here is an independent example demo.',
+      'At HPL Game Design Corporation, I built reusable front-end templates with React, Vite, and HTML5 Canvas/WebGL for responsive, animated mobile experiences. I integrated Phaser 3 game mechanics and the MRAID SDK, delivering single-file HTML builds optimized within strict 5 MB limits. Client previews and code are under NDA; Flappy is an independent demo.',
     stack: [
       'React',
       'Vite',
@@ -41,7 +43,7 @@ export const projects = [
     category: 'AI + CAREER MANAGEMENT',
     description: 'Stronger applications. A clearer next step.',
     detail:
-      'I built CareerForge AI to bring resume building, bullet enhancement, tailored cover letters, and job application tracking into one workspace. Built with Next.js, React, and TypeScript, it combines Groq-powered writing assistance with Prisma and PostgreSQL for application data, and NextAuth.js for authentication.',
+      'I built CareerForge AI with Next.js, React, and TypeScript, using Auth.js for authentication and Prisma/PostgreSQL for data. It combines Groq-powered resume and cover letter tools, application tracking, and Playwright PDF export from a shared preview renderer. Free-tier limits and Xendit test-mode checkout support plan upgrades and webhook-driven billing updates.',
     stack: [
       'Next.js',
       'React',
@@ -49,9 +51,10 @@ export const projects = [
       'Tailwind CSS',
       'PostgreSQL',
       'Prisma',
-      'NextAuth.js',
+      'Auth.js (NextAuth.js)',
       'Groq API',
       'Xendit',
+      'Playwright',
     ],
     color: 'blue',
     liveUrl: 'https://mycareerforge.vercel.app/',
@@ -68,8 +71,18 @@ export const projects = [
     category: 'AI + DATA ANALYTICS',
     description: 'Ask better questions. Find clearer answers.',
     detail:
-      'I built InsightVault Lite to help people explore CSV and PDF datasets through natural-language questions and interactive dashboards. The application connects a Next.js, React, and TypeScript interface with OpenAI-powered analysis, PostgreSQL, and Supabase. Recharts presents the results visually, making patterns easier to explore alongside the underlying data.',
-    stack: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Supabase', 'OpenAI API', 'Recharts'],
+      'I built InsightVault Lite with Next.js, OpenAI, and Supabase to analyze CSV and PDF files through a multi-step classify, retrieve, process, and generate pipeline. PDF retrieval uses paragraph-based chunking, embeddings, and metadata filters. Structured CSV queries produce deterministic charts, while streamed answers can be delivered through optional Slack and email actions. Supabase authentication protects access.',
+    stack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'PostgreSQL',
+      'Supabase',
+      'OpenAI API',
+      'Recharts',
+      'RAG',
+      'Embeddings',
+    ],
     color: 'blue',
     liveUrl: 'https://insight-vault-lite.vercel.app/',
     preview: {
@@ -128,7 +141,7 @@ export const projects = [
     category: 'INTERACTIVE + GAME DEVELOPMENT',
     description: 'Learn by doing. Prepare by playing.',
     detail:
-      'Our team developed Danger Zone as our thesis project focused on Disaster Risk Reduction training. The game places learners in interactive emergency scenarios, using simulation to make disaster-response concepts more engaging to explore. Developed with Unity, C#, and Firebase, it brings together game development and an educational purpose: learning about preparedness through play.',
+      'Our team built Danger Zone, a disaster-response simulation game for Disaster Risk Reduction training, using Unity, C#, and Firebase. I contributed to UI and layout design and integrated Unity with Firebase to support leaderboards.',
     stack: ['Unity', 'C#', 'Firebase'],
     color: 'sage',
     liveUrl: 'https://dangerzone.vercel.app/',
@@ -146,6 +159,19 @@ export const stackGroups = [
     countLabel: 'languages',
     note: 'The languages behind the logic.',
     items: ['JavaScript', 'TypeScript', 'Python', 'SQL', 'C#'],
+  },
+  {
+    name: 'AI / ML',
+    countLabel: 'technologies',
+    note: 'Useful intelligence, thoughtfully integrated.',
+    items: [
+      'RAG',
+      'Embeddings',
+      'OpenAI API',
+      'Groq API',
+      'LLM Integration',
+      'PDF Text Extraction',
+    ],
   },
   {
     name: 'Frontend',
@@ -178,26 +204,7 @@ export const stackGroups = [
     name: 'Databases',
     countLabel: 'databases',
     note: 'Structured data. Connected applications.',
-    items: ['PostgreSQL', 'MySQL', 'SQL Server', 'Supabase', 'Neon'],
-  },
-  {
-    name: 'AI / ML',
-    countLabel: 'technologies',
-    note: 'Useful intelligence, thoughtfully integrated.',
-    items: [
-      'RAG',
-      'Embeddings',
-      'OpenAI API',
-      'Groq API',
-      'Machine Learning',
-      'PDF Text Extraction',
-    ],
-  },
-  {
-    name: 'AI Tools',
-    countLabel: 'tools',
-    note: 'Tools that support the development process.',
-    items: ['GitHub Copilot', 'Claude AI', 'Codex', 'Gemini'],
+    items: ['PostgreSQL', 'MySQL', 'SQL Server', 'Supabase', 'Neon', 'Firebase'],
   },
   {
     name: 'Tools',
@@ -214,6 +221,12 @@ export const stackGroups = [
       'Vite',
       'Playwright',
     ],
+  },
+  {
+    name: 'AI Tools',
+    countLabel: 'tools',
+    note: 'Tools that support the development process.',
+    items: ['GitHub Copilot', 'Claude AI', 'Codex', 'Gemini'],
   },
 ]
 
@@ -241,11 +254,12 @@ export const technologyDetails: Record<string, string> = {
   'SQL Server': 'Data queries and reporting',
   Supabase: 'Hosted application data',
   Neon: 'Serverless PostgreSQL',
+  Firebase: 'Application data and leaderboards',
   RAG: 'Retrieval-grounded responses',
   Embeddings: 'Semantic representations',
   'OpenAI API': 'Language model integration',
   'Groq API': 'Language model inference',
-  'Machine Learning': 'Data patterns and models',
+  'LLM Integration': 'Language model APIs and streamed responses',
   'PDF Text Extraction': 'Documents into usable text',
   'GitHub Copilot': 'In-editor coding assistance',
   'Claude AI': 'Reasoning and code assistance',

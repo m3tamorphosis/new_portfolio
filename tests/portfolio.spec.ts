@@ -87,7 +87,7 @@ test('project demos run and can be replayed', async ({ page }) => {
   await page.goto('/#builds')
   await page
     .locator('.project-selector')
-    .getByRole('button', { name: /Playable experiences/ })
+    .getByRole('button', { name: /Front-End & Game Dev/ })
     .click()
   await page.getByRole('button', { name: 'Let’s fly' }).click()
   await expect(page.getByRole('button', { name: 'Pause game' })).toBeEnabled()

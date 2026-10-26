@@ -85,7 +85,7 @@ Home's Tech Stack Globe is centered and sized to fill the available visual area,
 
 ### Iconography
 
-Technology brands use locally hosted SVGs in `public/icons/brands/`, rendered by `BrandIcon.tsx`. Original brand colors and aspect ratios are preserved. SQL, REST APIs, API Integration, RAG, Embeddings, Machine Learning, and PDF Text Extraction are concepts rather than proprietary brands and use semantic Lucide symbols.
+Technology brands use locally hosted SVGs in `public/icons/brands/`, rendered by `BrandIcon.tsx`. Original brand colors and aspect ratios are preserved. SQL, REST APIs, API Integration, RAG, Embeddings, LLM Integration, and PDF Text Extraction are concepts rather than proprietary brands and use semantic Lucide symbols.
 
 Brand assets come from [SVGL](https://github.com/pheralb/svgl), with the missing marks obtained directly from [Phaser](https://phaser.io/download/logo), [Microsoft Power BI](https://github.com/microsoft/PowerBI-Icons), and [Tableau](https://www.tableau.com/themes/custom/tableau_www/logo.v2.svg). Power BI artwork is credited to Microsoft under CC BY 4.0. Included license notices and `sources.json` record the original URLs, hashes, and presentation adjustments. Only the Phaser canvas whitespace and Tableau wordmark canvas are cropped; logo paths and native colors are unchanged.
 
@@ -95,9 +95,9 @@ Stack follows the seven user-supplied résumé groups in `src/data.ts`; `src/sta
 
 ### Portfolio content
 
-Builds lists six projects: Playable experiences, CareerForge AI, InsightVault Lite, Developer Portfolio (04), StudyBuddyGPT, and Danger Zone. Developer Portfolio uses a local screenshot and links back to this site's Home view. CareerForge AI's public landing-page screenshot supplies its Builds preview and Home thumbnail, linking to `https://mycareerforge.vercel.app/`. Stack and the Home globe also include Prisma ORM, NextAuth.js, Xendit Payment Integration, Neon, and Playwright.
+Builds lists six projects: Front-End & Game Dev, CareerForge AI, InsightVault Lite, Developer Portfolio (04), StudyBuddyGPT, and Danger Zone. Developer Portfolio uses a local screenshot and links back to this site's Home view. CareerForge AI's public landing-page screenshot supplies its Builds preview and Home thumbnail, linking to `https://mycareerforge.vercel.app/`. Stack and the Home globe also include Prisma ORM, NextAuth.js, Xendit Payment Integration, Neon, and Playwright.
 
-Project descriptions and work history reflect the updated résumé, including HPL Game Design employment from April through October 2026. Home and About describe this as recent work rather than current employment. Playable experiences emphasizes frontend development and interactive gameplay. Its description explains that client previews and source code are unavailable due to NDA; the Flappy game remains an independent example demo. Danger Zone uses a screenshot linked to its public site.
+Project descriptions and work history reflect the updated résumé, including HPL Game Design employment from April through October 2026. Home and About describe this as recent work rather than current employment. Front-End & Game Dev emphasizes frontend development and interactive gameplay. Its description explains that client previews and source code are unavailable due to NDA; the Flappy game remains an independent example demo. Danger Zone uses a screenshot linked to its public site.
 
 InsightVault Lite and StudyBuddyGPT use real screenshots captured from their public live sites on October 7, 2026. Optimized JPEGs in `public/images` supply Home thumbnails and edge-to-edge Builds previews. InsightVault's screenshot shows its public sign-in screen; StudyBuddyGPT shows its PDF study entry page. Both screenshots link to the actual apps. These are static images, not embedded apps or generated interfaces. `tests/project-images.spec.ts` verifies image assets, live links, and responsive preview bounds.
 

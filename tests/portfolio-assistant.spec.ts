@@ -20,7 +20,7 @@ test('mobile dialogs omit touch focus outlines and retain keyboard focus indicat
   await expect(assistantClose).toHaveCSS('outline-style', 'solid')
   await assistantClose.tap()
 
-  await page.getByRole('button', { name: 'Preview Playable experiences', exact: true }).tap()
+  await page.getByRole('button', { name: 'Preview Front-End & Game Dev', exact: true }).tap()
   const previewClose = page.getByRole('button', { name: 'Close project preview' })
   await expect(previewClose).toBeFocused()
   await expect(previewClose).toHaveCSS('outline-style', 'none')

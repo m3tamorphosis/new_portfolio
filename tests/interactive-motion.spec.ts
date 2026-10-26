@@ -71,7 +71,7 @@ test('project hover responds to the pointer, resets, and still opens the project
   await project.locator('.mini-preview').click()
   await project.locator('.teaser-note').click()
   await expect(page.getByRole('dialog')).not.toBeVisible()
-  await project.getByRole('button', { name: 'Preview Playable experiences' }).focus()
+  await project.getByRole('button', { name: 'Preview Front-End & Game Dev' }).focus()
   await page.keyboard.press('Enter')
   await page.getByRole('button', { name: 'Play demo', exact: true }).click()
   await expect(page).toHaveURL(/#builds$/)

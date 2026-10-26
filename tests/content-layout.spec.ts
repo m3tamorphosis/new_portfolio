@@ -28,7 +28,7 @@ for (const [width, height] of [
     await page.goto('/#builds')
     await expect(page.locator('.view-container')).toHaveCSS('opacity', '1')
     for (const name of [
-      'Playable experiences',
+      'Front-End & Game Dev',
       'CareerForge AI',
       'InsightVault Lite',
       'Developer Portfolio',
@@ -49,7 +49,7 @@ for (const [width, height] of [
     }
     await page
       .locator('.project-selector')
-      .getByRole('button', { name: /Playable experiences/ })
+      .getByRole('button', { name: /Front-End & Game Dev/ })
       .click()
     await page.screenshot({
       path: `test-results/builds-fit-${width}x${height}.png`,

@@ -209,7 +209,7 @@ test('mobile previews, canvas, and contact remain interactive and accessible', a
     'href',
     'https://dangerzone.vercel.app/',
   )
-  await page.getByRole('button', { name: /Playable experiences/ }).click()
+  await page.getByRole('button', { name: /Front-End & Game Dev/ }).click()
   await page.getByRole('button', { name: 'Let’s fly' }).click()
   await expect(page.getByRole('button', { name: 'Pause game' })).toBeEnabled()
   await page.goto('/#contact')

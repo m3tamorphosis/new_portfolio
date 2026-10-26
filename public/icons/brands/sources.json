@@ -384,5 +384,15 @@
     "presentation": "Original brand geometry in brand blue",
     "sourceSha256": "eddede7b0b7244dab02de30bc9c6358a04d3ee683c6858634a8212d083565ada",
     "sha256": "1db956544dc08625cabe19e0ed0a857e77f0901ec3aa7d1b357d7241b57f105e"
+  },
+  {
+    "file": "firebase",
+    "title": "Firebase",
+    "source": "https://svgl.app/library/firebase.svg",
+    "provider": "SVGL",
+    "brand": "https://firebase.google.com/",
+    "presentation": "Unmodified SVG",
+    "sourceSha256": "d7237deed92953b176ebf4d2010b121efecaa381fc3469cd879d2f99d8b18d8b",
+    "sha256": "d7237deed92953b176ebf4d2010b121efecaa381fc3469cd879d2f99d8b18d8b"
   }
 ]

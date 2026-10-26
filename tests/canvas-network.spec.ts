@@ -92,6 +92,12 @@ const expectedStack = [
   'Python',
   'SQL',
   'C#',
+  'RAG',
+  'Embeddings',
+  'OpenAI API',
+  'Groq API',
+  'LLM Integration',
+  'PDF Text Extraction',
   'React.js',
   'Next.js',
   'HTML5',
@@ -110,16 +116,7 @@ const expectedStack = [
   'SQL Server',
   'Supabase',
   'Neon',
-  'RAG',
-  'Embeddings',
-  'OpenAI API',
-  'Groq API',
-  'Machine Learning',
-  'PDF Text Extraction',
-  'GitHub Copilot',
-  'Claude AI',
-  'Codex',
-  'Gemini',
+  'Firebase',
   'Git',
   'GitHub',
   'Vercel',
@@ -129,6 +126,10 @@ const expectedStack = [
   'Tableau',
   'Vite',
   'Playwright',
+  'GitHub Copilot',
+  'Claude AI',
+  'Codex',
+  'Gemini',
 ]
 
 for (const [width, height] of [
@@ -176,8 +177,8 @@ for (const [width, height] of [
         elements.map((el) => el.getAttribute('data-technology')),
       ),
     ).toEqual(expectedStack)
-    await expect(nodes.locator('.technology-icon')).toHaveCount(42)
-    await expect(nodes.locator('img.brand-logo')).toHaveCount(35)
+    await expect(nodes.locator('.technology-icon')).toHaveCount(43)
+    await expect(nodes.locator('img.brand-logo')).toHaveCount(36)
     await nodes
       .locator('img')
       .evaluateAll((images) =>
@@ -261,7 +262,7 @@ for (const [width, height] of [
       return failures
     })
     expect(issues).toEqual([])
-    await expect(canvas).toHaveAccessibleName(/all 42 stack entries/)
+    await expect(canvas).toHaveAccessibleName(new RegExp(`all ${expectedStack.length} stack entries`))
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width)
     expect(errors).toEqual([])
   })

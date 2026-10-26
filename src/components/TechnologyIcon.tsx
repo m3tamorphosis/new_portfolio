@@ -39,6 +39,7 @@ const brandNames: Record<string, string> = {
   MySQL: 'mysql',
   'SQL Server': 'sqlserver',
   Supabase: 'supabase',
+  Firebase: 'firebase',
   'OpenAI API': 'openai',
   'Groq API': 'groq',
   'GitHub Copilot': 'copilot',
@@ -55,6 +56,7 @@ const brandNames: Record<string, string> = {
   Vite: 'vite',
   'Prisma ORM': 'prisma',
   'NextAuth.js': 'authjs',
+  'Auth.js (NextAuth.js)': 'authjs',
   'Xendit Payment Integration': 'xendit',
   Neon: 'neon',
   Playwright: 'playwright',
@@ -66,11 +68,11 @@ const conceptIcons: Record<string, LucideIcon> = {
   'API Integration': Plug,
   RAG: Network,
   Embeddings: Waypoints,
-  'Machine Learning': BrainCircuit,
+  'LLM Integration': BrainCircuit,
   'PDF Text Extraction': FileText,
 }
 
-export const stackGroupIcons = [Braces, PanelsTopLeft, Server, Database, Cpu, Terminal, Wrench]
+export const stackGroupIcons = [Braces, Cpu, PanelsTopLeft, Server, Database, Wrench, Terminal]
 export const projectIcons: Record<string, LucideIcon> = {
   playable: Gamepad2,
   insight: ChartNoAxesCombined,

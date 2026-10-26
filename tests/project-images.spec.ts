@@ -83,7 +83,7 @@ for (const [width, height] of [
     }
     await page
       .locator('.project-selector')
-      .getByRole('button', { name: /Playable experiences/ })
+      .getByRole('button', { name: /Front-End & Game Dev/ })
       .click()
     await expect(
       page.getByRole('heading', { name: 'Frontend craft. Interactive gameplay.' }),

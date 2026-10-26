@@ -19,6 +19,7 @@ const brands = {
   mysql: 'MySQL',
   sqlserver: 'Microsoft SQL Server',
   supabase: 'Supabase',
+  firebase: 'Firebase',
   openai: 'OpenAI',
   groq: 'Groq',
   copilot: 'GitHub Copilot',

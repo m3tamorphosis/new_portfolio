@@ -17,7 +17,7 @@ test('previews pause the background globe and resume it after closing', async ({
   const frames = () =>
     page.evaluate(() => (window as typeof window & { globeFrames: number }).globeFrames)
   await expect.poll(frames).toBeGreaterThan(2)
-  for (const name of ['CareerForge AI', 'Playable experiences']) {
+  for (const name of ['CareerForge AI', 'Front-End & Game Dev']) {
     await page.getByRole('button', { name: `Preview ${name}`, exact: true }).click()
     const dialog = page.getByRole('dialog', { name, exact: true })
     await expect(dialog).toBeVisible()

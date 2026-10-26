@@ -38,14 +38,7 @@ export default function Home({
             <br />
             AI-powered possibilities.
           </p>
-          <p className="hero-description">
-            Full-stack developer building AI-powered web applications with React, Next.js,
-            TypeScript, and Node.js, backed by PostgreSQL and Supabase. Hands-on with LLM
-            integration, RAG pipelines, embeddings, and PDF processing, shipped in live tools for
-            document analysis, data insights, and career management. Strong front-end and game
-            development foundation: reusable UI components, animation systems, and interactive games
-            built with Phaser 3 and HTML5 Canvas/WebGL.
-          </p>
+          <p className="hero-description">{profile.summary}</p>
           <div className="hero-actions">
             <button className="button button-dark" onClick={() => navigate('Builds')}>
               Explore my builds <ArrowUpRight size={18} />

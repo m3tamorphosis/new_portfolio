@@ -24,7 +24,7 @@ const stackGroups = [
       'Xendit Payment Integration',
     ],
   },
-  { name: 'Databases', items: ['PostgreSQL', 'MySQL', 'SQL Server', 'Supabase', 'Neon'] },
+  { name: 'Databases', items: ['PostgreSQL', 'MySQL', 'SQL Server', 'Supabase', 'Neon', 'Firebase'] },
   {
     name: 'AI / ML',
     items: [
@@ -32,7 +32,7 @@ const stackGroups = [
       'Embeddings',
       'OpenAI API',
       'Groq API',
-      'Machine Learning',
+      'LLM Integration',
       'PDF Text Extraction',
     ],
   },

@@ -15,7 +15,7 @@ for (const [width, height] of [
     await page.goto('/#builds')
     await page
       .locator('.project-selector')
-      .getByRole('button', { name: /Playable experiences/ })
+      .getByRole('button', { name: /Front-End & Game Dev/ })
       .click()
     await expect(page.locator('.view-container')).toHaveCSS('opacity', '1')
     await page.locator('.flight-demo').scrollIntoViewIfNeeded()
@@ -50,7 +50,7 @@ test('flapping clears gates, pause freezes play, and collision allows replay', a
   await page.goto('/#builds')
   await page
     .locator('.project-selector')
-    .getByRole('button', { name: /Playable experiences/ })
+    .getByRole('button', { name: /Front-End & Game Dev/ })
     .click()
   await expect(page.locator('.view-container')).toHaveCSS('opacity', '1')
   await page.clock.pauseAt(new Date('2026-01-01T00:01:00Z'))
@@ -76,7 +76,7 @@ test('flapping clears gates, pause freezes play, and collision allows replay', a
   await page.getByRole('button', { name: /CareerForge AI/ }).click()
   await page.clock.runFor(1000)
   await expect(canvas).toHaveCount(0)
-  await page.getByRole('button', { name: /Playable experiences/ }).click()
+  await page.getByRole('button', { name: /Front-End & Game Dev/ }).click()
   await expect(page.getByRole('button', { name: 'Let’s fly' })).toBeVisible()
 })
 
@@ -91,7 +91,7 @@ test('touch can flap and leaving the game pauses it', async ({ browser }) => {
   await page.goto('/#builds')
   await page
     .locator('.project-selector')
-    .getByRole('button', { name: /Playable experiences/ })
+    .getByRole('button', { name: /Front-End & Game Dev/ })
     .click()
   await expect(page.locator('.view-container')).toHaveCSS('opacity', '1')
   const canvas = page.getByLabel('Flappy flight game')
