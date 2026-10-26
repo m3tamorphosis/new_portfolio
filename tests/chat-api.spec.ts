@@ -2,6 +2,13 @@ import { test, expect } from '@playwright/test'
 import { createServer } from 'node:http'
 import { createChatHandler } from '../api/chat'
 import AxeBuilder from '@axe-core/playwright'
+import { experience } from '../src/data'
+import {
+  MAX_CHAT_CHARACTERS,
+  MAX_CHAT_MESSAGES,
+  trimChatHistory,
+  type ChatMessage,
+} from '../src/chatHistory'
 
 test('Groq endpoint uses trusted portfolio context, validates history, and hides provider errors', async () => {
   const calls: { headers: Headers; body: { messages: { role: string; content: string }[] } }[] = []
@@ -37,6 +44,10 @@ test('Groq endpoint uses trusted portfolio context, validates history, and hides
     expect(calls[0].body.messages[0].role).toBe('system')
     expect(calls[0].body.messages[0].content).toContain('HPL Game Design')
     expect(calls[0].body.messages[0].content).toContain('CareerForge AI')
+    const facts = JSON.parse(calls[0].body.messages[0].content.split('Portfolio facts:\n')[1])
+    expect(facts.experience).toEqual(experience)
+    expect(facts.experience[0].status).toBe('completed')
+    expect(facts.employment.currentEmployer).toBeNull()
     expect(calls[0].body.messages[0].content).not.toContain('test-server-secret')
     const followup = [
       { role: 'user', content: 'What has Carl built?' },
@@ -45,6 +56,17 @@ test('Groq endpoint uses trusted portfolio context, validates history, and hides
     ]
     expect((await post(followup)).status).toBe(200)
     expect(calls[1].body.messages.slice(1)).toEqual(followup)
+    const longerHistory: ChatMessage[] = [
+      { role: 'user', content: 'Focus on CareerForge AI. Keep answers short.' },
+      { role: 'assistant', content: 'Sure, we can focus on CareerForge AI.' },
+      ...Array.from({ length: 11 }, () => [
+        { role: 'user' as const, content: 'Tell me more about it.' },
+        { role: 'assistant' as const, content: 'It supports resume building.' },
+      ]).flat(),
+      { role: 'user', content: 'Which project were we discussing?' },
+    ]
+    expect((await post(longerHistory)).status).toBe(200)
+    expect(calls[2].body.messages.slice(1)).toEqual(longerHistory)
     providerFails = true
     const failed = await post([{ role: 'user', content: 'Hello' }])
     expect(failed.status).toBe(502)
@@ -52,6 +74,60 @@ test('Groq endpoint uses trusted portfolio context, validates history, and hides
   } finally {
     await new Promise<void>((resolve) => server.close(() => resolve()))
   }
+})
+
+test('long chat context keeps recent complete pairs within the request limits', () => {
+  const messages: ChatMessage[] = Array.from({ length: 50 }, (_, i) => [
+    { role: 'user' as const, content: `Question ${i} ` + 'x'.repeat(1000) },
+    { role: 'assistant' as const, content: `Answer ${i} ` + 'y'.repeat(1000) },
+  ]).flat()
+  messages.push({ role: 'user', content: 'What about that project?' })
+  const trimmed = trimChatHistory(messages)
+  expect(trimmed.length).toBeLessThanOrEqual(MAX_CHAT_MESSAGES)
+  expect(trimmed.reduce((sum, m) => sum + m.content.length, 0)).toBeLessThanOrEqual(
+    MAX_CHAT_CHARACTERS,
+  )
+  expect(trimmed.at(-1)).toEqual(messages.at(-1))
+  expect(trimmed.every((m, i) => m.role === (i % 2 === 0 ? 'user' : 'assistant'))).toBe(true)
+})
+
+test('chat remembers its topic after reload and mobile remount, and New chat clears it', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  const requests: ChatMessage[][] = []
+  await page.route('**/api/chat', async (route) => {
+    requests.push(route.request().postDataJSON().messages)
+    await route.fulfill({
+      json: { reply: 'CareerForge AI is a completed career management project.' },
+    })
+  })
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto('/#home')
+  await page.locator('.assistant-launcher').click()
+  await page
+    .getByRole('textbox', { name: 'Message portfolio assistant' })
+    .fill('Focus on CareerForge AI and keep replies short.')
+  await page.getByRole('button', { name: 'Send message' }).click()
+  await expect(page.locator('.assistant-reply')).toContainText('completed career management')
+  await page.reload()
+  await page.locator('.assistant-launcher').click()
+  await expect(page.locator('.assistant-message-user')).toContainText('Focus on CareerForge AI')
+  await page.getByRole('button', { name: 'Close portfolio assistant' }).click()
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.locator('.app-footer .assistant-launcher').click()
+  await expect(page.locator('.assistant-message-user')).toContainText('Focus on CareerForge AI')
+  await page
+    .getByRole('textbox', { name: 'Message portfolio assistant' })
+    .fill('What stack does it use?')
+  await page.getByRole('button', { name: 'Send message' }).click()
+  await expect(page.locator('.assistant-reply')).toHaveCount(2)
+  expect(requests[1][0].content).toBe('Focus on CareerForge AI and keep replies short.')
+  expect(requests[1].map((m) => m.role)).toEqual(['user', 'assistant', 'user'])
+  await page.getByRole('button', { name: 'New chat' }).click()
+  await page.reload()
+  await page.locator('.assistant-launcher').click()
+  await expect(page.locator('.assistant-message-user')).toHaveCount(0)
 })
 
 test('missing configuration and excessive requests produce clear responses without calling Groq', async () => {

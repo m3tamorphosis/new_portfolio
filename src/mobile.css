@@ -701,10 +701,14 @@
     padding: 22px 20px;
   }
   .detail-top {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
   .experience-view .current-pill {
     font-size: 11px;
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
   .experience-detail h2 {
     font-size: 26px;
@@ -767,9 +771,6 @@
     font-size: 23px;
     line-height: 1.35;
     margin: 16px 0 24px;
-  }
-  .stack-board-top .mono {
-    font-size: 12px;
   }
   .stack-view .tool-grid {
     grid-template-columns: minmax(0, 1fr);

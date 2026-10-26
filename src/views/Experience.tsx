@@ -1,41 +1,12 @@
 import { useState } from 'react'
 import { LayoutGroup, motion, useReducedMotion } from 'motion/react'
 import { ChevronRight } from 'lucide-react'
+import { experience } from '../data'
 
 export default function Experience() {
   const [selected, setSelected] = useState(0)
   const reducedMotion = useReducedMotion()
-  const roles = [
-    {
-      company: 'HPL Game Design',
-      full: 'HPL Game Design Corporation',
-      role: 'Front-End Web Developer — Mid | Game Development',
-      field: 'FRONT-END DEVELOPMENT | GAME DEVELOPMENT',
-      date: 'APR — OCT 2026',
-      body: 'Reusable systems. Experiences built to be played.',
-      points: [
-        'Built reusable UI components and animation systems with React, Vite, JavaScript, HTML5 Canvas, and CSS3, using Motion for physics-based animation and easing.',
-        'Developed cross-platform Phaser 3 games for iOS and Android with reusable game loops, sprite animation, and win/lose state management.',
-        'Implemented drag-and-drop, tap-to-play, and timed challenges tailored to iOS and Android devices.',
-        'Optimized mobile builds to meet strict 5 MB delivery limits while preserving smooth animation.',
-      ],
-      tags: ['Interactive UI', 'Game mechanics', 'Performance'],
-    },
-    {
-      company: 'Department of Budget & Management',
-      full: 'Department of Budget and Management',
-      role: 'Business Data Analytics Intern',
-      field: 'DATA & ANALYTICS',
-      date: 'FEB — MAY 2025',
-      body: 'Turning complex financial reports into something people can use.',
-      points: [
-        'Analyzed government financial datasets for budget monitoring and reporting.',
-        'Converted 100+ PDF financial reports, approximately 10,000 records, into structured datasets.',
-        'Built Power BI dashboards to track budget utilization KPIs.',
-      ],
-      tags: ['Data pipelines', 'Power BI', 'Financial analytics'],
-    },
-  ]
+  const roles = experience
   const role = roles[selected]
   return (
     <div className="section-view experience-view">

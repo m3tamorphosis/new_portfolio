@@ -18,10 +18,6 @@
 .stack-view .stack-board-top h2 {
   margin: 0;
 }
-.stack-board-top .mono {
-  flex-shrink: 0;
-  font-size: 13px;
-}
 .stack-view .stack-board-foot {
   font-size: 14px;
 }

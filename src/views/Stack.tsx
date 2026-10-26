@@ -42,9 +42,6 @@ export default function Stack() {
         <div className="stack-board">
           <div className="stack-board-top">
             <h2>{stackGroups[group].note}</h2>
-            <span className="mono">
-              {stackGroups[group].items.length} {stackGroups[group].countLabel.toUpperCase()}
-            </span>
           </div>
           <div
             className="tool-grid"

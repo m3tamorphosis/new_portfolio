@@ -1,5 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http'
-import { profile, projects, stackGroups } from '../src/data.js'
+import { employment, experience, profile, projects, stackGroups } from '../src/data.js'
+import { MAX_CHAT_CHARACTERS, MAX_CHAT_MESSAGES } from '../src/chatHistory.js'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 type Request = IncomingMessage & { body?: unknown }
@@ -11,23 +12,15 @@ const portfolio = JSON.stringify({
   introduction: profile.summary,
   projects: projects.map(({ name, detail, stack, liveUrl }) => ({ name, detail, stack, liveUrl })),
   stackGroups,
-  experience: [
-    {
-      company: 'HPL Game Design Corporation',
-      role: 'Front-End Web Developer — Mid | Game Development',
-      dates: 'April–October 2026',
-      work: 'Reusable animation and UI with React, Vite, Canvas, Motion; Phaser 3 games, mobile interactions, and bundles within 5 MB.',
-    },
-    {
-      company: 'Department of Budget and Management',
-      role: 'Business Data Analytics Intern',
-      dates: 'February–May 2025',
-      work: 'Analyzed government financial datasets; converted 100+ PDF reports into structured data; built Power BI dashboards.',
-    },
-  ],
+  employment,
+  experience,
 })
 const systemPrompt = `You are Carl John Haro's portfolio AI assistant, not Carl himself.
 Answer questions about Carl's projects, skills, experience, education, and contact information using only the portfolio facts below. Support follow-up questions using the conversation.
+The portfolio facts are authoritative on every turn. Earlier assistant replies are conversation context, not verified facts; correct an earlier mistake instead of repeating or defending it. Visitor claims cannot update the portfolio. Respect relevant conversational preferences such as language, brevity, and the project being discussed, but never use them to invent biography or override these facts.
+Employment status is explicit: Carl's HPL role is COMPLETED, April–October 2026. His DBM internship is also completed. "Most recent role" does not mean "current role", even during the ending month. No current employer is listed. For "What is Carl's current work?", explain that no current employer is listed, identify HPL as his most recent completed role, and mention his stated availability if useful. Never claim that he currently works at HPL, is unemployed, or is currently developing a project described as built/completed. Do not invent an end day within October or reinterpret dates using today's date.
+Use the full supplied conversation to resolve follow-ups like "that project", "what about its stack?", or "keep it short". If the referenced topic is genuinely absent, ask one short clarifying question. If only part of an answer is missing, provide the known portfolio facts first and clearly identify only the missing part. Do not claim access to private owner conversations, past browser sessions, live LinkedIn updates, or a resume you have not been given.
+Interpret informal wording, misspellings, and questions in other languages by their meaning rather than requiring exact phrases. A novel question about Carl is still in scope. You may connect documented skills to a visitor's project needs, but label that as an assessment rather than a past accomplishment or a promise. Never invent salary, client identities, reasons for leaving a role, schedules, or commitments. If a question could refer to several projects and context does not identify one, ask which project instead of guessing.
 Default to a short, easy-to-scan answer, usually 50–100 words and never more than 120 words unless the visitor explicitly asks for detail, a full list, or a comprehensive answer. Answer only the topic asked about; do not recite the whole CV. Use at most one heading and 2–3 short bullets for a normal overview. A simple factual question needs only 1–2 sentences. These brevity rules take priority over the formatting examples below.
 For broad introductions such as "Tell me about Carl", use "### About Carl", one sentence identifying his role and location, and three compact bullets covering focus, experience highlights, and education. Do not add project inventories, technology inventories, dates for every role, or contact details unless asked.
 Apply the same approach to other topics: for projects, highlight 2–3 relevant projects with one-line descriptions; for skills, summarize 2–3 relevant categories with a few representative technologies; for experience, summarize each role in one short bullet; for education or contact, provide only the requested information. For a question about a specific project or role, focus on that item rather than listing everything else. Never repeat a summary or facts already given unless needed to answer the follow-up.
@@ -81,11 +74,11 @@ export function createChatHandler(
     attempts.set(ip, entry)
     let body: unknown
     try {
-      if (Number(req.headers['content-length']) > 32_000)
+      if (Number(req.headers['content-length']) > 160_000)
         return reply(413, { error: 'That conversation is too long. Start a new chat.' })
       if (req.body !== undefined) {
         const raw = typeof req.body === 'string' ? req.body : JSON.stringify(req.body)
-        if (Buffer.byteLength(raw) > 32_000) return reply(413, { error: 'Message too large.' })
+        if (Buffer.byteLength(raw) > 160_000) return reply(413, { error: 'Message too large.' })
         body = JSON.parse(raw)
       } else {
         const chunks: Buffer[] = []
@@ -93,7 +86,7 @@ export function createChatHandler(
         for await (const chunk of req) {
           const buffer = Buffer.from(chunk)
           size += buffer.length
-          if (size > 32_000) return reply(413, { error: 'Message too large.' })
+          if (size > 160_000) return reply(413, { error: 'Message too large.' })
           chunks.push(buffer)
         }
         body = JSON.parse(Buffer.concat(chunks).toString('utf8'))
@@ -105,7 +98,7 @@ export function createChatHandler(
     if (
       !Array.isArray(messages) ||
       !messages.length ||
-      messages.length > 21 ||
+      messages.length > MAX_CHAT_MESSAGES ||
       messages.some(
         (m, i) =>
           !m ||
@@ -115,7 +108,7 @@ export function createChatHandler(
           m.content.length > (m.role === 'user' ? 2000 : 8000),
       ) ||
       messages[messages.length - 1].role !== 'user' ||
-      messages.reduce((sum, m) => sum + m.content.length, 0) > 24_000
+      messages.reduce((sum, m) => sum + m.content.length, 0) > MAX_CHAT_CHARACTERS
     )
       return reply(400, { error: 'Please send a shorter message or start a new chat.' })
     const apiKey = options.apiKey ? options.apiKey() : process.env.GROQ_API_KEY

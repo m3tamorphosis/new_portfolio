@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ArrowUpRight, MessageCircle, SendHorizontal, X } from 'lucide-react'
 import './PortfolioAssistant.css'
-
-type ChatMessage = { role: 'user' | 'assistant'; content: string }
+import { readChatHistory, saveChatHistory, trimChatHistory, type ChatMessage } from '../chatHistory'
 
 function formatInline(text: string) {
   return text
@@ -117,13 +116,17 @@ function AssistantAvatar() {
 
 export default function PortfolioAssistant({ label = 'Ask about my work' }: { label?: string }) {
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const [messages, setMessages] = useState<ChatMessage[]>(readChatHistory)
   const [draft, setDraft] = useState('')
   const [pending, setPending] = useState(false)
   const [error, setError] = useState('')
   const request = useRef<AbortController | null>(null)
   const transcript = useRef<HTMLDivElement>(null)
   const input = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    saveChatHistory(messages)
+  }, [messages])
 
   useEffect(() => {
     if (!input.current) return
@@ -151,9 +154,7 @@ export default function PortfolioAssistant({ label = 'Ask about my work' }: { la
     const timer = window.setTimeout(() => controller.abort(), 30000)
     try {
       // Keep whole user/assistant pairs within the server's context limit.
-      const context = history.slice(-19)
-      while (context.length > 1 && context.reduce((sum, m) => sum + m.content.length, 0) > 24000)
-        context.splice(0, 2)
+      const context = trimChatHistory(history)
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -165,7 +166,7 @@ export default function PortfolioAssistant({ label = 'Ask about my work' }: { la
         throw new Error(
           result?.error || 'AI chat is unavailable right now. Please retry or contact Carl below.',
         )
-      setMessages([...history, { role: 'assistant', content: result.reply }])
+      setMessages(trimChatHistory([...history, { role: 'assistant', content: result.reply }]))
     } catch (cause) {
       if (!controller.signal.aborted || request.current === controller)
         setError(
@@ -187,7 +188,7 @@ export default function PortfolioAssistant({ label = 'Ask about my work' }: { la
     const content = value.trim()
     if (!content || content.length > 2000 || request.current) return
     const answered = messages.at(-1)?.role === 'user' ? messages.slice(0, -1) : messages
-    const next: ChatMessage[] = [...answered, { role: 'user', content }]
+    const next = trimChatHistory([...answered, { role: 'user', content }])
     setMessages(next)
     setDraft('')
     void ask(next)

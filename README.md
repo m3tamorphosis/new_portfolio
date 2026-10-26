@@ -42,7 +42,9 @@ If storage is blocked in the browser, the counter reads the total without record
 
 ## Portfolio AI chat (Groq)
 
-The assistant has a chat history, free-text input (Enter to send, Shift+Enter for a new line), suggested questions, retry, and New chat. Conversation history stays in browser memory and is sent to Groq for replies; it is not saved to localStorage. Responses use the portfolio's profile, projects, stack, and a server-side experience summary. The UI never substitutes canned answers for AI replies.
+The assistant has a chat history, free-text input (Enter to send, Shift+Enter for a new line), suggested questions, retry, and New chat. Conversation history is kept in the current tab's sessionStorage so reloads and mobile/desktop layout changes retain context; New chat clears it. If browser storage is blocked, chat still works in memory. Each request sends up to 40 recent exchanges plus the new question, bounded to 24,000 characters, to Groq. Older exchanges are dropped in complete pairs when either limit is reached. This is bounded conversation context, not permanent memory or access to private owner conversations.
+
+Responses use the portfolio's profile, projects, stack, and the same experience records rendered by the Experience page in `src/data.ts`. Those records explicitly mark HPL and DBM as completed; no current employer is listed. The assistant is instructed to prioritize these facts over earlier replies, interpret informal follow-ups, clarify ambiguous references, and acknowledge missing information without inventing it. Model replies can still be imperfect. The UI never substitutes canned answers for AI replies.
 
 1. Set `GROQ_API_KEY` in the local `.env` file (or copy `.env.example` to `.env.local`). Both are ignored by Git. Never put the key in a `VITE_` variable or commit it.
 2. Run/restart `npm run dev`. Vite serves `/api/chat` locally and loads the server-only key.

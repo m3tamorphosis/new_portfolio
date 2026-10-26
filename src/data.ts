@@ -13,6 +13,48 @@ export const profile = {
   resume: `${import.meta.env?.BASE_URL ?? '/'}Carl-John-Haro-Resume.pdf`,
 }
 
+export const experience = [
+  {
+    company: 'HPL Game Design',
+    status: 'completed',
+    dates: 'April–October 2026',
+    full: 'HPL Game Design Corporation',
+    role: 'Front-End Web Developer — Mid | Game Development',
+    field: 'FRONT-END DEVELOPMENT | GAME DEVELOPMENT',
+    date: 'APR — OCT 2026',
+    body: 'Reusable systems. Experiences built to be played.',
+    points: [
+      'Built reusable UI components and animation systems with React, Vite, JavaScript, HTML5 Canvas, and CSS3, using Motion for physics-based animation and easing.',
+      'Developed cross-platform Phaser 3 games for iOS and Android with reusable game loops, sprite animation, and win/lose state management.',
+      'Implemented drag-and-drop, tap-to-play, and timed challenges tailored to iOS and Android devices.',
+      'Optimized mobile builds to meet strict 5 MB delivery limits while preserving smooth animation.',
+    ],
+    tags: ['Interactive UI', 'Game mechanics', 'Performance'],
+  },
+  {
+    company: 'Department of Budget & Management',
+    status: 'completed',
+    dates: 'February–May 2025',
+    full: 'Department of Budget and Management',
+    role: 'Business Data Analytics Intern',
+    field: 'DATA & ANALYTICS',
+    date: 'FEB — MAY 2025',
+    body: 'Turning complex financial reports into something people can use.',
+    points: [
+      'Analyzed government financial datasets for budget monitoring and reporting.',
+      'Converted 100+ PDF financial reports, approximately 10,000 records, into structured datasets.',
+      'Built Power BI dashboards to track budget utilization KPIs.',
+    ],
+    tags: ['Data pipelines', 'Power BI', 'Financial analytics'],
+  },
+]
+
+export const employment = {
+  currentEmployer: null,
+  status:
+    'No current employer is listed in the portfolio. HPL was a completed role ending in October 2026, not a current job. Do not infer unemployment or an ongoing employer from these facts.',
+}
+
 export const projects = [
   {
     id: 'playable',
@@ -156,13 +198,11 @@ export const projects = [
 export const stackGroups = [
   {
     name: 'Languages',
-    countLabel: 'languages',
     note: 'The languages behind the logic.',
     items: ['JavaScript', 'TypeScript', 'Python', 'SQL', 'C#'],
   },
   {
     name: 'AI / ML',
-    countLabel: 'technologies',
     note: 'Useful intelligence, thoughtfully integrated.',
     items: [
       'RAG',
@@ -175,7 +215,6 @@ export const stackGroups = [
   },
   {
     name: 'Frontend',
-    countLabel: 'technologies',
     note: 'The part people feel.',
     items: [
       'React.js',
@@ -189,7 +228,6 @@ export const stackGroups = [
   },
   {
     name: 'Backend',
-    countLabel: 'technologies',
     note: 'A solid foundation underneath.',
     items: [
       'Node.js',
@@ -202,13 +240,11 @@ export const stackGroups = [
   },
   {
     name: 'Databases',
-    countLabel: 'databases',
     note: 'Structured data. Connected applications.',
     items: ['PostgreSQL', 'MySQL', 'SQL Server', 'Supabase', 'Neon', 'Firebase'],
   },
   {
     name: 'Tools',
-    countLabel: 'tools',
     note: 'From the first commit to the final interaction.',
     items: [
       'Git',
@@ -224,7 +260,6 @@ export const stackGroups = [
   },
   {
     name: 'AI Tools',
-    countLabel: 'tools',
     note: 'Tools that support the development process.',
     items: ['GitHub Copilot', 'Claude AI', 'Codex', 'Gemini'],
   },

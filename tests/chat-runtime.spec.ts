@@ -9,7 +9,7 @@ test('compiled chat endpoint starts in Node without the Vite module loader', asy
   const output = testInfo.outputPath('node-runtime')
   await mkdir(output, { recursive: true })
   await writeFile(join(output, 'package.json'), JSON.stringify({ type: 'module' }))
-  for (const file of ['api/chat.ts', 'src/data.ts']) {
+  for (const file of ['api/chat.ts', 'src/data.ts', 'src/chatHistory.ts']) {
     const target = join(output, file.replace(/\.ts$/, '.js'))
     await mkdir(dirname(target), { recursive: true })
     const compiled = ts.transpileModule(await readFile(file, 'utf8'), {
