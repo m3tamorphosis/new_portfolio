@@ -362,8 +362,9 @@ kbd {
     align-content: start;
     padding-block: 12px;
   }
+  .about-view .discipline-top > span,
   .about-view .about-discipline h3 {
-    font-size: 16px;
+    font-size: var(--discipline-description-size);
     line-height: 1.35;
   }
   .about-view .about-discipline p {
@@ -390,7 +391,16 @@ kbd {
     margin-top: 0;
   }
   .about-view .discipline-stack li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: calc(10.5px + var(--small-text-step));
+    white-space: nowrap;
+  }
+  .about-view .discipline-stack li + li::before {
+    content: '/';
+    color: var(--muted);
+    font-weight: 400;
   }
   @media (max-height: 940px) {
     .about-view .about-discipline {

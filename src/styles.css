@@ -1697,6 +1697,7 @@ kbd {
 }
 .experience-detail li {
   display: flex;
+  align-items: flex-start;
   gap: 10px;
   font-size: calc(11px + var(--small-text-step));
   line-height: 1.7;
@@ -1704,7 +1705,8 @@ kbd {
 }
 .experience-detail li > svg {
   color: light-dark(#515f47, var(--muted));
-  margin-top: 3px;
+  flex-shrink: 0;
+  margin-top: calc((1lh - 14px) / 2);
 }
 .experience-detail .tags {
   margin-top: 25px;
